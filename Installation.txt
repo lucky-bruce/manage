@@ -9,8 +9,12 @@ By doing this you start Golang server_start. Then in another terminal you write 
   make envoy_start
 
 Lastly type this to start React app:
+  cd frontend
 
-  make client_start
+  npm install
+
+  npm start
+  
 
 
 
