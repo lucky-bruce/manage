@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "products/products.proto";
+package authorization;
+
+service AuthorizationService {
+  rpc Register (User) returns (Response);
+  rpc Login (LoginParams) returns (Response);
+  rpc GetUser (Params) returns (User);
+  rpc GetUsers (Params) returns (Response);
+  rpc GetStats (Params) returns (Stats);
+}
+
+message User {
+  string FirstName =1;
+  string MidName = 2;
+  string LastName =3;
+  string PhoneNumber = 4;
+  string Email = 5;
+  string Password = 6;
+  string Role = 7;
+  string ID = 8;
+  string State = 9;
+  string City = 10;
+  string Address = 11;
+  string CNPJ = 12;
+  string CompanyName = 13;
+  string Category = 14;
+  string Zip = 15;
+  string Username = 16;
+  string Companyid = 17;
+}
+
+message LoginParams {
+  string Email = 1;
+  string Password = 2;
+
+}
+
+message Response {
+  string Token = 1;
+  repeated User users = 2;
+}
+
+message Params {
+  string id = 1;
+  products.Query query = 2;
+}
+
+message Stats {
+  uint32 quotes = 1;
+  uint32 completed = 2;
+  uint32 services = 3;
+  uint32 new = 4;
+} 

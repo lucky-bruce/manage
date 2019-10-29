@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package products;
+
+service ProductService {
+  rpc NewProduct(Product) returns (Product);
+  rpc GetProducts(ProductParams) returns (ProductResponse);
+  rpc GetProductByID(ProductParams) returns (Product);
+  rpc EditProduct(Product) returns (EmptyResponse);
+  rpc DeleteProductByID(ProductParams) returns (EmptyResponse);
+  rpc UploadImage(Image) returns (ImageResponse);
+}
+
+message ProductParams {
+  string id = 1;
+  string jwt = 2;
+  
+  Query query = 4;
+}
+
+message Query {
+  string Querystring = 1;
+  repeated string sortFields = 2;
+}
+
+message ProductResponse {
+  repeated Product products = 1;
+}
+
+message EmptyResponse{
+
+}
+
+message ImageResponse {
+  string url = 1;
+}
+
+message Image {
+  string image = 1;
+  string ext = 2;
+}
+
+message Product{
+  string name = 1;
+  int32 qtyinstock = 2;
+  string category = 3;
+  string subcategory = 4;
+  string sector = 5;
+  int32 buyingprice =6;
+  int32 desiredprofit = 7;
+  int32 sellingprice = 8;
+  int64 addedtime = 9;
+  string description = 10;
+  string id = 11;
+  float sizew = 12;
+  float sizel = 13;
+  float sized = 14;
+  float sizeh = 15;
+  float weight = 16;
+  string userid = 17;
+  repeated string images = 18;
+}
+

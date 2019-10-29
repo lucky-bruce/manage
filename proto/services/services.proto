@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "products/products.proto";
+import "authorization/authorization.proto";
+
+package services;
+
+service Services{
+  rpc GetService(Params) returns (Service);
+  rpc GetServices(Params) returns (ServicesResponse);
+  rpc NewService(Service) returns (Response);
+  rpc EditService(Service) returns (Response);
+  rpc DeleteService(Params) returns (Response);
+}
+
+message Service {
+  string id = 1;
+  string name = 2;
+  authorization.User user = 3;
+  float cpm = 4;
+  float cpd = 5;
+
+}
+
+message Params {
+  products.Query query = 1;
+  string id = 2;
+}
+
+message Response {
+  
+}
+
+message ServicesResponse{
+  repeated Service services = 1;
+}

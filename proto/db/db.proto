@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+
+package db;
+
+service DbService {
+  rpc GetUnique(Params) returns (Response);
+}
+
+message Params {
+  string field = 1;
+  string collection = 2;
+}
+
+message Response {
+
+  repeated string values = 1;
+  
+}

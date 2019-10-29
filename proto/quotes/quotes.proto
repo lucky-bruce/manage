@@ -1,0 +1,153 @@
+syntax = "proto3";
+import "products/products.proto";
+package quotes;
+
+service QuoteService {
+  rpc NewQuote (Quote) returns (Response);
+  rpc GetQuotes (products.Query) returns (QuoteResponse);
+  rpc GetQuoteByID(QuoteParams) returns (Quote);
+  rpc DeleteQuote(QuoteParams) returns (Response);
+  rpc EditQuote (Quote) returns (Response);
+  rpc GetStatistics(products.Query) returns (Stats);
+}
+
+message QuoteResponse {
+  repeated Quote quotes = 1;
+}
+
+message QuoteParams {
+  string ID = 1;
+  string jwt = 2;
+}
+
+message Response {
+  string id = 1;
+}
+
+
+enum Status {
+  NEW = 0;
+  SUPPLIER_APPLIED = 1;
+  CLIENT_APPLIED = 2;
+  SUPPLIER_REJECTED = 3;
+  CLIENT_REJECTED = 4;
+
+}
+
+enum ShippingStatus {
+  PREPARATION = 0;
+  DELIVERED = 1;
+  COMPLETED = 2;
+  CANCELLED = 3;
+}
+
+message Stats {
+  uint32 active = 1;
+  uint32 pending = 2;
+  uint32 denied = 3;
+  uint32 new = 4;
+  uint32 preparation = 5;
+  uint32 production = 6;
+  uint32 quality = 7;
+  uint32 ready = 8;
+  uint32 pickedup = 9;
+  uint32 delivered = 10;
+  uint32 installed = 11;
+  uint32 completed = 12;
+  uint32 cancelled = 13;
+
+}
+
+message QuoteProduct {
+  products.Product product = 1;
+  uint32 qty = 2;
+}
+
+message Suppliers {
+  string id = 1;
+  bool valid = 2;
+}
+
+message Quote {
+  string id = 1;
+  float quotationPrice = 2;
+  string phonenumber = 3;
+  int64 timestamp = 4;
+  string email = 5;
+  repeated Suppliers   supplierids = 6;
+  repeated QuoteProduct products = 7;
+
+  string jwt = 9;
+  
+  string name = 10;
+  string city = 11;
+  string address = 12;
+  string zip = 13;
+
+  string size = 14;
+  string userid = 15;
+  Status status = 16;
+
+  float sumPrice = 17;
+  float paidPrice = 18;
+  // uint32 quoteDate = 2;
+  ShippingStatus shipping = 19;
+  
+
+  // uint32 validDate = 4;
+  // string username = 5;
+ 
+ 
+
+  // string compInfo = 9;
+
+  // a way to let userto selct multiple products like a check list
+
+  
+
+  // sizes in Meter, cm and mm ex 00.00,00 M.cm,mm 
+  // can we draw lines with those sizes imputs? so we 
+  // can have a final IMG shape? 
+
+  // float sizesL = 12;
+  // float sizesW = 13;
+  // float sizesH = 14;
+  // float sizesD = 15;
+
+  // a way to let user to select multiple optionals 
+  //base on the selected products
+
+  // string selectedOptionals = 16;
+
+ 
+
+  // string finishingType = 18;
+  // float  pricePersqm = 19;
+  // float  sqM = 20;
+  // float  optinalPrice = 21;
+  // float  finishingPrice = 22;
+
+  // uint32 quanity = 23;
+  // float  productTotalPrice = 24;
+  // float  produstsListTotalPrice = 25; 
+  // uint32 serviceId = 26;
+  // float  labor = 27;
+  // float  perKmCharges = 28;
+  // float  perDayCharges = 29;
+  // float  totalServicePrice = 30;
+  // float  totalServiceListPrice = 31;
+  // float  subTotal = 32;
+
+  // float  taxA = 33;
+  // float  taxB = 34;
+  // float  taxC = 35;
+  // float  discaunt = 36;
+  // float  grandTotal = 37;
+
+ 
+  // when select product show color options, leave a autocomple field 
+  //to help on finding the product. Weight IF Applied in 
+  //( Kg, Grams, Pounds and Tones ), Volume ( Lt, Ml, Oz or Gallon ),
+  // Optionals ( Shapes, Finishes-types, Finishes-color, Description,
+  // Recommendation
+}

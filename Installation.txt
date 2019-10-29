@@ -1,0 +1,16 @@
+So, before start you should make sure that you have Golang, MongoDB and Docker installed.
+
+To start in terminal write following command:
+
+  make server_start
+
+By doing this you start Golang server_start. Then in another terminal you write following to start Envoy proxy:
+
+  make envoy_start
+
+Lastly type this to start React app:
+
+  make client_start
+
+
+

@@ -1,0 +1,49 @@
+syntax = "proto3";
+import "products/products.proto";
+package financial;
+
+service FinancialService {
+  rpc GetIncome(Params) returns(Response);
+  rpc NewBank(Bank) returns (EmptyResponse);
+  rpc GetBanks(Request) returns (Response);
+  rpc ToDestination(Params) returns (Response);
+}
+
+message Request {
+
+}
+
+message EmptyResponse {
+
+}
+
+message Params {
+  string name = 1;
+  float amount = 2;
+  string to = 3;
+  products.Query query = 4;
+}
+
+message Income {
+  string name = 1;
+  repeated Payoff payoffs = 2;
+  float sent = 3;
+}
+
+message Payoff {
+  int64 timestamp = 1;
+  float amount = 2;
+  string id = 3;
+  string supplierid = 4;
+}
+
+message Response {
+  repeated Income income = 1;
+  repeated Bank banks = 2;
+}
+
+message Bank {
+  string name = 1;
+  float money = 2;
+  string color = 3;
+}
