@@ -9,7 +9,7 @@ server_build:
 							@echo "Server has been built"
 
 server_start:
-							go run backend/cmd/management/main.go
+							go run backend/main.go
 
 client_build:
 							protoc --proto_path=proto  --js_out=import_style=commonjs,binary:frontend/src/proto/ --grpc-web_out=import_style=commonjs,mode=grpcwebtext:frontend/src/proto/	 proto/$(input)/$(input).proto 
