@@ -35,7 +35,7 @@ export default function IncomePage() {
 		let params = new Params();
 
 		var query = new Query();
-		query.setQuerystring(`{"payoffs.supplierid":"${user ? user.id : ""}"}`);
+		query.setQuerystring(`{"supplierid":"${user ? user.id : ""}"}`);
 
 		params.setQuery(query);
 
@@ -58,20 +58,19 @@ export default function IncomePage() {
 	}, []);
 
 	useEffect(() => {
-		let data = [];
-		for (var i in incomes) {
-			let total = 0;
-			console.log(incomes[i]);
-
-			for (var j in incomes[i].payoffsList) {
-				total += incomes[i].payoffsList[j].amount;
+		var incs = [{ name: "Mat", amount: 1 }, { name: "Mat", amount: 1 }];
+		let data = {};
+		for (var income of incs) {
+			if (data[income.name]) {
+				data[income.name] += income.amount;
+			} else {
+				data[income.name] = income.amount;
 			}
-
-			data.push({
-				x: incomes[i].name,
-				y: total - incomes[i].sent
-			});
 		}
+
+		// data = Object.keys(data).map(function(key) {
+		// 	return [];
+		// });
 		console.log(data);
 
 		setData(data);

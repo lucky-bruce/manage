@@ -40,8 +40,6 @@ type Server struct{}
 
 const chunkSize = 64 * 1024 // 64 KiB
 
-const API_KEY = "AIzaSyCVIhtrt5WM6M4LPXlZZlTT_FwhbBOGF28"
-
 func (s *Server) NewProduct(ctx context.Context, product *products.Product) (*products.Product, error) {
 	dataStore := db.NewDataStore()
 
@@ -550,7 +548,7 @@ func (s *Server) GetIncome(ctx context.Context, params *financial.Params) (*fina
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "income")
 
-	var in []*financial.Income
+	var payoffs []*financial.Payoff
 	var query interface{}
 	var sortFields []string
 	if params.GetQuery() != nil {
@@ -558,13 +556,13 @@ func (s *Server) GetIncome(ctx context.Context, params *financial.Params) (*fina
 		sortFields = params.GetQuery().SortFields
 	}
 
-	err := store.GetAll(&in, sortFields, query)
+	err := store.GetAll(&payoffs, sortFields, query)
 	if err != nil {
 		logger.ErrorFunc(err)
 		return new(financial.Response), err
 	}
 
-	return &financial.Response{Income: in}, nil
+	return &financial.Response{Income: payoffs}, nil
 }
 
 func NewIncome(quote *quotes.Quote) {
@@ -582,37 +580,12 @@ func NewIncome(quote *quotes.Quote) {
 		//Count/recount total price to make sure all products are counted
 		total += float32(p.GetQty()) * float32(p.GetProduct().Sellingprice)
 
-		newPayoff := financial.Payoff{Timestamp: time.Now().Unix(), Amount: total, Id: quote.Id, Supplierid: p.GetProduct().Userid}
+		newPayoff := financial.Payoff{Name: sector, Timestamp: time.Now().Unix(), Amount: total, Id: quote.Id, Supplierid: p.GetProduct().Userid}
 
-		var income financial.Income
-
-		//Check if the sector is already in db
-		err := store.GetElement(&income, bson.M{"name": sector})
-		if err != nil {
-
-			//If not insert it and skip it
-			err = store.Insert(financial.Income{Name: sector, Payoffs: []*financial.Payoff{&newPayoff}})
-			if err != nil {
-				logger.ErrorFunc(err)
-
-			}
-
-		}
-
-		//Check if the quote was already counted
-		for _, v := range income.Payoffs {
-			if v.Id == quote.Id {
-				break
-			}
-		}
-
-		payoffs := append(income.Payoffs, &newPayoff)
-
-		//Update created record
-		err = store.C.Update(bson.M{"name": p.GetProduct().Sector}, bson.M{"payoffs": payoffs, "name": income.Name, "sent": income.Sent})
-
+		err := store.Insert(newPayoff)
 		if err != nil {
 			logger.ErrorFunc(err)
+			continue
 		}
 	}
 
@@ -625,82 +598,61 @@ func DeleteIncome(quote *quotes.Quote) {
 
 	store := db.GetStore(dataStore, "income")
 
-	for _, p := range quote.Products {
-		var income financial.Income
-		err := store.GetElement(&income, bson.M{"name": p.GetProduct().Sector})
-		if err != nil {
-			logger.ErrorFunc(err)
-			return
-		}
-
-		for i, v := range income.Payoffs {
-
-			//Find the quote by id
-			if v.Id == quote.Id {
-
-				//Following code delete the quote from slice of payoffs
-				income.Payoffs[i] = income.Payoffs[len(income.Payoffs)-1]
-				income.Payoffs[len(income.Payoffs)-1] = new(financial.Payoff)
-
-				income.Payoffs = income.Payoffs[:len(income.Payoffs)-1]
-			}
-		}
-
-		err = store.C.Update(bson.M{"name": p.GetProduct().Sector}, bson.M{"name": p.GetProduct().Sector, "sent": income.Sent, "payoffs": income.Payoffs})
-		if err != nil {
-			logger.ErrorFunc(err)
-		}
+	_, err := store.C.RemoveAll(bson.M{"id": quote.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
 	}
 
 }
 
 func (s *Server) ToDestination(ctx context.Context, params *financial.Params) (*financial.Response, error) {
 
-	go func() {
-		dataStore := db.NewDataStore()
+	// 	go func() {
+	// 		dataStore := db.NewDataStore()
 
-		defer dataStore.Close()
+	// 		defer dataStore.Close()
 
-		store := db.GetStore(dataStore, "income")
+	// 		store := db.GetStore(dataStore, "income")
 
-		var income financial.Income
+	// 		var income financial.Income
 
-		err := store.GetElement(&income, bson.M{"name": params.Name})
-		if err != nil {
-			logger.ErrorFunc(err)
-			return
-		}
+	// 		err := store.GetElement(&income, bson.M{"name": params.Name})
+	// 		if err != nil {
+	// 			logger.ErrorFunc(err)
+	// 			return
+	// 		}
 
-		err = store.C.Update(bson.M{"name": params.Name}, bson.M{"name": params.Name, "payoffs": income.Payoffs, "sent": income.Sent + params.Amount})
-		if err != nil {
-			return
-		}
-	}()
+	// 		err = store.C.Update(bson.M{"name": params.Name}, bson.M{"name": params.Name, "payoffs": income.Payoffs, "sent": income.Sent + params.Amount})
+	// 		if err != nil {
+	// 			return
+	// 		}
+	// 	}()
 
-	go func() {
-		dataStore := db.NewDataStore()
+	// 	go func() {
+	// 		dataStore := db.NewDataStore()
 
-		defer dataStore.Close()
-		store := db.GetStore(dataStore, "banks")
+	// 		defer dataStore.Close()
+	// 		store := db.GetStore(dataStore, "banks")
 
-		var bank financial.Bank
-		query, _ := utils.GetQuery(`{"name":"` + params.To + `"}`)
+	// 		var bank financial.Bank
+	// 		query, _ := utils.GetQuery(`{"name":"` + params.To + `"}`)
 
-		err := store.GetElement(&bank, query)
-		if err != nil {
-			logger.ErrorFunc(err)
-			return
-		}
+	// 		err := store.GetElement(&bank, query)
+	// 		if err != nil {
+	// 			logger.ErrorFunc(err)
+	// 			return
+	// 		}
 
-		err = store.C.Update(bson.M{"name": bank.Name}, bson.M{"name": bank.Name, "money": bank.Money + params.Amount, "color": bank.Color})
-		if err != nil {
-			logger.ErrorFunc(err)
-			return
-		}
+	// 		err = store.C.Update(bson.M{"name": bank.Name}, bson.M{"name": bank.Name, "money": bank.Money + params.Amount, "color": bank.Color})
+	// 		if err != nil {
+	// 			logger.ErrorFunc(err)
+	// 			return
+	// 		}
 
-	}()
+	// 	}()
 
 	return new(financial.Response), nil
+
 }
 
 func (s *Server) NewBank(ctx context.Context, bank *financial.Bank) (*financial.EmptyResponse, error) {
@@ -747,7 +699,7 @@ func (s *Server) GetUnique(ctx context.Context, params *db.Params) (*db.Response
 }
 
 func GetDistance() {
-	c, err := maps.NewClient(maps.WithAPIKey(API_KEY))
+	c, err := maps.NewClient(maps.WithAPIKey("API_KEY"))
 	if err != nil {
 		logger.ErrorFunc(err)
 		return

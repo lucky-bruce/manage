@@ -24,21 +24,16 @@ message Params {
   products.Query query = 4;
 }
 
-message Income {
-  string name = 1;
-  repeated Payoff payoffs = 2;
-  float sent = 3;
-}
-
 message Payoff {
   int64 timestamp = 1;
   float amount = 2;
   string id = 3;
   string supplierid = 4;
+  string name = 5;
 }
 
 message Response {
-  repeated Income income = 1;
+  repeated Payoff income = 1;
   repeated Bank banks = 2;
 }
 

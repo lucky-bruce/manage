@@ -14,7 +14,6 @@ var global = Function('return this')();
 var products_products_pb = require('../products/products_pb.js');
 goog.exportSymbol('proto.financial.Bank', null, global);
 goog.exportSymbol('proto.financial.EmptyResponse', null, global);
-goog.exportSymbol('proto.financial.Income', null, global);
 goog.exportSymbol('proto.financial.Params', null, global);
 goog.exportSymbol('proto.financial.Payoff', null, global);
 goog.exportSymbol('proto.financial.Request', null, global);
@@ -502,228 +501,6 @@ proto.financial.Params.prototype.hasQuery = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.financial.Income = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.financial.Income.repeatedFields_, null);
-};
-goog.inherits(proto.financial.Income, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.financial.Income.displayName = 'proto.financial.Income';
-}
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.financial.Income.repeatedFields_ = [2];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.financial.Income.prototype.toObject = function(opt_includeInstance) {
-  return proto.financial.Income.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.financial.Income} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.financial.Income.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    payoffsList: jspb.Message.toObjectList(msg.getPayoffsList(),
-    proto.financial.Payoff.toObject, includeInstance),
-    sent: +jspb.Message.getFieldWithDefault(msg, 3, 0.0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.financial.Income}
- */
-proto.financial.Income.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.financial.Income;
-  return proto.financial.Income.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.financial.Income} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.financial.Income}
- */
-proto.financial.Income.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
-      break;
-    case 2:
-      var value = new proto.financial.Payoff;
-      reader.readMessage(value,proto.financial.Payoff.deserializeBinaryFromReader);
-      msg.addPayoffs(value);
-      break;
-    case 3:
-      var value = /** @type {number} */ (reader.readFloat());
-      msg.setSent(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.financial.Income.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.financial.Income.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.financial.Income} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.financial.Income.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getName();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getPayoffsList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      proto.financial.Payoff.serializeBinaryToWriter
-    );
-  }
-  f = message.getSent();
-  if (f !== 0.0) {
-    writer.writeFloat(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string name = 1;
- * @return {string}
- */
-proto.financial.Income.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/** @param {string} value */
-proto.financial.Income.prototype.setName = function(value) {
-  jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * repeated Payoff payoffs = 2;
- * @return {!Array<!proto.financial.Payoff>}
- */
-proto.financial.Income.prototype.getPayoffsList = function() {
-  return /** @type{!Array<!proto.financial.Payoff>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.financial.Payoff, 2));
-};
-
-
-/** @param {!Array<!proto.financial.Payoff>} value */
-proto.financial.Income.prototype.setPayoffsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-/**
- * @param {!proto.financial.Payoff=} opt_value
- * @param {number=} opt_index
- * @return {!proto.financial.Payoff}
- */
-proto.financial.Income.prototype.addPayoffs = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.financial.Payoff, opt_index);
-};
-
-
-proto.financial.Income.prototype.clearPayoffsList = function() {
-  this.setPayoffsList([]);
-};
-
-
-/**
- * optional float sent = 3;
- * @return {number}
- */
-proto.financial.Income.prototype.getSent = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 3, 0.0));
-};
-
-
-/** @param {number} value */
-proto.financial.Income.prototype.setSent = function(value) {
-  jspb.Message.setProto3FloatField(this, 3, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
 proto.financial.Payoff = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -763,7 +540,8 @@ proto.financial.Payoff.toObject = function(includeInstance, msg) {
     timestamp: jspb.Message.getFieldWithDefault(msg, 1, 0),
     amount: +jspb.Message.getFieldWithDefault(msg, 2, 0.0),
     id: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    supplierid: jspb.Message.getFieldWithDefault(msg, 4, "")
+    supplierid: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -815,6 +593,10 @@ proto.financial.Payoff.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setSupplierid(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
       break;
     default:
       reader.skipField();
@@ -870,6 +652,13 @@ proto.financial.Payoff.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -936,6 +725,21 @@ proto.financial.Payoff.prototype.setSupplierid = function(value) {
 };
 
 
+/**
+ * optional string name = 5;
+ * @return {string}
+ */
+proto.financial.Payoff.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/** @param {string} value */
+proto.financial.Payoff.prototype.setName = function(value) {
+  jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -991,7 +795,7 @@ proto.financial.Response.prototype.toObject = function(opt_includeInstance) {
 proto.financial.Response.toObject = function(includeInstance, msg) {
   var f, obj = {
     incomeList: jspb.Message.toObjectList(msg.getIncomeList(),
-    proto.financial.Income.toObject, includeInstance),
+    proto.financial.Payoff.toObject, includeInstance),
     banksList: jspb.Message.toObjectList(msg.getBanksList(),
     proto.financial.Bank.toObject, includeInstance)
   };
@@ -1031,8 +835,8 @@ proto.financial.Response.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.financial.Income;
-      reader.readMessage(value,proto.financial.Income.deserializeBinaryFromReader);
+      var value = new proto.financial.Payoff;
+      reader.readMessage(value,proto.financial.Payoff.deserializeBinaryFromReader);
       msg.addIncome(value);
       break;
     case 2:
@@ -1074,7 +878,7 @@ proto.financial.Response.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.financial.Income.serializeBinaryToWriter
+      proto.financial.Payoff.serializeBinaryToWriter
     );
   }
   f = message.getBanksList();
@@ -1089,28 +893,28 @@ proto.financial.Response.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * repeated Income income = 1;
- * @return {!Array<!proto.financial.Income>}
+ * repeated Payoff income = 1;
+ * @return {!Array<!proto.financial.Payoff>}
  */
 proto.financial.Response.prototype.getIncomeList = function() {
-  return /** @type{!Array<!proto.financial.Income>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.financial.Income, 1));
+  return /** @type{!Array<!proto.financial.Payoff>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.financial.Payoff, 1));
 };
 
 
-/** @param {!Array<!proto.financial.Income>} value */
+/** @param {!Array<!proto.financial.Payoff>} value */
 proto.financial.Response.prototype.setIncomeList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.financial.Income=} opt_value
+ * @param {!proto.financial.Payoff=} opt_value
  * @param {number=} opt_index
- * @return {!proto.financial.Income}
+ * @return {!proto.financial.Payoff}
  */
 proto.financial.Response.prototype.addIncome = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.financial.Income, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.financial.Payoff, opt_index);
 };
 
 
