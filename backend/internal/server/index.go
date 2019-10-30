@@ -571,16 +571,22 @@ func NewIncome(quote *quotes.Quote) {
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "income")
 
-	//We range through products to append to each sector
-	for _, p := range quote.Products {
-		sector := p.GetProduct().Sector
-
+	for _, sup := range quote.Supplierids {
 		var total float32
+		var totalWithProfit float32
+		sector := make(map[string]float32)
 
-		//Count/recount total price to make sure all products are counted
-		total += float32(p.GetQty()) * float32(p.GetProduct().Sellingprice)
+		for _, p := range quote.Products {
+			if p.Product.Userid == sup.Id {
+				sector[p.Product.Sector] += float32(p.GetQty()) * float32(p.GetProduct().Sellingprice)
+				totalWithProfit += float32(p.GetQty()) * float32(p.GetProduct().Sellingprice)
+				total += float32(p.GetQty()) * float32(p.GetProduct().Buyingprice)
+			}
+		}
 
-		newPayoff := financial.Payoff{Name: sector, Timestamp: time.Now().Unix(), Amount: total, Id: quote.Id, Supplierid: p.GetProduct().Userid}
+		sectorProfit := financial.MapToSectorSlice(sector)
+
+		newPayoff := financial.Payoff{Sectors: sectorProfit, Timestamp: time.Now().Unix(), Toreceive: totalWithProfit, Profitless: total, Quoteid: quote.Id, Supplierid: sup.Id}
 
 		err := store.Insert(newPayoff)
 		if err != nil {
@@ -588,7 +594,6 @@ func NewIncome(quote *quotes.Quote) {
 			continue
 		}
 	}
-
 }
 
 func DeleteIncome(quote *quotes.Quote) {
@@ -598,7 +603,7 @@ func DeleteIncome(quote *quotes.Quote) {
 
 	store := db.GetStore(dataStore, "income")
 
-	_, err := store.C.RemoveAll(bson.M{"id": quote.Id})
+	_, err := store.C.RemoveAll(bson.M{"quoteid": quote.Id})
 	if err != nil {
 		logger.ErrorFunc(err)
 	}
@@ -699,7 +704,7 @@ func (s *Server) GetUnique(ctx context.Context, params *db.Params) (*db.Response
 }
 
 func GetDistance() {
-	c, err := maps.NewClient(maps.WithAPIKey("API_KEY"))
+	c, err := maps.NewClient(maps.WithAPIKey("AIzaSyDbT2dcYKnJTXxQymnL4LRpxM87cVkcEPw"))
 	if err != nil {
 		logger.ErrorFunc(err)
 		return

@@ -4,6 +4,7 @@ import { faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import Context from "../../context/context";
 import { Params } from "../../../proto/financial/financial_pb";
 import { Query } from "../../../proto/products/products_pb";
+import { GetSortedIncome } from "../../financial/utils";
 
 export default function StockBoard(props) {
 	const [incomes, setIncomes] = useState([]);
@@ -14,7 +15,7 @@ export default function StockBoard(props) {
 	function GetIncomes() {
 		let params = new Params();
 		var query = new Query();
-		query.setQuerystring(`{"payoffs.supplierid":"${props.id}"}`);
+		query.setQuerystring(`{"supplierid":"${props.id}"}`);
 
 		params.setQuery(query);
 
@@ -34,17 +35,17 @@ export default function StockBoard(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	function GetIncomeBySector(sector) {
-		let income = 0;
-		for (var i in incomes) {
-			if (incomes[i].name === sector) {
-				for (var j in incomes[i].payoffsList) {
-					income += incomes[i].payoffsList[j].amount;
+	function GetIncomeBySector(name) {
+		let total = 0;
+		for (var income of incomes) {
+			for (let sector of income.sectorsList) {
+				if (sector.name === name) {
+					total += sector.amount;
 				}
 			}
 		}
 
-		return income;
+		return total;
 	}
 
 	return (
@@ -68,15 +69,13 @@ export default function StockBoard(props) {
 				</div>
 			</div>
 			<div className="d-flex justify-content-between">
-				{incomes.map((income, i) => (
+				{GetSortedIncome(incomes).map((sector, i) => (
 					<div key={i} className="d-flex flex-column pt-5">
-						{income.name} sector
+						{sector.name} sector
 						<span className="font-weight-bold text-warning">
-							R$ {GetIncomeBySector(income.name).toFixed(2)}
+							R$ {GetIncomeBySector(sector.name).toFixed(2)}
 						</span>
-						<span className="font-weight-bold">
-							Q: {income.payoffsList.length}
-						</span>
+						{/* <span className="font-weight-bold">Q</span> */}
 					</div>
 				))}
 			</div>

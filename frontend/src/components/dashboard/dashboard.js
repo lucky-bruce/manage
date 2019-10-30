@@ -47,7 +47,7 @@ export default function Dashboard() {
 					</A>
 				</div>
 				<div
-					classname="dashboard mt-3"
+					className="dashboard mt-3"
 					style={{ display: opened ? "block" : "none" }}
 				>
 					<div className="row">

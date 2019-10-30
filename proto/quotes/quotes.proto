@@ -93,6 +93,7 @@ message Quote {
   // uint32 quoteDate = 2;
   ShippingStatus shipping = 19;
   
+  
 
   // uint32 validDate = 4;
   // string username = 5;

@@ -25,11 +25,19 @@ message Params {
 }
 
 message Payoff {
-  int64 timestamp = 1;
+  
+  string supplierid = 1;
+  int64 timestamp = 2;
+  float toreceive = 3;
+  float paid = 4;
+  string quoteid = 5;
+  repeated SectorProfit sectors = 6;
+  float profitless = 7;
+}
+
+message SectorProfit {
+  string name = 1;
   float amount = 2;
-  string id = 3;
-  string supplierid = 4;
-  string name = 5;
 }
 
 message Response {

@@ -62,21 +62,6 @@ export function ToGRPCObject(obj) {
 	return grpc;
 }
 
-export function GetIncome(incomes) {
-	let total = 0;
-	for (var i in incomes) {
-		let t = 0;
-
-		for (var j in incomes[i].payoffsList) {
-			t += incomes[i].payoffsList[j].amount;
-		}
-
-		total += t - incomes[i].sent;
-	}
-
-	return total;
-}
-
 export function GetStatus(num) {
 	switch (num) {
 		case 0:

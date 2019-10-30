@@ -100,7 +100,7 @@ code {
 		padding: 0 0.2rem;
 		width: 100%;
 	}
-	.row .right-border {
+	.dashboard .right-border {
 		border-right: 0 !important;
 	}
 }
@@ -199,7 +199,7 @@ span.active:not(.tab-indicator) {
 	border-bottom: 2px solid red;
 }
 
-.row .right-border {
+.dashboard .right-border {
 	border-right: 1px solid #dee2e6;
 }
 

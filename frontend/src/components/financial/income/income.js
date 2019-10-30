@@ -4,7 +4,8 @@ import Context from "../../context/context";
 import { Params, Request } from "../../../proto/financial/financial_pb";
 import Banks from "./banks";
 import SendTo from "./send";
-import { GetIncome, GetProfile } from "../../../utils/utils";
+import { GetProfile } from "../../../utils/utils";
+import { GetIncome } from "../../financial/utils";
 import { Query } from "../../../proto/products/products_pb";
 
 export default function IncomePage() {
@@ -46,7 +47,6 @@ export default function IncomePage() {
 
 			if (res) {
 				setIncomes(res.toObject().incomeList);
-				console.log(res.toObject().incomeList);
 			}
 		});
 	}
@@ -58,22 +58,24 @@ export default function IncomePage() {
 	}, []);
 
 	useEffect(() => {
-		var incs = [{ name: "Mat", amount: 1 }, { name: "Mat", amount: 1 }];
+		let result = [];
+
 		let data = {};
-		for (var income of incs) {
-			if (data[income.name]) {
-				data[income.name] += income.amount;
-			} else {
-				data[income.name] = income.amount;
+		for (var income of incomes) {
+			for (let sector of income.sectorsList) {
+				if (data[sector.name]) {
+					data[sector.name] += sector.amount;
+				} else {
+					data[sector.name] = sector.amount;
+				}
 			}
 		}
 
-		// data = Object.keys(data).map(function(key) {
-		// 	return [];
-		// });
-		console.log(data);
+		for (let key of Object.keys(data)) {
+			result.push({ x: key, y: data[key] });
+		}
 
-		setData(data);
+		setData(result);
 	}, [incomes]);
 
 	if (user) {

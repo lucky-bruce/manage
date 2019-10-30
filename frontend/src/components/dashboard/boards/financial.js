@@ -3,12 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import Context from "../../context/context";
 import { Params } from "../../../proto/financial/financial_pb";
-import { GetIncome } from "../../../utils/utils";
+import {
+	GetIncome,
+	GetReceived,
+	GetToReceive,
+	GetProfit
+} from "../../financial/utils";
 import { Query } from "../../../proto/products/products_pb";
 
 export default function FinancialBoard(props) {
 	const [incomes, setIncomes] = useState([]);
-	const [income, setIncome] = useState(0);
 
 	const context = useContext(Context);
 	const client = context.finances;
@@ -17,7 +21,7 @@ export default function FinancialBoard(props) {
 		let params = new Params();
 
 		var query = new Query();
-		query.setQuerystring(`{"payoffs.supplierid":"${props.id}"}`);
+		query.setQuerystring(`{"supplierid":"${props.id}"}`);
 
 		params.setQuery(query);
 
@@ -27,8 +31,6 @@ export default function FinancialBoard(props) {
 			}
 
 			if (res) {
-				console.log(res.toObject());
-
 				setIncomes(res.toObject().incomeList);
 			}
 		});
@@ -38,11 +40,6 @@ export default function FinancialBoard(props) {
 		GetIncomes();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	useEffect(() => {
-		setIncome(GetIncome(incomes));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [incomes]);
 
 	return (
 		<div className="col-md-4 p-3 right-border">
@@ -60,7 +57,7 @@ export default function FinancialBoard(props) {
 					<div className="d-flex flex-column p-3">
 						Income
 						<span className="text-primary font-weight-bold">
-							R$ {income.toFixed(3)}
+							R$ {GetIncome(incomes).toFixed(3)}
 						</span>
 					</div>
 					<div className="d-flex flex-column p-3">
@@ -69,13 +66,13 @@ export default function FinancialBoard(props) {
 							style={{ color: "lightgreen" }}
 							className="font-weight-bold"
 						>
-							R$ 000.000,000
+							R$ {GetReceived(incomes).toFixed(3)}
 						</span>
 					</div>
 					<div className="d-flex flex-column p-3">
 						To recieve
 						<span className="text-black font-weight-bold">
-							R$ 000.000,000
+							R$ {GetToReceive(incomes).toFixed(3)}
 						</span>
 					</div>
 				</div>
@@ -83,7 +80,7 @@ export default function FinancialBoard(props) {
 					<div className="d-flex flex-column p-3">
 						Profit
 						<span className="text-success font-weight-bold">
-							R$ 000.000,000
+							R$ {GetProfit(incomes).toFixed(3)}
 						</span>
 					</div>
 					<div className="d-flex flex-column p-3">

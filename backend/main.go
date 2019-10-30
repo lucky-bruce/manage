@@ -36,6 +36,8 @@ func main() {
 		panic(err)
 	}
 
+	// server.GetDistance()
+
 	srv := grpc.NewServer(withServerUnaryInterceptor())
 	quotes.RegisterQuoteServiceServer(srv, &server.Server{})
 	authorization.RegisterAuthorizationServiceServer(srv, &server.Server{})

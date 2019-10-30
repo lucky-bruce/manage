@@ -60,7 +60,7 @@ export default function StaffTable() {
 				</thead>
 				<tbody>
 					{users.map((user, i) => (
-						<tr>
+						<tr key={i}>
 							<th scope="row">{i}</th>
 							<td>
 								{formatName(
