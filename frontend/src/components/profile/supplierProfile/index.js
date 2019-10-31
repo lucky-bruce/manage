@@ -81,13 +81,6 @@ export default function SupplierProfile() {
 								New product &#43;
 							</button>
 						</A>
-						<A
-							href="/new/service"
-							className="text-white "
-							style={{ marginBottom: "0.2rem" }}
-						>
-							<Button>New service &#43;</Button>
-						</A>
 
 						<OverlayTrigger
 							trigger="click"

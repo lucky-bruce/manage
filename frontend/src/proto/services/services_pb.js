@@ -65,10 +65,9 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
 				id: jspb.Message.getFieldWithDefault(msg, 1, ""),
 				name: jspb.Message.getFieldWithDefault(msg, 2, ""),
 				userid: jspb.Message.getFieldWithDefault(msg, 3, ""),
-				costpermeter: +jspb.Message.getFieldWithDefault(msg, 4, 0.0),
-				costperday: +jspb.Message.getFieldWithDefault(msg, 5, 0.0),
-				sector: jspb.Message.getFieldWithDefault(msg, 6, ""),
-				costperservice: +jspb.Message.getFieldWithDefault(msg, 7, 0.0)
+				chargetype: jspb.Message.getFieldWithDefault(msg, 4, ""),
+				chargevalue: +jspb.Message.getFieldWithDefault(msg, 5, 0.0),
+				sector: jspb.Message.getFieldWithDefault(msg, 6, "")
 			};
 
 		if (includeInstance) {
@@ -116,20 +115,16 @@ proto.services.Service.deserializeBinaryFromReader = function(msg, reader) {
 				msg.setUserid(value);
 				break;
 			case 4:
-				var value = /** @type {number} */ (reader.readFloat());
-				msg.setCostpermeter(value);
+				var value = /** @type {string} */ (reader.readString());
+				msg.setChargetype(value);
 				break;
 			case 5:
 				var value = /** @type {number} */ (reader.readFloat());
-				msg.setCostperday(value);
+				msg.setChargevalue(value);
 				break;
 			case 6:
 				var value = /** @type {string} */ (reader.readString());
 				msg.setSector(value);
-				break;
-			case 7:
-				var value = /** @type {number} */ (reader.readFloat());
-				msg.setCostperservice(value);
 				break;
 			default:
 				reader.skipField();
@@ -170,21 +165,17 @@ proto.services.Service.serializeBinaryToWriter = function(message, writer) {
 	if (f.length > 0) {
 		writer.writeString(3, f);
 	}
-	f = message.getCostpermeter();
-	if (f !== 0.0) {
-		writer.writeFloat(4, f);
+	f = message.getChargetype();
+	if (f.length > 0) {
+		writer.writeString(4, f);
 	}
-	f = message.getCostperday();
+	f = message.getChargevalue();
 	if (f !== 0.0) {
 		writer.writeFloat(5, f);
 	}
 	f = message.getSector();
 	if (f.length > 0) {
 		writer.writeString(6, f);
-	}
-	f = message.getCostperservice();
-	if (f !== 0.0) {
-		writer.writeFloat(7, f);
 	}
 };
 
@@ -240,27 +231,27 @@ proto.services.Service.prototype.setUserid = function(value) {
 };
 
 /**
- * optional float costpermeter = 4;
- * @return {number}
+ * optional string chargetype = 4;
+ * @return {string}
  */
-proto.services.Service.prototype.getCostpermeter = function() {
-	return /** @type {number} */ (+jspb.Message.getFieldWithDefault(
+proto.services.Service.prototype.getChargetype = function() {
+	return /** @type {string} */ (jspb.Message.getFieldWithDefault(
 		this,
 		4,
-		0.0
+		""
 	));
 };
 
-/** @param {number} value */
-proto.services.Service.prototype.setCostpermeter = function(value) {
-	jspb.Message.setProto3FloatField(this, 4, value);
+/** @param {string} value */
+proto.services.Service.prototype.setChargetype = function(value) {
+	jspb.Message.setProto3StringField(this, 4, value);
 };
 
 /**
- * optional float costperday = 5;
+ * optional float chargevalue = 5;
  * @return {number}
  */
-proto.services.Service.prototype.getCostperday = function() {
+proto.services.Service.prototype.getChargevalue = function() {
 	return /** @type {number} */ (+jspb.Message.getFieldWithDefault(
 		this,
 		5,
@@ -269,7 +260,7 @@ proto.services.Service.prototype.getCostperday = function() {
 };
 
 /** @param {number} value */
-proto.services.Service.prototype.setCostperday = function(value) {
+proto.services.Service.prototype.setChargevalue = function(value) {
 	jspb.Message.setProto3FloatField(this, 5, value);
 };
 
@@ -288,23 +279,6 @@ proto.services.Service.prototype.getSector = function() {
 /** @param {string} value */
 proto.services.Service.prototype.setSector = function(value) {
 	jspb.Message.setProto3StringField(this, 6, value);
-};
-
-/**
- * optional float costperservice = 7;
- * @return {number}
- */
-proto.services.Service.prototype.getCostperservice = function() {
-	return /** @type {number} */ (+jspb.Message.getFieldWithDefault(
-		this,
-		7,
-		0.0
-	));
-};
-
-/** @param {number} value */
-proto.services.Service.prototype.setCostperservice = function(value) {
-	jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 /**

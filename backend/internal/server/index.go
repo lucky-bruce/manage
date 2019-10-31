@@ -115,9 +115,27 @@ func (s *Server) DeleteProductByID(ctx context.Context, productParams *products.
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "products")
 
-	err := store.DeleteElementByID(productParams.GetId())
+	var product products.Product
+	err := store.GetElementByID(productParams.Id, product)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(products.EmptyResponse), err
+	}
+	go DeleteFiles(product)
+
+	err = store.DeleteElementByID(productParams.GetId())
 
 	return new(products.EmptyResponse), err
+}
+
+func DeleteFiles(product products.Product) {
+	for _, v := range product.Images {
+		err := os.Remove(v)
+		if err != nil {
+			logger.ErrorFunc(err)
+			return
+		}
+	}
 }
 
 func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer) error {

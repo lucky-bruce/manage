@@ -117,11 +117,11 @@ export const GetGRPCProduct = obj => {
 export function GetGRPCService(obj) {
 	let s = new Service();
 
+	s.setId(obj.id);
 	s.setName(obj.name);
 	s.setUserid(obj.userid);
-	s.setCostpermeter(obj.costpermeter);
-	s.setCostperday(obj.costperday);
-	s.setCostperservice(obj.costperservice);
+	s.setChargetype(obj.chargetype);
+	s.setChargevalue(obj.chargevalue);
 	s.setSector(obj.sector);
 
 	return s;

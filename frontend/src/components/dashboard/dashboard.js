@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import { A } from "hookrouter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
@@ -6,12 +6,12 @@ import FinancialBoard from "./boards/financial";
 import StockBoard from "./boards/stock";
 import ClientsBoard from "./boards/clients";
 import QuotesBoard from "./boards/quotes";
-import { GetProfile, TimestampSearch } from "../../utils/utils";
+import { GetProfile } from "../../utils/utils";
 import DateSelect from "./table/quotes/dateSelect";
 
 export default function Dashboard() {
 	const [opened, setOpened] = useState(false);
-	const [query, setQuery] = useState("");
+	const [query] = useState("");
 	const user = GetProfile();
 
 	const [userInput, setUserInput] = useReducer(

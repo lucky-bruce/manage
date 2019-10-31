@@ -90,7 +90,7 @@ export default function Stock() {
 							<td>{product.name}</td>
 							<td>{product.sector}</td>
 							<td>{product.category}</td>
-							<td>{product.sellingprice}</td>
+							<td>{product.sellingprice.toFixed(2)}</td>
 							<td>{product.qtyinstock}</td>
 							<td>
 								<A href={`/product/${product.id}`}>

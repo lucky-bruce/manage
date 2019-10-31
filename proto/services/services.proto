@@ -17,10 +17,9 @@ message Service {
   string id = 1;
   string name = 2;
   string userid = 3;
-  float costpermeter = 4;
-  float costperday = 5;
+  string chargetype = 4;
+  float chargevalue = 5;
   string sector = 6;
-  float costperservice = 7;
 }
 
 message Params {

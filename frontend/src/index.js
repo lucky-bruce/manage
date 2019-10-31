@@ -26,7 +26,6 @@ import StockPage from "./routes/products/Stock";
 import QuotesPage from "./routes/quotes/Quotes";
 import NotPermittedPage from "./routes/NotPermitted";
 import StaffForm from "./routes/accounts/StaffRegistration";
-import ServiceForm from "./routes/services/ServiceForm";
 import { GetClients } from "./clients";
 
 require("jquery");
@@ -40,7 +39,6 @@ const routes = {
 	"/profile": () => <UserProfile />,
 	"/new/quote": () => <QuoteForm />,
 	"/new/product": () => <ProductForm />,
-	"/new/service": () => <ServiceForm />,
 	"/new/staff": () => <StaffForm />,
 	"/edit/quote/:id": ({ id }) => <QuoteEdit id={id} />,
 	"/edit/product/:id": ({ id }) => <ProductEdit id={id} />,
