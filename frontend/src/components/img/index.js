@@ -31,14 +31,12 @@ export default function Img({ src, className, style, alt }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return loaded ? (
+	return (
 		<img
 			className={className}
 			style={style}
 			alt={alt}
 			src={`data:image/png;base64,${image}`}
 		/>
-	) : (
-		""
 	);
 }

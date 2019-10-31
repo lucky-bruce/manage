@@ -1,6 +1,7 @@
 import decode from "jwt-decode";
 import { navigate } from "hookrouter";
 import { Product } from "../proto/products/products_pb";
+import { Service } from "../proto/services/services_pb";
 
 export function checkAuthorization(profile, path) {
 	if (profile) {
@@ -81,7 +82,7 @@ export function GetStatus(num) {
 }
 
 export const GetGRPCProduct = obj => {
-	let product = new Product();
+	var product = new Product();
 
 	product.setId(obj.id);
 	product.setName(obj.name);
@@ -94,14 +95,37 @@ export const GetGRPCProduct = obj => {
 	product.setSellingprice(
 		obj.buyingprice + (obj.buyingprice * obj.desiredprofit) / 100
 	);
+
 	product.setSector(obj.sector);
-	product.setSizew(obj.sizew.toFixed(1));
-	product.setSizel(obj.sizel.toFixed(1));
-	product.setSizeh(obj.sizeh.toFixed(1));
+	product.setSizew(obj.sizew);
+	product.setSizel(obj.sizel);
+	product.setSizeh(obj.sizeh);
+	product.setSized(obj.sized);
 	product.setUserid(obj.userid);
-	product.setShipping(obj.shipping);
+	product.setBarcode(obj.barcode);
+	product.setImagesList(obj.images);
+	product.setDiscount(obj.discount);
+	product.setMeasurementunit(obj.measurementunit);
+	product.setPortionunit(obj.portionunit);
+	product.setPortionvalue(obj.portionvalue);
+	product.setBrand(obj.brand);
+	product.setBrandmodel(obj.brandmodel);
+
 	return product;
 };
+
+export function GetGRPCService(obj) {
+	let s = new Service();
+
+	s.setName(obj.name);
+	s.setUserid(obj.userid);
+	s.setCostpermeter(obj.costpermeter);
+	s.setCostperday(obj.costperday);
+	s.setCostperservice(obj.costperservice);
+	s.setSector(obj.sector);
+
+	return s;
+}
 
 export const TimestampSearch = (from, to, timestampLink) => {
 	from = from.valueOf() / 1000 - 86400;

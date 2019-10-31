@@ -46,9 +46,9 @@ message Product{
   string category = 3;
   string subcategory = 4;
   string sector = 5;
-  int32 buyingprice =6;
-  int32 desiredprofit = 7;
-  int32 sellingprice = 8;
+  float buyingprice =6;
+  float desiredprofit = 7;
+  float sellingprice = 8;
   int64 addedtime = 9;
   string description = 10;
   string id = 11;
@@ -56,8 +56,15 @@ message Product{
   float sizel = 13;
   float sized = 14;
   float sizeh = 15;
-  float weight = 16;
   string userid = 17;
   repeated string images = 18;
+  string barcode = 19;
+  string soldby = 20;
+  float discount = 21;
+  string brand= 22;
+  string brandmodel = 23;
+  string measurementunit = 25;
+  string portionunit = 27;
+  float portionvalue = 28;
 }
 

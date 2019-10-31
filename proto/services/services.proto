@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "products/products.proto";
-import "authorization/authorization.proto";
+
 
 package services;
 
@@ -16,10 +16,11 @@ service Services{
 message Service {
   string id = 1;
   string name = 2;
-  authorization.User user = 3;
-  float cpm = 4;
-  float cpd = 5;
-
+  string userid = 3;
+  float costpermeter = 4;
+  float costperday = 5;
+  string sector = 6;
+  float costperservice = 7;
 }
 
 message Params {

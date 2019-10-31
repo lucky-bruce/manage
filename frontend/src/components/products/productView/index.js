@@ -49,13 +49,7 @@ export default function View(props) {
 						<h4>{product.name}</h4>
 
 						<p>{product.sector}</p>
-						<ImgCarousel
-							imgs={[
-								"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668",
-								"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668",
-								"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-xr-white-select-201809?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1551226036668"
-							]}
-						/>
+						<ImgCarousel imgs={product.imagesList || []} />
 					</div>
 					<div className="col-md-4 p-0">
 						<h5>Total in stock: {product.qtyinstock}</h5>

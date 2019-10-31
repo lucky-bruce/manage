@@ -1075,9 +1075,9 @@ proto.products.Product.toObject = function(includeInstance, msg) {
     category: jspb.Message.getFieldWithDefault(msg, 3, ""),
     subcategory: jspb.Message.getFieldWithDefault(msg, 4, ""),
     sector: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    buyingprice: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    desiredprofit: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    sellingprice: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    buyingprice: +jspb.Message.getFieldWithDefault(msg, 6, 0.0),
+    desiredprofit: +jspb.Message.getFieldWithDefault(msg, 7, 0.0),
+    sellingprice: +jspb.Message.getFieldWithDefault(msg, 8, 0.0),
     addedtime: jspb.Message.getFieldWithDefault(msg, 9, 0),
     description: jspb.Message.getFieldWithDefault(msg, 10, ""),
     id: jspb.Message.getFieldWithDefault(msg, 11, ""),
@@ -1087,7 +1087,17 @@ proto.products.Product.toObject = function(includeInstance, msg) {
     sizeh: +jspb.Message.getFieldWithDefault(msg, 15, 0.0),
     weight: +jspb.Message.getFieldWithDefault(msg, 16, 0.0),
     userid: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    imagesList: jspb.Message.getRepeatedField(msg, 18)
+    imagesList: jspb.Message.getRepeatedField(msg, 18),
+    barcode: jspb.Message.getFieldWithDefault(msg, 19, ""),
+    soldby: jspb.Message.getFieldWithDefault(msg, 20, ""),
+    discount: +jspb.Message.getFieldWithDefault(msg, 21, 0.0),
+    brand: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    brandmodel: jspb.Message.getFieldWithDefault(msg, 23, ""),
+    volume: +jspb.Message.getFieldWithDefault(msg, 24, 0.0),
+    measurementunit: jspb.Message.getFieldWithDefault(msg, 25, ""),
+    measurementvalue: +jspb.Message.getFieldWithDefault(msg, 26, 0.0),
+    portionunit: jspb.Message.getFieldWithDefault(msg, 27, ""),
+    portionvalue: +jspb.Message.getFieldWithDefault(msg, 28, 0.0)
   };
 
   if (includeInstance) {
@@ -1145,15 +1155,15 @@ proto.products.Product.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSector(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setBuyingprice(value);
       break;
     case 7:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setDesiredprofit(value);
       break;
     case 8:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readFloat());
       msg.setSellingprice(value);
       break;
     case 9:
@@ -1195,6 +1205,46 @@ proto.products.Product.deserializeBinaryFromReader = function(msg, reader) {
     case 18:
       var value = /** @type {string} */ (reader.readString());
       msg.addImages(value);
+      break;
+    case 19:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBarcode(value);
+      break;
+    case 20:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSoldby(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setDiscount(value);
+      break;
+    case 22:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBrand(value);
+      break;
+    case 23:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBrandmodel(value);
+      break;
+    case 24:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setVolume(value);
+      break;
+    case 25:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMeasurementunit(value);
+      break;
+    case 26:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setMeasurementvalue(value);
+      break;
+    case 27:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPortionunit(value);
+      break;
+    case 28:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setPortionvalue(value);
       break;
     default:
       reader.skipField();
@@ -1261,22 +1311,22 @@ proto.products.Product.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getBuyingprice();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f !== 0.0) {
+    writer.writeFloat(
       6,
       f
     );
   }
   f = message.getDesiredprofit();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f !== 0.0) {
+    writer.writeFloat(
       7,
       f
     );
   }
   f = message.getSellingprice();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f !== 0.0) {
+    writer.writeFloat(
       8,
       f
     );
@@ -1348,6 +1398,76 @@ proto.products.Product.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeRepeatedString(
       18,
+      f
+    );
+  }
+  f = message.getBarcode();
+  if (f.length > 0) {
+    writer.writeString(
+      19,
+      f
+    );
+  }
+  f = message.getSoldby();
+  if (f.length > 0) {
+    writer.writeString(
+      20,
+      f
+    );
+  }
+  f = message.getDiscount();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      21,
+      f
+    );
+  }
+  f = message.getBrand();
+  if (f.length > 0) {
+    writer.writeString(
+      22,
+      f
+    );
+  }
+  f = message.getBrandmodel();
+  if (f.length > 0) {
+    writer.writeString(
+      23,
+      f
+    );
+  }
+  f = message.getVolume();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      24,
+      f
+    );
+  }
+  f = message.getMeasurementunit();
+  if (f.length > 0) {
+    writer.writeString(
+      25,
+      f
+    );
+  }
+  f = message.getMeasurementvalue();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      26,
+      f
+    );
+  }
+  f = message.getPortionunit();
+  if (f.length > 0) {
+    writer.writeString(
+      27,
+      f
+    );
+  }
+  f = message.getPortionvalue();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      28,
       f
     );
   }
@@ -1430,47 +1550,47 @@ proto.products.Product.prototype.setSector = function(value) {
 
 
 /**
- * optional int32 buyingprice = 6;
+ * optional float buyingprice = 6;
  * @return {number}
  */
 proto.products.Product.prototype.getBuyingprice = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 6, 0.0));
 };
 
 
 /** @param {number} value */
 proto.products.Product.prototype.setBuyingprice = function(value) {
-  jspb.Message.setProto3IntField(this, 6, value);
+  jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
 /**
- * optional int32 desiredprofit = 7;
+ * optional float desiredprofit = 7;
  * @return {number}
  */
 proto.products.Product.prototype.getDesiredprofit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 7, 0.0));
 };
 
 
 /** @param {number} value */
 proto.products.Product.prototype.setDesiredprofit = function(value) {
-  jspb.Message.setProto3IntField(this, 7, value);
+  jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional int32 sellingprice = 8;
+ * optional float sellingprice = 8;
  * @return {number}
  */
 proto.products.Product.prototype.getSellingprice = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 8, 0.0));
 };
 
 
 /** @param {number} value */
 proto.products.Product.prototype.setSellingprice = function(value) {
-  jspb.Message.setProto3IntField(this, 8, value);
+  jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
@@ -1635,6 +1755,156 @@ proto.products.Product.prototype.addImages = function(value, opt_index) {
 
 proto.products.Product.prototype.clearImagesList = function() {
   this.setImagesList([]);
+};
+
+
+/**
+ * optional string barcode = 19;
+ * @return {string}
+ */
+proto.products.Product.prototype.getBarcode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setBarcode = function(value) {
+  jspb.Message.setProto3StringField(this, 19, value);
+};
+
+
+/**
+ * optional string soldby = 20;
+ * @return {string}
+ */
+proto.products.Product.prototype.getSoldby = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setSoldby = function(value) {
+  jspb.Message.setProto3StringField(this, 20, value);
+};
+
+
+/**
+ * optional float discount = 21;
+ * @return {number}
+ */
+proto.products.Product.prototype.getDiscount = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 21, 0.0));
+};
+
+
+/** @param {number} value */
+proto.products.Product.prototype.setDiscount = function(value) {
+  jspb.Message.setProto3FloatField(this, 21, value);
+};
+
+
+/**
+ * optional string brand = 22;
+ * @return {string}
+ */
+proto.products.Product.prototype.getBrand = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setBrand = function(value) {
+  jspb.Message.setProto3StringField(this, 22, value);
+};
+
+
+/**
+ * optional string brandmodel = 23;
+ * @return {string}
+ */
+proto.products.Product.prototype.getBrandmodel = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setBrandmodel = function(value) {
+  jspb.Message.setProto3StringField(this, 23, value);
+};
+
+
+/**
+ * optional float volume = 24;
+ * @return {number}
+ */
+proto.products.Product.prototype.getVolume = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 24, 0.0));
+};
+
+
+/** @param {number} value */
+proto.products.Product.prototype.setVolume = function(value) {
+  jspb.Message.setProto3FloatField(this, 24, value);
+};
+
+
+/**
+ * optional string measurementunit = 25;
+ * @return {string}
+ */
+proto.products.Product.prototype.getMeasurementunit = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 25, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setMeasurementunit = function(value) {
+  jspb.Message.setProto3StringField(this, 25, value);
+};
+
+
+/**
+ * optional float measurementvalue = 26;
+ * @return {number}
+ */
+proto.products.Product.prototype.getMeasurementvalue = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 26, 0.0));
+};
+
+
+/** @param {number} value */
+proto.products.Product.prototype.setMeasurementvalue = function(value) {
+  jspb.Message.setProto3FloatField(this, 26, value);
+};
+
+
+/**
+ * optional string portionunit = 27;
+ * @return {string}
+ */
+proto.products.Product.prototype.getPortionunit = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 27, ""));
+};
+
+
+/** @param {string} value */
+proto.products.Product.prototype.setPortionunit = function(value) {
+  jspb.Message.setProto3StringField(this, 27, value);
+};
+
+
+/**
+ * optional float portionvalue = 28;
+ * @return {number}
+ */
+proto.products.Product.prototype.getPortionvalue = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 28, 0.0));
+};
+
+
+/** @param {number} value */
+proto.products.Product.prototype.setPortionvalue = function(value) {
+  jspb.Message.setProto3FloatField(this, 28, value);
 };
 
 

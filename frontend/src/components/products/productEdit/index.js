@@ -25,6 +25,7 @@ export default function EditForm(props) {
 			sellingprice: 0,
 			description: "",
 			userid: "",
+			barcode: "",
 			shipping: 0
 		}
 	);
@@ -58,6 +59,7 @@ export default function EditForm(props) {
 				handleChange("description", original.description);
 				handleChange("userid", original.userid);
 				handleChange("shipping", original.shipping);
+				handleChange("barcode", original.barcode);
 			}
 		});
 	}

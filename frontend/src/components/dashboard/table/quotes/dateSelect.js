@@ -7,7 +7,7 @@ export default function DateSelect(props) {
 
 	return (
 		<div className="">
-			<button className="btn border" onClick={() => setfrom(!from)}>
+			<button className="btn border mr-3" onClick={() => setfrom(!from)}>
 				{props.from
 					? props.from.toLocaleDateString("en-US")
 					: "Date from"}
@@ -24,7 +24,7 @@ export default function DateSelect(props) {
 					maxDate={new Date()}
 				/>
 			</span>
-			<button className="ml-3 btn border" onClick={() => setto(!to)}>
+			<button className="btn border" onClick={() => setto(!to)}>
 				{props.to ? props.to.toLocaleDateString("en-US") : "Date to"}
 			</button>
 			<span className={` position-absolute ${to ? "" : "d-none"}`}>

@@ -1,7 +1,10 @@
 import React from "react";
 import Slider from "react-slick";
+import Img from "../../img/index";
 
-export default function imgCarousel(props) {
+export default function imgCarousel({ imgs }) {
+	console.log(imgs);
+
 	var settings = {
 		dots: true,
 		infinite: false,
@@ -10,17 +13,13 @@ export default function imgCarousel(props) {
 		slidesToScroll: 1,
 		dotsClass: "mt-4 d-flex flex-row no-dots",
 		customPaging: i => (
-			<img
-				alt={"Product"}
-				style={{ width: "100px" }}
-				src={props.imgs[i]}
-			/>
+			<Img alt={"Product"} style={{ width: "100px" }} src={imgs[i]} />
 		)
 	};
 	return (
 		<Slider {...settings}>
-			{props.imgs.map((img, i) => (
-				<img key={i} className="item-slick" src={img} alt="" />
+			{imgs.map((img, i) => (
+				<Img key={i} className="item-slick" src={img} alt="" />
 			))}
 		</Slider>
 	);

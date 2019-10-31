@@ -206,3 +206,38 @@ span.active:not(.tab-indicator) {
 .react-datepicker.cal {
 	z-index: 1000;
 }
+
+.image-drop {
+	background: #e4e4e4;
+	border: 2px dashed #bdbdbd;
+}
+
+.product-form-image {
+	width: 50%;
+	padding: 1rem;
+}
+
+.disabled {
+	color: #6c757d !important;
+}
+
+.autocomplete {
+	position: absolute;
+	width: 100%;
+	z-index: 3;
+	background: white;
+	border: 1px solid black;
+}
+
+.autocomplete div {
+	padding: 0.3rem 0.5rem;
+}
+
+.autocomplete div:hover {
+	background: blue;
+	color: white;
+}
+
+.form-control.product::placeholder {
+	color: white;
+}
