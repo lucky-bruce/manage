@@ -25,7 +25,7 @@ message Params {
 }
 
 message Payoff {
-  
+
   string supplierid = 1;
   int64 timestamp = 2;
   float toreceive = 3;

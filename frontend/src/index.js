@@ -27,6 +27,7 @@ import QuotesPage from "./routes/quotes/Quotes";
 import NotPermittedPage from "./routes/NotPermitted";
 import StaffForm from "./routes/accounts/StaffRegistration";
 import { GetClients } from "./clients";
+import StatusUpdate from "./routes/quotes/StatusUpdate";
 
 require("jquery");
 require("bootstrap");
@@ -44,6 +45,7 @@ const routes = {
 	"/edit/product/:id": ({ id }) => <ProductEdit id={id} />,
 	"/quote/:id": ({ id }) => <QuoteView id={id} />,
 	"/product/:id": ({ id }) => <ProductView id={id} />,
+	"/quote/:id/status-update": ({ id }) => <StatusUpdate id={id} />,
 	"/financial": () => <FinancialPage />,
 	"/stock": () => <StockPage />,
 	"/quotes": () => <QuotesPage />,

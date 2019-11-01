@@ -17,9 +17,9 @@ goog.exportSymbol('proto.quotes.QuoteParams', null, global);
 goog.exportSymbol('proto.quotes.QuoteProduct', null, global);
 goog.exportSymbol('proto.quotes.QuoteResponse', null, global);
 goog.exportSymbol('proto.quotes.Response', null, global);
-goog.exportSymbol('proto.quotes.ShippingStatus', null, global);
 goog.exportSymbol('proto.quotes.Stats', null, global);
 goog.exportSymbol('proto.quotes.Status', null, global);
+goog.exportSymbol('proto.quotes.StatusParams', null, global);
 goog.exportSymbol('proto.quotes.Suppliers', null, global);
 
 /**
@@ -511,6 +511,175 @@ proto.quotes.Response.prototype.setId = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.quotes.StatusParams = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.quotes.StatusParams, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.quotes.StatusParams.displayName = 'proto.quotes.StatusParams';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.quotes.StatusParams.prototype.toObject = function(opt_includeInstance) {
+  return proto.quotes.StatusParams.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.quotes.StatusParams} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.StatusParams.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    status: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    id: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.quotes.StatusParams}
+ */
+proto.quotes.StatusParams.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.quotes.StatusParams;
+  return proto.quotes.StatusParams.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.quotes.StatusParams} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.quotes.StatusParams}
+ */
+proto.quotes.StatusParams.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setStatus(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.quotes.StatusParams.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.quotes.StatusParams.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.quotes.StatusParams} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.StatusParams.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getStatus();
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int32 status = 1;
+ * @return {number}
+ */
+proto.quotes.StatusParams.prototype.getStatus = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.quotes.StatusParams.prototype.setStatus = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string id = 2;
+ * @return {string}
+ */
+proto.quotes.StatusParams.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.quotes.StatusParams.prototype.setId = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.quotes.Stats = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -551,13 +720,10 @@ proto.quotes.Stats.toObject = function(includeInstance, msg) {
     pending: jspb.Message.getFieldWithDefault(msg, 2, 0),
     denied: jspb.Message.getFieldWithDefault(msg, 3, 0),
     pb_new: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    preparation: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    production: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    quality: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    ready: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    pickedup: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    applied: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    preparation: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    production: jspb.Message.getFieldWithDefault(msg, 7, 0),
     delivered: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    installed: jspb.Message.getFieldWithDefault(msg, 11, 0),
     completed: jspb.Message.getFieldWithDefault(msg, 12, 0),
     cancelled: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
@@ -614,31 +780,19 @@ proto.quotes.Stats.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 5:
       var value = /** @type {number} */ (reader.readUint32());
-      msg.setPreparation(value);
+      msg.setApplied(value);
       break;
     case 6:
       var value = /** @type {number} */ (reader.readUint32());
-      msg.setProduction(value);
+      msg.setPreparation(value);
       break;
     case 7:
       var value = /** @type {number} */ (reader.readUint32());
-      msg.setQuality(value);
-      break;
-    case 8:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setReady(value);
-      break;
-    case 9:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setPickedup(value);
+      msg.setProduction(value);
       break;
     case 10:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setDelivered(value);
-      break;
-    case 11:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setInstalled(value);
       break;
     case 12:
       var value = /** @type {number} */ (reader.readUint32());
@@ -705,38 +859,24 @@ proto.quotes.Stats.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPreparation();
+  f = message.getApplied();
   if (f !== 0) {
     writer.writeUint32(
       5,
       f
     );
   }
-  f = message.getProduction();
+  f = message.getPreparation();
   if (f !== 0) {
     writer.writeUint32(
       6,
       f
     );
   }
-  f = message.getQuality();
+  f = message.getProduction();
   if (f !== 0) {
     writer.writeUint32(
       7,
-      f
-    );
-  }
-  f = message.getReady();
-  if (f !== 0) {
-    writer.writeUint32(
-      8,
-      f
-    );
-  }
-  f = message.getPickedup();
-  if (f !== 0) {
-    writer.writeUint32(
-      9,
       f
     );
   }
@@ -744,13 +884,6 @@ proto.quotes.Stats.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       10,
-      f
-    );
-  }
-  f = message.getInstalled();
-  if (f !== 0) {
-    writer.writeUint32(
-      11,
       f
     );
   }
@@ -832,77 +965,47 @@ proto.quotes.Stats.prototype.setNew = function(value) {
 
 
 /**
- * optional uint32 preparation = 5;
+ * optional uint32 applied = 5;
  * @return {number}
  */
-proto.quotes.Stats.prototype.getPreparation = function() {
+proto.quotes.Stats.prototype.getApplied = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /** @param {number} value */
-proto.quotes.Stats.prototype.setPreparation = function(value) {
+proto.quotes.Stats.prototype.setApplied = function(value) {
   jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional uint32 production = 6;
+ * optional uint32 preparation = 6;
  * @return {number}
  */
-proto.quotes.Stats.prototype.getProduction = function() {
+proto.quotes.Stats.prototype.getPreparation = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
 /** @param {number} value */
-proto.quotes.Stats.prototype.setProduction = function(value) {
+proto.quotes.Stats.prototype.setPreparation = function(value) {
   jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
 /**
- * optional uint32 quality = 7;
+ * optional uint32 production = 7;
  * @return {number}
  */
-proto.quotes.Stats.prototype.getQuality = function() {
+proto.quotes.Stats.prototype.getProduction = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
 /** @param {number} value */
-proto.quotes.Stats.prototype.setQuality = function(value) {
+proto.quotes.Stats.prototype.setProduction = function(value) {
   jspb.Message.setProto3IntField(this, 7, value);
-};
-
-
-/**
- * optional uint32 ready = 8;
- * @return {number}
- */
-proto.quotes.Stats.prototype.getReady = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
-};
-
-
-/** @param {number} value */
-proto.quotes.Stats.prototype.setReady = function(value) {
-  jspb.Message.setProto3IntField(this, 8, value);
-};
-
-
-/**
- * optional uint32 pickedup = 9;
- * @return {number}
- */
-proto.quotes.Stats.prototype.getPickedup = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
-};
-
-
-/** @param {number} value */
-proto.quotes.Stats.prototype.setPickedup = function(value) {
-  jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
@@ -918,21 +1021,6 @@ proto.quotes.Stats.prototype.getDelivered = function() {
 /** @param {number} value */
 proto.quotes.Stats.prototype.setDelivered = function(value) {
   jspb.Message.setProto3IntField(this, 10, value);
-};
-
-
-/**
- * optional uint32 installed = 11;
- * @return {number}
- */
-proto.quotes.Stats.prototype.getInstalled = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
-};
-
-
-/** @param {number} value */
-proto.quotes.Stats.prototype.setInstalled = function(value) {
-  jspb.Message.setProto3IntField(this, 11, value);
 };
 
 
@@ -1396,7 +1484,7 @@ proto.quotes.Quote.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 16, 0),
     sumprice: +jspb.Message.getFieldWithDefault(msg, 17, 0.0),
     paidprice: +jspb.Message.getFieldWithDefault(msg, 18, 0.0),
-    shipping: jspb.Message.getFieldWithDefault(msg, 19, 0)
+    qrcodeurl: jspb.Message.getFieldWithDefault(msg, 20, "")
   };
 
   if (includeInstance) {
@@ -1503,9 +1591,9 @@ proto.quotes.Quote.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readFloat());
       msg.setPaidprice(value);
       break;
-    case 19:
-      var value = /** @type {!proto.quotes.ShippingStatus} */ (reader.readEnum());
-      msg.setShipping(value);
+    case 20:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setQrcodeurl(value);
       break;
     default:
       reader.skipField();
@@ -1657,10 +1745,10 @@ proto.quotes.Quote.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getShipping();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      19,
+  f = message.getQrcodeurl();
+  if (f.length > 0) {
+    writer.writeString(
+      20,
       f
     );
   }
@@ -1955,17 +2043,17 @@ proto.quotes.Quote.prototype.setPaidprice = function(value) {
 
 
 /**
- * optional ShippingStatus shipping = 19;
- * @return {!proto.quotes.ShippingStatus}
+ * optional string qrcodeurl = 20;
+ * @return {string}
  */
-proto.quotes.Quote.prototype.getShipping = function() {
-  return /** @type {!proto.quotes.ShippingStatus} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+proto.quotes.Quote.prototype.getQrcodeurl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 20, ""));
 };
 
 
-/** @param {!proto.quotes.ShippingStatus} value */
-proto.quotes.Quote.prototype.setShipping = function(value) {
-  jspb.Message.setProto3EnumField(this, 19, value);
+/** @param {string} value */
+proto.quotes.Quote.prototype.setQrcodeurl = function(value) {
+  jspb.Message.setProto3StringField(this, 20, value);
 };
 
 
@@ -1976,18 +2064,13 @@ proto.quotes.Status = {
   NEW: 0,
   SUPPLIER_APPLIED: 1,
   CLIENT_APPLIED: 2,
-  SUPPLIER_REJECTED: 3,
-  CLIENT_REJECTED: 4
-};
-
-/**
- * @enum {number}
- */
-proto.quotes.ShippingStatus = {
-  PREPARATION: 0,
-  DELIVERED: 1,
-  COMPLETED: 2,
-  CANCELLED: 3
+  PREPARATION: 3,
+  PRODUCTION: 4,
+  DELIVERED: 5,
+  COMPLETED: 6,
+  CANCELLED: 7,
+  SUPPLIER_REJECTED: 8,
+  CLIENT_REJECTED: 9
 };
 
 goog.object.extend(exports, proto.quotes);

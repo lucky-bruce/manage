@@ -475,6 +475,83 @@ proto.quotes.QuoteServicePromiseClient.prototype.editQuote = function(
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.quotes.StatusParams,
+ *   !proto.quotes.Response>}
+ */
+const methodDescriptor_QuoteService_ChangeShippingStatus = new grpc.web.MethodDescriptor(
+	"/quotes.QuoteService/ChangeShippingStatus",
+	grpc.web.MethodType.UNARY,
+	proto.quotes.StatusParams,
+	proto.quotes.Response,
+	/** @param {!proto.quotes.StatusParams} request */
+	function(request) {
+		return request.serializeBinary();
+	},
+	proto.quotes.Response.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.quotes.StatusParams,
+ *   !proto.quotes.Response>}
+ */
+const methodInfo_QuoteService_ChangeShippingStatus = new grpc.web.AbstractClientBase.MethodInfo(
+	proto.quotes.Response,
+	/** @param {!proto.quotes.StatusParams} request */
+	function(request) {
+		return request.serializeBinary();
+	},
+	proto.quotes.Response.deserializeBinary
+);
+
+/**
+ * @param {!proto.quotes.StatusParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.quotes.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.quotes.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.quotes.QuoteServiceClient.prototype.changeShippingStatus = function(
+	request,
+	metadata,
+	callback
+) {
+	return this.client_.rpcCall(
+		this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
+		request,
+		metadata || {},
+		methodDescriptor_QuoteService_ChangeShippingStatus,
+		callback
+	);
+};
+
+/**
+ * @param {!proto.quotes.StatusParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.quotes.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.quotes.QuoteServicePromiseClient.prototype.changeShippingStatus = function(
+	request,
+	metadata
+) {
+	return this.client_.unaryCall(
+		this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
+		request,
+		metadata || {},
+		methodDescriptor_QuoteService_ChangeShippingStatus
+	);
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.products.Query,
  *   !proto.quotes.Stats>}
  */

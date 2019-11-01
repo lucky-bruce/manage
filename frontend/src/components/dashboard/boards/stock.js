@@ -5,6 +5,7 @@ import Context from "../../context/context";
 import { Params } from "../../../proto/financial/financial_pb";
 import { Query } from "../../../proto/products/products_pb";
 import { GetSortedIncome } from "../../financial/utils";
+import { TimestampSearch } from "../../../utils/utils";
 
 export default function StockBoard(props) {
 	const [incomes, setIncomes] = useState([]);
@@ -15,7 +16,9 @@ export default function StockBoard(props) {
 	function GetIncomes() {
 		let params = new Params();
 		var query = new Query();
-		query.setQuerystring(`{"supplierid":"${props.id}"}`);
+
+		const timestamp = TimestampSearch(props.from, props.to);
+		query.setQuerystring(`{"supplierid":"${props.id},${timestamp}"}`);
 
 		params.setQuery(query);
 
@@ -34,6 +37,10 @@ export default function StockBoard(props) {
 		GetIncomes();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		GetIncomes();
+	}, [props.from, props.to]);
 
 	function GetIncomeBySector(name) {
 		let total = 0;

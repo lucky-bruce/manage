@@ -71,10 +71,19 @@ export function GetStatus(num) {
 			return "Accepted by Supplier";
 		case 2:
 			return "Accepted by Client";
-
 		case 3:
-			return "Rejected by Supplier";
+			return "Preparation";
 		case 4:
+			return "Production";
+		case 5:
+			return "Delivered";
+		case 6:
+			return "Completed";
+		case 7:
+			return "Cancelled";
+		case 8:
+			return "Rejected by Supplier";
+		case 9:
 			return "Rejected by Client";
 		default:
 			break;
@@ -137,4 +146,12 @@ export const TimestampSearch = (from, to, timestampLink) => {
 	timestampLink = timestampLink || "timestamp";
 
 	return `"$and":[{"${timestampLink}":{"$gte": ${from}}},{"${timestampLink}":{"$lte": ${to}}}]`;
+};
+
+export const isEmpty = obj => {
+	if (Object.entries(obj).length === 0 && obj.constructor === Object) {
+		return true;
+	}
+
+	return false;
 };

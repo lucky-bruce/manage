@@ -10,6 +10,7 @@ import {
 	GetProfit
 } from "../../financial/utils";
 import { Query } from "../../../proto/products/products_pb";
+import { TimestampSearch } from "../../../utils/utils";
 
 export default function FinancialBoard(props) {
 	const [incomes, setIncomes] = useState([]);
@@ -21,7 +22,9 @@ export default function FinancialBoard(props) {
 		let params = new Params();
 
 		var query = new Query();
-		query.setQuerystring(`{"supplierid":"${props.id}"}`);
+		const timestamp = TimestampSearch(props.from, props.to);
+
+		query.setQuerystring(`{"supplierid":"${props.id}",${timestamp}}`);
 
 		params.setQuery(query);
 
@@ -40,6 +43,10 @@ export default function FinancialBoard(props) {
 		GetIncomes();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		GetIncomes();
+	}, [props.from, props.to]);
 
 	return (
 		<div className="col-md-4 p-3 right-border">

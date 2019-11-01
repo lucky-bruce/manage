@@ -8,6 +8,7 @@ service QuoteService {
   rpc GetQuoteByID(QuoteParams) returns (Quote);
   rpc DeleteQuote(QuoteParams) returns (Response);
   rpc EditQuote (Quote) returns (Response);
+  rpc ChangeShippingStatus(StatusParams) returns (Response);
   rpc GetStatistics(products.Query) returns (Stats);
 }
 
@@ -24,21 +25,22 @@ message Response {
   string id = 1;
 }
 
+message StatusParams {
+  int32 status = 1;
+  string id = 2;
+}
 
 enum Status {
   NEW = 0;
   SUPPLIER_APPLIED = 1;
   CLIENT_APPLIED = 2;
-  SUPPLIER_REJECTED = 3;
-  CLIENT_REJECTED = 4;
-
-}
-
-enum ShippingStatus {
-  PREPARATION = 0;
-  DELIVERED = 1;
-  COMPLETED = 2;
-  CANCELLED = 3;
+  PREPARATION = 3;
+  PRODUCTION = 4;
+  DELIVERED = 5;
+  COMPLETED = 6;
+  CANCELLED = 7;
+  SUPPLIER_REJECTED = 8;
+  CLIENT_REJECTED = 9;
 }
 
 message Stats {
@@ -46,13 +48,10 @@ message Stats {
   uint32 pending = 2;
   uint32 denied = 3;
   uint32 new = 4;
-  uint32 preparation = 5;
-  uint32 production = 6;
-  uint32 quality = 7;
-  uint32 ready = 8;
-  uint32 pickedup = 9;
+  uint32 applied = 5;
+  uint32 preparation = 6;
+  uint32 production = 7;
   uint32 delivered = 10;
-  uint32 installed = 11;
   uint32 completed = 12;
   uint32 cancelled = 13;
 
@@ -91,8 +90,8 @@ message Quote {
   float sumPrice = 17;
   float paidPrice = 18;
   // uint32 quoteDate = 2;
-  ShippingStatus shipping = 19;
   
+  string qrcodeurl = 20;
   
 
   // uint32 validDate = 4;

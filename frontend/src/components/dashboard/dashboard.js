@@ -1,13 +1,12 @@
 import React, { useState, useReducer } from "react";
 import { A } from "hookrouter";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
 import FinancialBoard from "./boards/financial";
 import StockBoard from "./boards/stock";
 import ClientsBoard from "./boards/clients";
 import QuotesBoard from "./boards/quotes";
 import { GetProfile } from "../../utils/utils";
 import DateSelect from "./table/quotes/dateSelect";
+import ShippingBoard from "./shippingboard";
 
 export default function Dashboard() {
 	const [opened, setOpened] = useState(false);
@@ -70,57 +69,7 @@ export default function Dashboard() {
 							/>
 						</div>
 					</div>
-					<div className="pt-3 d-flex flex-column">
-						<h3>
-							<span style={{ marginRight: "0.5rem" }}>
-								<FontAwesomeIcon icon={faArrowsAltH} />
-							</span>
-							Order process
-						</h3>
-
-						<div className="d-flex flex-row flex-wrap">
-							<span className="d-flex flex-column p-3 text-success">
-								New
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Preparation
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Production
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Quality
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Ready
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Picked-up
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Delivered
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3">
-								Installed
-								<span>0</span>
-							</span>
-							<span className="d-flex flex-column p-3 text-info">
-								Completed
-								<span>2</span>
-							</span>
-							<span className="d-flex flex-column p-3 text-danger">
-								Cancelled
-								<span>1</span>
-							</span>
-						</div>
-					</div>
+					<ShippingBoard from={userInput.from} to={userInput.to} />
 				</div>
 			</div>
 		);

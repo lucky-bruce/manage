@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { Query } from "../../../proto/products/products_pb";
-import { GetProfile } from "../../../utils/utils";
+import { GetProfile, TimestampSearch, GetStatus } from "../../../utils/utils";
 import Context from "../../context/context";
 
-export default function QuotesBoard() {
+export default function QuotesBoard({ from, to }) {
 	const context = useContext(Context);
 	const client = context.quotes;
 
@@ -13,7 +13,11 @@ export default function QuotesBoard() {
 
 	function GetStats() {
 		let query = new Query();
-		query.setQuerystring(`{"supplierids.id":"${GetProfile().id}"}`);
+
+		const timestamp = TimestampSearch(from, to);
+		query.setQuerystring(
+			`{"supplierids.id":"${GetProfile().id},${timestamp}"}`
+		);
 
 		client.getStatistics(query, {}, (err, res) => {
 			if (err) {
@@ -28,6 +32,10 @@ export default function QuotesBoard() {
 		GetStats();
 		//eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		GetStats();
+	}, [from, to]);
 
 	return (
 		<div>

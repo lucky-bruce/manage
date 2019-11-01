@@ -16,8 +16,7 @@ import {
 } from "../../../utils/utils";
 import { navigate } from "hookrouter";
 import ProductTable from "./productTable";
-
-require("google-protobuf/google/protobuf/struct_pb");
+import Img from "../../img";
 
 export default function View(props) {
 	const context = useContext(Context);
@@ -43,13 +42,14 @@ export default function View(props) {
 		{
 			name: "",
 			email: "",
+			quoteobj: {},
 			phonenumber: "+",
 			city: "",
 			address: "",
 			zip: "",
 			size: "",
 			sector: "",
-			status: "",
+			status: 0,
 			supplieridsList: [],
 			id: "",
 			productsList: [],
@@ -66,10 +66,13 @@ export default function View(props) {
 		var q = userInput.quote;
 		let sups = userInput.supplieridsList;
 		q.setSupplieridsList(undefined);
+
 		for (let sup of sups) {
 			let s = new Suppliers();
 			s.setId(sup.id);
-			if (sup.id === GetProfile().id) {
+			console.log(sup.id, user.id);
+
+			if (sup.id === user.id) {
 				s.setValid(true);
 			} else {
 				s.setValid(sup.valid);
@@ -78,7 +81,7 @@ export default function View(props) {
 			q.addSupplierids(s);
 		}
 
-		if (GetProfile().role === "user") q.setStatus(2.0);
+		if (user.role === "user") q.setStatus(Status.CLIENT_APPLIED);
 
 		client.editQuote(q, {}, (err, res) => {
 			if (err) {
@@ -106,6 +109,7 @@ export default function View(props) {
 				const original = res.toObject();
 
 				handleChange("quote", res);
+				handleChange("quoteobj", res.toObject());
 				handleChange("name", original.name);
 				handleChange("phonenumber", original.phonenumber);
 				handleChange("zip", original.zip);
@@ -292,6 +296,7 @@ export default function View(props) {
 							>
 								Please enter a valid phone number
 							</div>
+
 							{/* <label htmlFor="phnumber">Phone number</label> */}
 						</div>
 					</div>
@@ -357,13 +362,23 @@ export default function View(props) {
 							>
 								Please enter a valid Zip code
 							</div>
+
 							{/* <label htmlFor="zip">Zip code</label> */}
 						</div>
 					</div>
-					<div className="col-md-4">
-						<span className="mx-auto">
+					<div className="col-md-2 d-flex flex-column">
+						<span className="">
 							Status: {GetStatus(userInput.status)}
 						</span>
+						{(user.role === "staff" || user.role === "supplier") &&
+						userInput.status >= Status.CLIENT_APPLIED ? (
+							<Img
+								className="w-100"
+								src={userInput.quoteobj.qrcodeurl}
+							/>
+						) : (
+							""
+						)}
 					</div>
 				</div>
 				<div className="float-right m-3">
