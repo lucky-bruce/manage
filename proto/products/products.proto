@@ -66,5 +66,6 @@ message Product{
   string measurementunit = 25;
   string portionunit = 27;
   float portionvalue = 28;
+  uint32 minqtyinstock = 29;
 }
 

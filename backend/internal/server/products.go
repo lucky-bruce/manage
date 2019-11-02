@@ -34,6 +34,7 @@ func (s *Server) NewProduct(ctx context.Context, product *products.Product) (*pr
 
 	err := db.IdGenerator(product)
 
+	product.Addedtime = time.Now().Unix()
 	product.Sellingprice = product.Buyingprice + (product.Desiredprofit*product.Buyingprice)/100
 
 	err = store.Insert(product)

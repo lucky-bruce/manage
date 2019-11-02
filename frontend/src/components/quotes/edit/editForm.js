@@ -9,7 +9,7 @@ import {
 } from "../../../proto/quotes/quotes_pb";
 import { Product } from "../../../proto/products/products_pb";
 import { validate } from "email-validator";
-import { ToGRPCObject } from "../../../utils/utils";
+import { ToGRPCObject } from "../../../utils/grpc";
 import { getToken, GetProfile } from "../../../utils/utils";
 import QuoteTable from "../quoteForm/product/producttable";
 
@@ -42,7 +42,7 @@ export default function EditForm(props) {
 			sector: "",
 			suppliersIDs: [],
 			product: {},
-			productsList: [],
+			productslist: [],
 			sumprice: 0,
 			status: 0,
 			paidprice: 0,
@@ -116,9 +116,9 @@ export default function EditForm(props) {
 		quote.setId(userInput.id);
 		quote.setProductsList(undefined);
 
-		for (var i in userInput.productsList) {
-			const product = userInput.productsList[i].product;
-			const qty = userInput.productsList[i].qty;
+		for (var i in userInput.productslist) {
+			const product = userInput.productslist[i].product;
+			const qty = userInput.productslist[i].qty;
 			var qp = new QuoteProduct();
 
 			var p = new Product(ToGRPCObject(product));
@@ -174,7 +174,7 @@ export default function EditForm(props) {
 				handleChange("city", original.city);
 				handleChange("address", original.address);
 				handleChange("userId", original.userid);
-				handleChange("productsList", original.productsList);
+				handleChange("productslist", original.productslist);
 				handleChange("status", original.status);
 				handleChange("supplierIDs", original.supplierids);
 			}
@@ -182,23 +182,23 @@ export default function EditForm(props) {
 	}
 
 	function onQtyChange(i, qty) {
-		var p = userInput.productsList;
+		var p = userInput.productslist;
 		p[i].qty = qty;
-		handleChange("productsList", p);
+		handleChange("productslist", p);
 		totalPrice();
 	}
 
 	function totalPrice() {
 		var total = 0;
-		for (var i in userInput.productsList) {
-			const unit = userInput.productsList[i];
+		for (var i in userInput.productslist) {
+			const unit = userInput.productslist[i];
 			console.log(unit);
 
 			total += unit.product.sellingprice * unit.qty;
 		}
 		console.log(total);
 
-		handleChange("totalPrice", total);
+		handleChange("sumprice", total);
 	}
 
 	useEffect(() => {
@@ -209,7 +209,7 @@ export default function EditForm(props) {
 	useEffect(() => {
 		totalPrice();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userInput.productsList]);
+	}, [userInput.productslist]);
 	return (
 		<div className="mt-4">
 			<div className="sticky-top">
@@ -366,7 +366,7 @@ export default function EditForm(props) {
 					<div className=" d-flex flex-column">
 						<QuoteTable
 							onQtyChange={(i, qty) => onQtyChange(i, qty)}
-							products={userInput.productsList}
+							products={userInput.productslist}
 							user={GetProfile()}
 						/>
 						<div className="float-right font-weight-bold">

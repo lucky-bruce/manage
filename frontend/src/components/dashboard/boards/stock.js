@@ -18,7 +18,7 @@ export default function StockBoard(props) {
 		var query = new Query();
 
 		const timestamp = TimestampSearch(props.from, props.to);
-		query.setQuerystring(`{"supplierid":"${props.id},${timestamp}"}`);
+		query.setQuerystring(`{"supplierid":"${props.id}",${timestamp}}`);
 
 		params.setQuery(query);
 
@@ -28,6 +28,8 @@ export default function StockBoard(props) {
 			}
 
 			if (res) {
+				console.log(res.toObject());
+
 				setIncomes(res.toObject().incomeList);
 			}
 		});

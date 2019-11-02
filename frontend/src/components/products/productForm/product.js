@@ -173,7 +173,6 @@ export default function ProductForm({ handleChange, userInput }) {
 				</div>
 				<div className="w-50 mt-3 row ml-3">
 					<input
-						disabled={userInput.portion !== "volume"}
 						className="col-md-8 form-control mr-5 "
 						type="number"
 						min="0"
@@ -257,6 +256,34 @@ export default function ProductForm({ handleChange, userInput }) {
 							}
 						/>
 					</div>
+				</div>
+			</div>
+			<div className="mt-3">
+				<h5>Stock</h5>
+				<div className="quote-input mt-3 col-md-3 col-6">
+					<input
+						className="form-control mb"
+						placeholder="Qty in stock"
+						required
+						type="number"
+						onChange={e =>
+							handleChange("qtyinstock", parseInt(e.target.value))
+						}
+					/>
+				</div>
+				<div className="quote-input col-md-3 col-6">
+					<input
+						className="form-control mb"
+						placeholder="Min qty"
+						required
+						type="number"
+						onChange={e =>
+							handleChange(
+								"minqtyinstock",
+								parseInt(e.target.value)
+							)
+						}
+					/>
 				</div>
 			</div>
 

@@ -2,10 +2,10 @@ import React, { useState, useContext, useReducer } from "react";
 import { Image } from "../../../proto/products/products_pb";
 import Context from "../../context/context";
 import {
-	GetProfile,
 	GetGRPCProduct,
-	GetGRPCService
-} from "../../../utils/utils";
+	GetGRPCService,
+	productInput
+} from "../../../utils/grpc";
 import Img from "../../img";
 import { navigate } from "hookrouter";
 import { TopBar } from "../../ui/index";
@@ -20,35 +20,7 @@ export default function ProductForm() {
 
 	const [userInput, setUserInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
-		{
-			name: "",
-			category: "",
-			subcategory: "",
-			sector: "",
-			buyingprice: 0,
-			desiredprofit: 0,
-			sizew: 0,
-			sizeh: 0,
-			sizel: 0,
-			sized: 0,
-			description: "",
-			qtyinstock: 0,
-			images: [],
-			barcode: "",
-			soldby: "unit",
-			measurement: false,
-			measurementunit: "cm",
-			measurementvalue: 0,
-			discount: 0,
-			brand: "",
-			brandmodel: "",
-			portion: "volume",
-			portionunit: "ml",
-			portionvalue: "0",
-			chargetype: "Per day",
-			chargevalue: 0,
-			userid: GetProfile().id
-		}
+		productInput
 	);
 
 	const handleChange = (name, value) => {

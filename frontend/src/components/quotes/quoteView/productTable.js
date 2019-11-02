@@ -34,64 +34,74 @@ export default function ProductTable(props) {
 					</tr>
 				</thead>
 				<tbody>
-					{props.products.map((p, i) => {
-						let dis =
-							p.product.userid !== GetProfile().id &&
-							p.product.userid !== GetProfile().companyid;
+					{props.products
+						? props.products.map((p, i) => {
+								console.log(p);
 
-						return (
-							<tr key={i}>
-								<td>{p.product.id}</td>
-								<td>{p.product.name}</td>
-								<td width="20%">
-									<input
-										onChange={e =>
-											onQtyChange(i, e.target.value)
-										}
-										// disabled={
-										// 	(GetProfile().role !== "supplier" ||
-										// 		GetProfile().role) !==
-										// 		"staff" && dis
-										// }
-										className="custom-input"
-										type="number"
-										value={p.qty}
-									/>
-								</td>
-								<td>{`${p.product.sizel.toFixed(
-									1
-								)}x${p.product.sizew.toFixed(
-									1
-								)}x${p.product.sizeh.toFixed(1)}`}</td>
-								<td width="30%">
-									<input
-										disabled={
-											(GetProfile().role !== "supplier" ||
-												GetProfile().role) !==
-												"staff" && dis
-										}
-										type="number"
-										onChange={e => {
-											onProductChange(
-												i,
-												"sellingprice",
-												e.target.value
-											);
-										}}
-										className="custom-input disabled"
-										value={p.product.sellingprice}
-									/>
-									R$
-								</td>
+								let dis =
+									p.product.userid !== GetProfile().id &&
+									p.product.userid !== GetProfile().companyid;
 
-								<td>
-									<A href={`/product/${p.product.id}`}>
-										View
-									</A>
-								</td>
-							</tr>
-						);
-					})}
+								return (
+									<tr key={i}>
+										<td>{p.product.id}</td>
+										<td>{p.product.name}</td>
+										<td width="20%">
+											<input
+												onChange={e =>
+													onQtyChange(
+														i,
+														e.target.value
+													)
+												}
+												// disabled={
+												// 	(GetProfile().role !== "supplier" ||
+												// 		GetProfile().role) !==
+												// 		"staff" && dis
+												// }
+												className="custom-input"
+												type="number"
+												value={p.qty}
+											/>
+										</td>
+										<td>{`${p.product.sizel.toFixed(
+											1
+										)}x${p.product.sizew.toFixed(
+											1
+										)}x${p.product.sizeh.toFixed(1)}`}</td>
+										<td width="30%">
+											<input
+												disabled={
+													(GetProfile().role !==
+														"supplier" ||
+														GetProfile().role) !==
+														"staff" && dis
+												}
+												type="number"
+												onChange={e => {
+													onProductChange(
+														i,
+														"sellingprice",
+														e.target.value
+													);
+												}}
+												className="custom-input disabled"
+												value={p.product.sellingprice}
+											/>
+											R$
+										</td>
+
+										<td>
+											<A
+												href={`/product/${p.product.id}`}
+											>
+												View
+											</A>
+										</td>
+									</tr>
+								);
+						  })
+						: ""}
 				</tbody>
 			</table>
 		</div>

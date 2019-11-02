@@ -13,20 +13,19 @@ import { navigate } from "hookrouter";
 import { getToken, GetProfile } from "../../../utils/utils";
 import ProductSelect from "./product/productSelect";
 import ProductTable from "./product/producttable";
-import { ToGRPCObject } from "../../../utils/utils";
+import { ToGRPCObject, quoteInput, GetGRPCQuote } from "../../../utils/grpc";
 import ServiceSelect from "./serviceSelect";
 
 export default function Form() {
 	const context = useContext(Context);
 	const client = context.quotes;
 
-	const user = GetProfile();
-
+	const [timeout, settimeout] = useState(0);
 	const [mode, setMode] = useState(0);
 	const [error, setError] = useState({
 		name: false,
 		email: false,
-		phoneNumber: false,
+		phonenumber: false,
 		city: false,
 		address: false,
 		zip: false,
@@ -37,20 +36,7 @@ export default function Form() {
 
 	const [userInput, setUserInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
-		{
-			fullName: user.firstName + " " + user.lastName || "",
-			email: user.email || "",
-			phoneNumber: user.phonenumber || "+",
-			city: user.city || "",
-			address: user.address || "",
-			zip: "",
-			size: "",
-			sector: "",
-			suppliersIDs: [],
-			product: {},
-			productsList: [],
-			totalPrice: 0
-		}
+		quoteInput
 	);
 
 	const handleChange = (name, value) => {
@@ -77,6 +63,11 @@ export default function Form() {
 		}
 	];
 
+	useEffect(() => {
+		totalPrice();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userInput.productsList]);
+
 	const onProductSelect = product => {
 		var errored = false;
 		for (var i in userInput.productsList) {
@@ -100,11 +91,10 @@ export default function Form() {
 				userInput.product
 			]);
 
-			handleChange();
 			var isIn = false;
-			for (var i in userInput.suppliersIDs) {
+			for (var i in userInput.supplieridsList) {
 				if (
-					userInput.suppliersIDs[i] ===
+					userInput.supplieridsList[i] ===
 					userInput.product.product.userid
 				) {
 					isIn = true;
@@ -113,8 +103,8 @@ export default function Form() {
 			}
 
 			if (!isIn) {
-				handleChange("suppliersIDs", [
-					...userInput.suppliersIDs,
+				handleChange("supplieridsList", [
+					...userInput.supplieridsList,
 					{
 						id: userInput.product.product.userid
 					}
@@ -137,7 +127,7 @@ export default function Form() {
 		var err = {};
 		var errored = false;
 
-		if (userInput.fullName.length === 0) {
+		if (userInput.name.length === 0) {
 			err.name = true;
 
 			errored = true;
@@ -148,8 +138,8 @@ export default function Form() {
 			errored = true;
 		}
 
-		if (userInput.phoneNumber.length < 4) {
-			err.phoneNumber = true;
+		if (userInput.phonenumber.length < 4) {
+			err.phonenumber = true;
 			errored = true;
 		}
 
@@ -196,63 +186,35 @@ export default function Form() {
 		var total = 0;
 		for (var i in userInput.productsList) {
 			const unit = userInput.productsList[i];
-			console.log(unit);
 
 			total += unit.product.sellingprice * unit.qty;
 		}
-		console.log(total);
 
-		handleChange("totalPrice", total);
+		handleChange("sumprice", total);
 	}
 
-	useEffect(() => {
-		totalPrice();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userInput.productsList]);
+	const handleAddressChange = e => {
+		handleChange("address", e.target.value);
+
+		if (timeout) clearTimeout(timeout);
+		settimeout(
+			setTimeout(() => {
+				DistanceCalculator();
+			}, 1500)
+		);
+	};
+
+	const DistanceCalculator = () => {};
 
 	function submit() {
 		const [errored, err] = checkValidity();
 
 		if (errored) {
-			console.log(errored, err);
-
 			setError(err);
 			return;
 		}
 
-		var quote = new Quote();
-
-		quote.setProductsList(undefined);
-
-		for (var i in userInput.productsList) {
-			const product = userInput.productsList[i].product;
-			const qty = userInput.productsList[i].qty;
-			var qp = new QuoteProduct();
-
-			var p = new Product(ToGRPCObject(product));
-
-			qp.setProduct(p);
-			qp.setQty(qty);
-
-			quote.addProducts(qp);
-		}
-		quote.setName(userInput.fullName);
-		quote.setEmail(userInput.email);
-		quote.setPhonenumber(userInput.phoneNumber);
-		quote.setCity(userInput.city);
-		quote.setAddress(userInput.address);
-		quote.setZip(userInput.zip);
-		quote.setSize(userInput.size);
-		quote.setJwt(getToken());
-		quote.setSumprice(userInput.totalPrice);
-
-		quote.setSupplieridsList(undefined);
-		for (var rec of userInput.suppliersIDs) {
-			var sup = new Suppliers();
-			sup.setId(rec.id);
-
-			quote.addSupplierids(sup);
-		}
+		var quote = GetGRPCQuote(userInput);
 
 		client.newQuote(quote, {}, (err, res) => {
 			if (err) {
@@ -299,9 +261,9 @@ export default function Form() {
 								placeholder="Full name"
 								required
 								autoFocus
-								value={userInput.fullName}
+								value={userInput.name}
 								onChange={e => {
-									handleChange("fullName", e.target.value);
+									handleChange("name", e.target.value);
 								}}
 							/>
 							<div
@@ -337,16 +299,16 @@ export default function Form() {
 								type="text"
 								id="phnumber"
 								className="form-control"
-								value={userInput.phoneNumber}
+								value={userInput.phonenumber}
 								placeholder="Phone number"
 								required
 								onChange={e =>
-									handleChange("phoneNumber", e.target.value)
+									handleChange("phonenumber", e.target.value)
 								}
 							/>
 							<div
 								className={`invalid-feedback ${
-									error.phoneNumber ? "d-block" : ""
+									error.phonenumber ? "d-block" : ""
 								}`}
 							>
 								Please enter a valid phone number
@@ -382,9 +344,9 @@ export default function Form() {
 								placeholder="Address"
 								value={userInput.address}
 								required
-								onChange={e =>
-									handleChange("address", e.target.value)
-								}
+								onChange={e => {
+									handleAddressChange(e);
+								}}
 							/>
 							<div
 								className={`invalid-feedback ${
@@ -442,7 +404,7 @@ export default function Form() {
 							products={userInput.productsList}
 						/>
 						<div className="float-right font-weight-bold">
-							Total: R$ {userInput.totalPrice.toFixed(2)}
+							Total: R$ {userInput.sumprice.toFixed(2)}
 						</div>
 
 						<table className="table mt-5 border-bottom table-responsive">

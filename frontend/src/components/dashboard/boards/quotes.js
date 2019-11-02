@@ -16,7 +16,7 @@ export default function QuotesBoard({ from, to }) {
 
 		const timestamp = TimestampSearch(from, to);
 		query.setQuerystring(
-			`{"supplierids.id":"${GetProfile().id},${timestamp}"}`
+			`{"supplierids.id":"${GetProfile().id}",${timestamp}}`
 		);
 
 		client.getStatistics(query, {}, (err, res) => {

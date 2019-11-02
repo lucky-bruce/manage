@@ -8,12 +8,13 @@ import {
 	Suppliers
 } from "../../../proto/quotes/quotes_pb";
 import Context from "../../context/context";
+import { GetProfile, getToken, GetStatus } from "../../../utils/utils";
 import {
-	GetProfile,
-	getToken,
-	GetStatus,
-	GetGRPCProduct
-} from "../../../utils/utils";
+	GetGRPCProduct,
+	quoteInput,
+	GetQuoteObjFromGRPC,
+	GetGRPCQuote
+} from "../../../utils/grpc";
 import { navigate } from "hookrouter";
 import ProductTable from "./productTable";
 import Img from "../../img";
@@ -39,23 +40,7 @@ export default function View(props) {
 
 	const [userInput, setUserInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
-		{
-			name: "",
-			email: "",
-			quoteobj: {},
-			phonenumber: "+",
-			city: "",
-			address: "",
-			zip: "",
-			size: "",
-			sector: "",
-			status: 0,
-			supplieridsList: [],
-			id: "",
-			productsList: [],
-			quote: {},
-			dis: true
-		}
+		quoteInput
 	);
 
 	const handleChange = (name, value) => {
@@ -107,19 +92,9 @@ export default function View(props) {
 
 			if (res) {
 				const original = res.toObject();
+				console.log(original);
 
-				handleChange("quote", res);
-				handleChange("quoteobj", res.toObject());
-				handleChange("name", original.name);
-				handleChange("phonenumber", original.phonenumber);
-				handleChange("zip", original.zip);
-				handleChange("id", original.id);
-				handleChange("email", original.email);
-				handleChange("city", original.city);
-				handleChange("address", original.address);
-				handleChange("status", original.status);
-				handleChange("productsList", original.productsList);
-				handleChange("supplieridsList", original.supplieridsList);
+				GetQuoteObjFromGRPC(handleChange, res.toObject());
 			}
 		});
 	}
@@ -142,7 +117,7 @@ export default function View(props) {
 	}
 
 	const Edit = () => {
-		var q = userInput.quote;
+		var q = GetGRPCQuote(userInput);
 
 		q.setProductsList(undefined);
 		for (let rec of userInput.productsList) {
@@ -372,10 +347,7 @@ export default function View(props) {
 						</span>
 						{(user.role === "staff" || user.role === "supplier") &&
 						userInput.status >= Status.CLIENT_APPLIED ? (
-							<Img
-								className="w-100"
-								src={userInput.quoteobj.qrcodeurl}
-							/>
+							<Img className="w-100" src={userInput.qrcodeurl} />
 						) : (
 							""
 						)}

@@ -1,7 +1,5 @@
 import decode from "jwt-decode";
 import { navigate } from "hookrouter";
-import { Product } from "../proto/products/products_pb";
-import { Service } from "../proto/services/services_pb";
 
 export function checkAuthorization(profile, path) {
 	if (profile) {
@@ -53,16 +51,6 @@ export function logOut() {
 	localStorage.removeItem("token");
 }
 
-export function ToGRPCObject(obj) {
-	var values = Object.values(obj);
-	var grpc = {};
-	for (var i in values) {
-		grpc[parseInt(i)] = values[i];
-	}
-
-	return grpc;
-}
-
 export function GetStatus(num) {
 	switch (num) {
 		case 0:
@@ -88,52 +76,6 @@ export function GetStatus(num) {
 		default:
 			break;
 	}
-}
-
-export const GetGRPCProduct = obj => {
-	var product = new Product();
-
-	product.setId(obj.id);
-	product.setName(obj.name);
-	product.setQtyinstock(obj.qtyinstock);
-	product.setCategory(obj.category);
-	product.setDescription(obj.description);
-	product.setSubcategory(obj.subcategory);
-	product.setBuyingprice(obj.buyingprice);
-	product.setDesiredprofit(obj.desiredprofit);
-	product.setSellingprice(
-		obj.buyingprice + (obj.buyingprice * obj.desiredprofit) / 100
-	);
-
-	product.setSector(obj.sector);
-	product.setSizew(obj.sizew);
-	product.setSizel(obj.sizel);
-	product.setSizeh(obj.sizeh);
-	product.setSized(obj.sized);
-	product.setUserid(obj.userid);
-	product.setBarcode(obj.barcode);
-	product.setImagesList(obj.images);
-	product.setDiscount(obj.discount);
-	product.setMeasurementunit(obj.measurementunit);
-	product.setPortionunit(obj.portionunit);
-	product.setPortionvalue(obj.portionvalue);
-	product.setBrand(obj.brand);
-	product.setBrandmodel(obj.brandmodel);
-
-	return product;
-};
-
-export function GetGRPCService(obj) {
-	let s = new Service();
-
-	s.setId(obj.id);
-	s.setName(obj.name);
-	s.setUserid(obj.userid);
-	s.setChargetype(obj.chargetype);
-	s.setChargevalue(obj.chargevalue);
-	s.setSector(obj.sector);
-
-	return s;
 }
 
 export const TimestampSearch = (from, to, timestampLink) => {

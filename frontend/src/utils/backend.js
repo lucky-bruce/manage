@@ -1,6 +1,7 @@
 import { GetClients } from "../clients";
 import { QuoteParams } from "../proto/quotes/quotes_pb";
 import { StatusParams } from "../proto/quotes/quotes_pb";
+import { ProductParams } from "../proto/products/products_pb";
 
 const client = GetClients();
 
@@ -21,3 +22,16 @@ export function changeShippingStatus(id, callback) {
 		callback(err, res);
 	});
 }
+
+export const GetProductByID = (id, callback) => {
+	let params = new ProductParams();
+	params.setId(id);
+
+	client.products.getProductByID(params, {}, (err, res) =>
+		callback(err, res)
+	);
+};
+
+export const editProduct = (prod, callback) => {
+	client.products.editProduct(prod, {}, (err, res) => callback(err, res));
+};

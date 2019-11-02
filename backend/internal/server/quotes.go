@@ -6,13 +6,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/Beaxhem/manage/backend/internal/authorization"
 	"github.com/Beaxhem/manage/backend/internal/db"
 	"github.com/Beaxhem/manage/backend/internal/logger"
 	"github.com/Beaxhem/manage/backend/internal/products"
 	"github.com/Beaxhem/manage/backend/internal/quotes"
 	"github.com/Beaxhem/manage/backend/internal/utils"
-	"github.com/dgrijalva/jwt-go"
 	qrcode "github.com/skip2/go-qrcode"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -23,16 +21,9 @@ func (s *Server) NewQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Res
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "quotes")
 
-	user, err := authorization.ValidateJWT(quote.GetJwt())
-	if err != nil {
-		logger.ErrorFunc(err)
-		return new(quotes.Response), err
-	}
-
-	quote.Userid = user.(jwt.MapClaims)["id"].(string)
 	quote.Status = quotes.Status_NEW
 	quote.Timestamp = time.Now().Unix()
-	err = db.IdGenerator(quote)
+	err := db.IdGenerator(quote)
 	if err != nil {
 		logger.ErrorFunc(err)
 		return new(quotes.Response), err

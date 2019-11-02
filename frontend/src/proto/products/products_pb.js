@@ -1085,7 +1085,6 @@ proto.products.Product.toObject = function(includeInstance, msg) {
     sizel: +jspb.Message.getFieldWithDefault(msg, 13, 0.0),
     sized: +jspb.Message.getFieldWithDefault(msg, 14, 0.0),
     sizeh: +jspb.Message.getFieldWithDefault(msg, 15, 0.0),
-    weight: +jspb.Message.getFieldWithDefault(msg, 16, 0.0),
     userid: jspb.Message.getFieldWithDefault(msg, 17, ""),
     imagesList: jspb.Message.getRepeatedField(msg, 18),
     barcode: jspb.Message.getFieldWithDefault(msg, 19, ""),
@@ -1093,11 +1092,10 @@ proto.products.Product.toObject = function(includeInstance, msg) {
     discount: +jspb.Message.getFieldWithDefault(msg, 21, 0.0),
     brand: jspb.Message.getFieldWithDefault(msg, 22, ""),
     brandmodel: jspb.Message.getFieldWithDefault(msg, 23, ""),
-    volume: +jspb.Message.getFieldWithDefault(msg, 24, 0.0),
     measurementunit: jspb.Message.getFieldWithDefault(msg, 25, ""),
-    measurementvalue: +jspb.Message.getFieldWithDefault(msg, 26, 0.0),
     portionunit: jspb.Message.getFieldWithDefault(msg, 27, ""),
-    portionvalue: +jspb.Message.getFieldWithDefault(msg, 28, 0.0)
+    portionvalue: +jspb.Message.getFieldWithDefault(msg, 28, 0.0),
+    minqtyinstock: jspb.Message.getFieldWithDefault(msg, 29, 0)
   };
 
   if (includeInstance) {
@@ -1194,10 +1192,6 @@ proto.products.Product.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readFloat());
       msg.setSizeh(value);
       break;
-    case 16:
-      var value = /** @type {number} */ (reader.readFloat());
-      msg.setWeight(value);
-      break;
     case 17:
       var value = /** @type {string} */ (reader.readString());
       msg.setUserid(value);
@@ -1226,17 +1220,9 @@ proto.products.Product.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setBrandmodel(value);
       break;
-    case 24:
-      var value = /** @type {number} */ (reader.readFloat());
-      msg.setVolume(value);
-      break;
     case 25:
       var value = /** @type {string} */ (reader.readString());
       msg.setMeasurementunit(value);
-      break;
-    case 26:
-      var value = /** @type {number} */ (reader.readFloat());
-      msg.setMeasurementvalue(value);
       break;
     case 27:
       var value = /** @type {string} */ (reader.readString());
@@ -1245,6 +1231,10 @@ proto.products.Product.deserializeBinaryFromReader = function(msg, reader) {
     case 28:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setPortionvalue(value);
+      break;
+    case 29:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setMinqtyinstock(value);
       break;
     default:
       reader.skipField();
@@ -1380,13 +1370,6 @@ proto.products.Product.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getWeight();
-  if (f !== 0.0) {
-    writer.writeFloat(
-      16,
-      f
-    );
-  }
   f = message.getUserid();
   if (f.length > 0) {
     writer.writeString(
@@ -1436,24 +1419,10 @@ proto.products.Product.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getVolume();
-  if (f !== 0.0) {
-    writer.writeFloat(
-      24,
-      f
-    );
-  }
   f = message.getMeasurementunit();
   if (f.length > 0) {
     writer.writeString(
       25,
-      f
-    );
-  }
-  f = message.getMeasurementvalue();
-  if (f !== 0.0) {
-    writer.writeFloat(
-      26,
       f
     );
   }
@@ -1468,6 +1437,13 @@ proto.products.Product.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeFloat(
       28,
+      f
+    );
+  }
+  f = message.getMinqtyinstock();
+  if (f !== 0) {
+    writer.writeUint32(
+      29,
       f
     );
   }
@@ -1700,21 +1676,6 @@ proto.products.Product.prototype.setSizeh = function(value) {
 
 
 /**
- * optional float weight = 16;
- * @return {number}
- */
-proto.products.Product.prototype.getWeight = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 16, 0.0));
-};
-
-
-/** @param {number} value */
-proto.products.Product.prototype.setWeight = function(value) {
-  jspb.Message.setProto3FloatField(this, 16, value);
-};
-
-
-/**
  * optional string userid = 17;
  * @return {string}
  */
@@ -1834,21 +1795,6 @@ proto.products.Product.prototype.setBrandmodel = function(value) {
 
 
 /**
- * optional float volume = 24;
- * @return {number}
- */
-proto.products.Product.prototype.getVolume = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 24, 0.0));
-};
-
-
-/** @param {number} value */
-proto.products.Product.prototype.setVolume = function(value) {
-  jspb.Message.setProto3FloatField(this, 24, value);
-};
-
-
-/**
  * optional string measurementunit = 25;
  * @return {string}
  */
@@ -1860,21 +1806,6 @@ proto.products.Product.prototype.getMeasurementunit = function() {
 /** @param {string} value */
 proto.products.Product.prototype.setMeasurementunit = function(value) {
   jspb.Message.setProto3StringField(this, 25, value);
-};
-
-
-/**
- * optional float measurementvalue = 26;
- * @return {number}
- */
-proto.products.Product.prototype.getMeasurementvalue = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 26, 0.0));
-};
-
-
-/** @param {number} value */
-proto.products.Product.prototype.setMeasurementvalue = function(value) {
-  jspb.Message.setProto3FloatField(this, 26, value);
 };
 
 
@@ -1905,6 +1836,21 @@ proto.products.Product.prototype.getPortionvalue = function() {
 /** @param {number} value */
 proto.products.Product.prototype.setPortionvalue = function(value) {
   jspb.Message.setProto3FloatField(this, 28, value);
+};
+
+
+/**
+ * optional uint32 minqtyinstock = 29;
+ * @return {number}
+ */
+proto.products.Product.prototype.getMinqtyinstock = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 29, 0));
+};
+
+
+/** @param {number} value */
+proto.products.Product.prototype.setMinqtyinstock = function(value) {
+  jspb.Message.setProto3IntField(this, 29, value);
 };
 
 
