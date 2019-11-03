@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isEmpty } from "../../utils/utils";
 
 export const TopBar = props => {
 	return (
@@ -14,14 +15,29 @@ export const TopBar = props => {
 export const Select = props => {
 	const [opened, setOpened] = useState(false);
 
+	const value = () => {
+		if (props.value) {
+			if (isEmpty(props.value)) {
+				return props.name;
+			}
+			if (!isEmpty(props.value) && props.value.name) {
+				return props.value.name;
+			}
+
+			return props.value;
+		}
+
+		return props.name;
+	};
+
 	return (
-		<div>
+		<div className={props.className}>
 			<div
 				className="text-white bg-primary c-select"
 				style={{ cursor: "pointer" }}
 				onClick={() => setOpened(!opened)}
 			>
-				Select a service
+				{value()}
 			</div>
 			<div className={`drop position-absolute ${opened ? "" : "d-none"}`}>
 				<input
@@ -31,7 +47,7 @@ export const Select = props => {
 				{props.elements.map((elem, i) => (
 					<div
 						onClick={() => {
-							props.onSelect(elem);
+							props.onSelect(elem.value);
 							setOpened(false);
 						}}
 						key={i}

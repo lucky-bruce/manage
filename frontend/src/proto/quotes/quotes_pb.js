@@ -12,11 +12,15 @@ var goog = jspb;
 var global = Function('return this')();
 
 var products_products_pb = require('../products/products_pb.js');
+var services_services_pb = require('../services/services_pb.js');
+goog.exportSymbol('proto.quotes.Distance', null, global);
+goog.exportSymbol('proto.quotes.DistanceParams', null, global);
 goog.exportSymbol('proto.quotes.Quote', null, global);
 goog.exportSymbol('proto.quotes.QuoteParams', null, global);
 goog.exportSymbol('proto.quotes.QuoteProduct', null, global);
 goog.exportSymbol('proto.quotes.QuoteResponse', null, global);
 goog.exportSymbol('proto.quotes.Response', null, global);
+goog.exportSymbol('proto.quotes.ServiceInQuote', null, global);
 goog.exportSymbol('proto.quotes.Stats', null, global);
 goog.exportSymbol('proto.quotes.Status', null, global);
 goog.exportSymbol('proto.quotes.StatusParams', null, global);
@@ -1251,6 +1255,192 @@ proto.quotes.QuoteProduct.prototype.setQty = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.quotes.ServiceInQuote = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.quotes.ServiceInQuote, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.quotes.ServiceInQuote.displayName = 'proto.quotes.ServiceInQuote';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.quotes.ServiceInQuote.prototype.toObject = function(opt_includeInstance) {
+  return proto.quotes.ServiceInQuote.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.quotes.ServiceInQuote} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.ServiceInQuote.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    service: (f = msg.getService()) && services_services_pb.Service.toObject(includeInstance, f),
+    qty: jspb.Message.getFieldWithDefault(msg, 2, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.quotes.ServiceInQuote}
+ */
+proto.quotes.ServiceInQuote.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.quotes.ServiceInQuote;
+  return proto.quotes.ServiceInQuote.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.quotes.ServiceInQuote} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.quotes.ServiceInQuote}
+ */
+proto.quotes.ServiceInQuote.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new services_services_pb.Service;
+      reader.readMessage(value,services_services_pb.Service.deserializeBinaryFromReader);
+      msg.setService(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setQty(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.quotes.ServiceInQuote.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.quotes.ServiceInQuote.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.quotes.ServiceInQuote} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.ServiceInQuote.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getService();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      services_services_pb.Service.serializeBinaryToWriter
+    );
+  }
+  f = message.getQty();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional services.Service service = 1;
+ * @return {?proto.services.Service}
+ */
+proto.quotes.ServiceInQuote.prototype.getService = function() {
+  return /** @type{?proto.services.Service} */ (
+    jspb.Message.getWrapperField(this, services_services_pb.Service, 1));
+};
+
+
+/** @param {?proto.services.Service|undefined} value */
+proto.quotes.ServiceInQuote.prototype.setService = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.quotes.ServiceInQuote.prototype.clearService = function() {
+  this.setService(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.quotes.ServiceInQuote.prototype.hasService = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional uint32 qty = 2;
+ * @return {number}
+ */
+proto.quotes.ServiceInQuote.prototype.getQty = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.quotes.ServiceInQuote.prototype.setQty = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.quotes.Suppliers = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -1422,6 +1612,317 @@ proto.quotes.Suppliers.prototype.setValid = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.quotes.Distance = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.quotes.Distance, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.quotes.Distance.displayName = 'proto.quotes.Distance';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.quotes.Distance.prototype.toObject = function(opt_includeInstance) {
+  return proto.quotes.Distance.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.quotes.Distance} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.Distance.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    distance: jspb.Message.getFieldWithDefault(msg, 1, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.quotes.Distance}
+ */
+proto.quotes.Distance.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.quotes.Distance;
+  return proto.quotes.Distance.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.quotes.Distance} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.quotes.Distance}
+ */
+proto.quotes.Distance.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDistance(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.quotes.Distance.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.quotes.Distance.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.quotes.Distance} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.Distance.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getDistance();
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int32 distance = 1;
+ * @return {number}
+ */
+proto.quotes.Distance.prototype.getDistance = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.quotes.Distance.prototype.setDistance = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.quotes.DistanceParams = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.quotes.DistanceParams, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.quotes.DistanceParams.displayName = 'proto.quotes.DistanceParams';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.quotes.DistanceParams.prototype.toObject = function(opt_includeInstance) {
+  return proto.quotes.DistanceParams.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.quotes.DistanceParams} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.DistanceParams.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    from: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    to: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.quotes.DistanceParams}
+ */
+proto.quotes.DistanceParams.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.quotes.DistanceParams;
+  return proto.quotes.DistanceParams.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.quotes.DistanceParams} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.quotes.DistanceParams}
+ */
+proto.quotes.DistanceParams.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFrom(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTo(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.quotes.DistanceParams.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.quotes.DistanceParams.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.quotes.DistanceParams} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.quotes.DistanceParams.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getFrom();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getTo();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string from = 1;
+ * @return {string}
+ */
+proto.quotes.DistanceParams.prototype.getFrom = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.quotes.DistanceParams.prototype.setFrom = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string to = 2;
+ * @return {string}
+ */
+proto.quotes.DistanceParams.prototype.getTo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.quotes.DistanceParams.prototype.setTo = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.quotes.Quote = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.quotes.Quote.repeatedFields_, null);
 };
@@ -1434,7 +1935,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.quotes.Quote.repeatedFields_ = [6,7];
+proto.quotes.Quote.repeatedFields_ = [6,7,19];
 
 
 
@@ -1484,7 +1985,10 @@ proto.quotes.Quote.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 16, 0),
     sumprice: +jspb.Message.getFieldWithDefault(msg, 17, 0.0),
     paidprice: +jspb.Message.getFieldWithDefault(msg, 18, 0.0),
-    qrcodeurl: jspb.Message.getFieldWithDefault(msg, 20, "")
+    servicesList: jspb.Message.toObjectList(msg.getServicesList(),
+    proto.quotes.ServiceInQuote.toObject, includeInstance),
+    qrcodeurl: jspb.Message.getFieldWithDefault(msg, 20, ""),
+    delivery: +jspb.Message.getFieldWithDefault(msg, 21, 0.0)
   };
 
   if (includeInstance) {
@@ -1591,9 +2095,18 @@ proto.quotes.Quote.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readFloat());
       msg.setPaidprice(value);
       break;
+    case 19:
+      var value = new proto.quotes.ServiceInQuote;
+      reader.readMessage(value,proto.quotes.ServiceInQuote.deserializeBinaryFromReader);
+      msg.addServices(value);
+      break;
     case 20:
       var value = /** @type {string} */ (reader.readString());
       msg.setQrcodeurl(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setDelivery(value);
       break;
     default:
       reader.skipField();
@@ -1745,10 +2258,25 @@ proto.quotes.Quote.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getServicesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      19,
+      f,
+      proto.quotes.ServiceInQuote.serializeBinaryToWriter
+    );
+  }
   f = message.getQrcodeurl();
   if (f.length > 0) {
     writer.writeString(
       20,
+      f
+    );
+  }
+  f = message.getDelivery();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      21,
       f
     );
   }
@@ -2043,6 +2571,37 @@ proto.quotes.Quote.prototype.setPaidprice = function(value) {
 
 
 /**
+ * repeated ServiceInQuote services = 19;
+ * @return {!Array<!proto.quotes.ServiceInQuote>}
+ */
+proto.quotes.Quote.prototype.getServicesList = function() {
+  return /** @type{!Array<!proto.quotes.ServiceInQuote>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.quotes.ServiceInQuote, 19));
+};
+
+
+/** @param {!Array<!proto.quotes.ServiceInQuote>} value */
+proto.quotes.Quote.prototype.setServicesList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 19, value);
+};
+
+
+/**
+ * @param {!proto.quotes.ServiceInQuote=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.quotes.ServiceInQuote}
+ */
+proto.quotes.Quote.prototype.addServices = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 19, opt_value, proto.quotes.ServiceInQuote, opt_index);
+};
+
+
+proto.quotes.Quote.prototype.clearServicesList = function() {
+  this.setServicesList([]);
+};
+
+
+/**
  * optional string qrcodeurl = 20;
  * @return {string}
  */
@@ -2054,6 +2613,21 @@ proto.quotes.Quote.prototype.getQrcodeurl = function() {
 /** @param {string} value */
 proto.quotes.Quote.prototype.setQrcodeurl = function(value) {
   jspb.Message.setProto3StringField(this, 20, value);
+};
+
+
+/**
+ * optional float delivery = 21;
+ * @return {number}
+ */
+proto.quotes.Quote.prototype.getDelivery = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 21, 0.0));
+};
+
+
+/** @param {number} value */
+proto.quotes.Quote.prototype.setDelivery = function(value) {
+  jspb.Message.setProto3FloatField(this, 21, value);
 };
 
 

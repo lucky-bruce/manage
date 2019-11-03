@@ -1,22 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import Context from "../../../context/context";
-import { Params } from "../../../../proto/db/db_pb";
+import React, { useState, useEffect } from "react";
+import { getUniqueFields } from "../../../../utils/backend";
 
 export default function SectorSelect(props) {
-	const context = useContext(Context);
-	const client = context.db;
-
 	const [sectors, setSectors] = useState([]);
 	const GetSectors = () => {
-		let params = new Params();
-		params.setField("sector");
-		params.setCollection("products");
-
-		client.getUnique(params, {}, (err, res) => {
+		getUniqueFields("sector", "products", (err, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(res.toObject());
 				setSectors(res.toObject().valuesList);
 			}
 		});

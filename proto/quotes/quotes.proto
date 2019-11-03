@@ -1,5 +1,6 @@
 syntax = "proto3";
 import "products/products.proto";
+import "services/services.proto";
 package quotes;
 
 service QuoteService {
@@ -10,6 +11,7 @@ service QuoteService {
   rpc EditQuote (Quote) returns (Response);
   rpc ChangeShippingStatus(StatusParams) returns (Response);
   rpc GetStatistics(products.Query) returns (Stats);
+  rpc GetDistance(DistanceParams) returns (Distance);
 }
 
 message QuoteResponse {
@@ -54,7 +56,6 @@ message Stats {
   uint32 delivered = 10;
   uint32 completed = 12;
   uint32 cancelled = 13;
-
 }
 
 message QuoteProduct {
@@ -62,11 +63,23 @@ message QuoteProduct {
   uint32 qty = 2;
 }
 
+message ServiceInQuote {
+  services.Service service = 1;
+  uint32 qty = 2;
+}
 message Suppliers {
   string id = 1;
   bool valid = 2;
 }
 
+message Distance {
+  int32 distance = 1;
+}
+
+message DistanceParams {
+  string from = 1;
+  string to = 2;
+}
 message Quote {
   string id = 1;
   float quotationPrice = 2;
@@ -90,9 +103,9 @@ message Quote {
   float sumPrice = 17;
   float paidPrice = 18;
   // uint32 quoteDate = 2;
-  
+  repeated ServiceInQuote services = 19;
   string qrcodeurl = 20;
-  
+  float delivery = 21;
 
   // uint32 validDate = 4;
   // string username = 5;

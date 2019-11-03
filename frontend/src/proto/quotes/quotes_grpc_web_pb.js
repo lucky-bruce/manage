@@ -7,11 +7,12 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 /* eslint-disable */
-
 const grpc = {};
 grpc.web = require("grpc-web");
 
 var products_products_pb = require("../products/products_pb.js");
+
+var services_services_pb = require("../services/services_pb.js");
 const proto = {};
 proto.quotes = require("./quotes_pb.js");
 
@@ -623,6 +624,83 @@ proto.quotes.QuoteServicePromiseClient.prototype.getStatistics = function(
 		request,
 		metadata || {},
 		methodDescriptor_QuoteService_GetStatistics
+	);
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.quotes.DistanceParams,
+ *   !proto.quotes.Distance>}
+ */
+const methodDescriptor_QuoteService_GetDistance = new grpc.web.MethodDescriptor(
+	"/quotes.QuoteService/GetDistance",
+	grpc.web.MethodType.UNARY,
+	proto.quotes.DistanceParams,
+	proto.quotes.Distance,
+	/** @param {!proto.quotes.DistanceParams} request */
+	function(request) {
+		return request.serializeBinary();
+	},
+	proto.quotes.Distance.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.quotes.DistanceParams,
+ *   !proto.quotes.Distance>}
+ */
+const methodInfo_QuoteService_GetDistance = new grpc.web.AbstractClientBase.MethodInfo(
+	proto.quotes.Distance,
+	/** @param {!proto.quotes.DistanceParams} request */
+	function(request) {
+		return request.serializeBinary();
+	},
+	proto.quotes.Distance.deserializeBinary
+);
+
+/**
+ * @param {!proto.quotes.DistanceParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.quotes.Distance)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.quotes.Distance>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.quotes.QuoteServiceClient.prototype.getDistance = function(
+	request,
+	metadata,
+	callback
+) {
+	return this.client_.rpcCall(
+		this.hostname_ + "/quotes.QuoteService/GetDistance",
+		request,
+		metadata || {},
+		methodDescriptor_QuoteService_GetDistance,
+		callback
+	);
+};
+
+/**
+ * @param {!proto.quotes.DistanceParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.quotes.Distance>}
+ *     A native promise that resolves to the response
+ */
+proto.quotes.QuoteServicePromiseClient.prototype.getDistance = function(
+	request,
+	metadata
+) {
+	return this.client_.unaryCall(
+		this.hostname_ + "/quotes.QuoteService/GetDistance",
+		request,
+		metadata || {},
+		methodDescriptor_QuoteService_GetDistance
 	);
 };
 

@@ -8,33 +8,33 @@ import { ServicesClient } from "./proto/services/services_grpc_web_pb";
 
 export function GetClients() {
 	const quotes = new QuoteServiceClient(
-		"http://192.168.0.107:8080",
+		"http://192.168.0.106:8080",
 		null,
 		null
 	);
 	const auth = new AuthorizationServiceClient(
-		"http://192.168.0.107:8080",
+		"http://192.168.0.106:8080",
 		null,
 		null
 	);
 	const products = new ProductServiceClient(
-		"http://192.168.0.107:8080",
+		"http://192.168.0.106:8080",
 		null,
 		null
 	);
 
 	const finances = new FinancialServiceClient(
-		"http://192.168.0.107:8080",
+		"http://192.168.0.106:8080",
 		null,
 		null
 	);
 
-	const db = new DbServiceClient("http://192.168.0.107:8080", null, null);
+	const db = new DbServiceClient("http://192.168.0.106:8080", null, null);
 
-	const chunker = new ChunkerClient("http://192.168.0.107:8080", null, null);
+	const chunker = new ChunkerClient("http://192.168.0.106:8080", null, null);
 
 	const services = new ServicesClient(
-		"http://192.168.0.107:8080",
+		"http://192.168.0.106:8080",
 		null,
 		null
 	);

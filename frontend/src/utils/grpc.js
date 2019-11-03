@@ -1,6 +1,11 @@
 import { Product } from "../proto/products/products_pb";
 import { Service } from "../proto/services/services_pb";
-import { Quote, QuoteProduct, Suppliers } from "../proto/quotes/quotes_pb";
+import {
+	Quote,
+	QuoteProduct,
+	Suppliers,
+	ServiceInQuote
+} from "../proto/quotes/quotes_pb";
 import { GetProfile } from "./utils";
 
 const user = GetProfile();
@@ -53,7 +58,14 @@ export const quoteInput = {
 	userid: "",
 	qrcodeurl: "",
 	status: 0,
-	timestamp: 0
+	timestamp: 0,
+	service: {},
+	servicesList: [],
+	delivery: 0,
+	state: "Ukraine",
+	suppliersLoc: [],
+	subtotal: 0,
+	total: 0
 };
 
 export function ToGRPCObject(obj) {
@@ -127,6 +139,7 @@ export const GetGRPCQuote = obj => {
 	quote.setSumprice(obj.totalprice);
 	quote.setTimestamp(obj.timestamp);
 	quote.setStatus(obj.status);
+	quote.setDelivery(obj.delivery);
 	quote.setQrcodeurl(obj.qrcodeurl);
 
 	quote.setSupplieridsList(undefined);
@@ -135,6 +148,16 @@ export const GetGRPCQuote = obj => {
 		sup.setId(rec.id);
 
 		quote.addSupplierids(sup);
+	}
+	quote.setServicesList(undefined);
+	for (let service of obj.servicesList) {
+		let sq = new ServiceInQuote();
+		let s = GetGRPCService(service.service);
+
+		sq.setService(s);
+		sq.setQty(service.qty);
+
+		quote.addServices(s);
 	}
 
 	return quote;
@@ -200,4 +223,6 @@ export const GetQuoteObjFromGRPC = (handleChange, obj) => {
 	handleChange("qrcodeurl", obj.qrcodeurl);
 	handleChange("productsList", obj.productsList);
 	handleChange("supplieridsList", obj.supplieridsList);
+	handleChange("servicesList", obj.servicesList);
+	handleChange("delivery", obj.delivery);
 };

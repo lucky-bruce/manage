@@ -19,9 +19,6 @@ func CreateSession() {
 	if err != nil {
 		log.Fatalf("Failed to create DB session: %s\n", err)
 	}
-
-	c := session.DB("management").C("products")
-	session.SetMode(mgo.Monotonic, true)
 	// Index
 	index := mgo.Index{
 		Key:        []string{"$text:name"},
@@ -30,6 +27,15 @@ func CreateSession() {
 		Background: true,
 		Sparse:     true,
 	}
+	c := session.DB("management").C("products")
+	session.SetMode(mgo.Monotonic, true)
+
+	err = c.EnsureIndex(index)
+	if err != nil {
+		panic(err)
+	}
+	c = session.DB("management").C("services")
+	session.SetMode(mgo.Monotonic, true)
 
 	err = c.EnsureIndex(index)
 	if err != nil {

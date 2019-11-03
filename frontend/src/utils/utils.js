@@ -91,9 +91,13 @@ export const TimestampSearch = (from, to, timestampLink) => {
 };
 
 export const isEmpty = obj => {
-	if (Object.entries(obj).length === 0 && obj.constructor === Object) {
-		return true;
+	if (obj) {
+		if (Object.entries(obj).length === 0 && obj.constructor === Object) {
+			return true;
+		}
+
+		return false;
 	}
 
-	return false;
+	return true;
 };

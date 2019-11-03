@@ -1,25 +1,18 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Context from "../../context/context";
-import {
-	Quote,
-	QuoteProduct,
-	Suppliers
-} from "../../../proto/quotes/quotes_pb";
-import { Product } from "../../../proto/products/products_pb";
 import { validate } from "email-validator";
 import { navigate } from "hookrouter";
-import { getToken, GetProfile } from "../../../utils/utils";
+import { isEmpty } from "../../../utils/utils";
 import ProductSelect from "./product/productSelect";
 import ProductTable from "./product/producttable";
-import { ToGRPCObject, quoteInput, GetGRPCQuote } from "../../../utils/grpc";
-import ServiceSelect from "./serviceSelect";
+import { quoteInput, GetGRPCQuote } from "../../../utils/grpc";
+import ServiceSelect from "./service/serviceSelect";
+import ServiceTable from "./service/serviceTable";
+import { newQuote, getDistance, getUser } from "../../../utils/backend";
+import Total from "./total";
 
 export default function Form() {
-	const context = useContext(Context);
-	const client = context.quotes;
-
 	const [timeout, settimeout] = useState(0);
 	const [mode, setMode] = useState(0);
 	const [error, setError] = useState({
@@ -59,14 +52,22 @@ export default function Form() {
 		},
 		{
 			title: "Service",
-			component: <ServiceSelect />
+			component: (
+				<ServiceSelect
+					service={userInput.service}
+					onServiceSelect={service =>
+						handleChange("service", service)
+					}
+					add={() => add()}
+				/>
+			)
 		}
 	];
 
 	useEffect(() => {
-		totalPrice();
+		subtotalPrice();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userInput.productsList]);
+	}, [userInput.productsList, userInput.servicesList]);
 
 	const onProductSelect = product => {
 		var errored = false;
@@ -85,7 +86,7 @@ export default function Form() {
 	};
 
 	const add = () => {
-		if (userInput.product) {
+		if (!isEmpty(userInput.product)) {
 			handleChange("productsList", [
 				...userInput.productsList,
 				userInput.product
@@ -113,14 +114,47 @@ export default function Form() {
 
 			handleChange("product", null);
 		}
+		if (!isEmpty(userInput.service)) {
+			handleChange("servicesList", [
+				...userInput.servicesList,
+				{ service: userInput.service, qty: 1 }
+			]);
+
+			var isIn = false;
+			for (var supplier of userInput.supplieridsList) {
+				if (supplier === userInput.service.userid) {
+					isIn = true;
+					return;
+				}
+			}
+
+			if (!isIn) {
+				handleChange("supplieridsList", [
+					...userInput.supplieridsList,
+					{
+						id: userInput.service.userid
+					}
+				]);
+			}
+
+			handleChange("service", null);
+		}
 	};
 
-	const onQtyChange = (i, value) => {
+	const onProductQtyChange = (i, value) => {
 		var p = userInput.productsList;
 		p[i].qty = value;
 
 		handleChange("productsList", p);
-		totalPrice();
+		subtotalPrice();
+	};
+
+	const onServiceQtyChange = (i, value) => {
+		var s = userInput.servicesList;
+		s[i].qty = value;
+
+		handleChange("servicesList", s);
+		subtotalPrice();
 	};
 
 	function checkValidity() {
@@ -182,29 +216,75 @@ export default function Form() {
 		return [errored, err];
 	}
 
-	function totalPrice() {
+	function subtotalPrice() {
 		var total = 0;
-		for (var i in userInput.productsList) {
-			const unit = userInput.productsList[i];
-
+		for (const unit of userInput.productsList) {
 			total += unit.product.sellingprice * unit.qty;
 		}
+		for (const unit of userInput.servicesList) {
+			total += unit.service.chargevalue * unit.qty;
+		}
 
-		handleChange("sumprice", total);
+		handleChange("subtotal", total);
 	}
 
-	const handleAddressChange = e => {
-		handleChange("address", e.target.value);
-
+	const handleAddressChange = (field, e) => {
+		handleChange(field, e.target.value);
+		handleChange("delivery", 0);
 		if (timeout) clearTimeout(timeout);
 		settimeout(
 			setTimeout(() => {
-				DistanceCalculator();
+				DistanceCalculator(userInput.suppliersLoc);
 			}, 1500)
 		);
 	};
 
-	const DistanceCalculator = () => {};
+	const GetSupplier = id => {
+		getUser(id, (err, res) => {
+			if (err) {
+				console.log(err);
+			} else {
+				let u = res.toObject();
+				handleChange("suppliersLoc", [
+					...userInput.suppliersLoc,
+					`${u.address}, ${u.city}, ${u.state}`
+				]);
+			}
+		});
+	};
+
+	useEffect(() => {
+		for (let id of userInput.supplieridsList) {
+			GetSupplier(id.id);
+		}
+	}, [userInput.supplieridsList]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			DistanceCalculator(userInput.suppliersLoc);
+		}, 1500);
+	}, [userInput.suppliersLoc]);
+
+	async function DistanceCalculator(locs) {
+		let from = `${userInput.address}, ${userInput.city}, ${userInput.state}`;
+
+		await handleChange("delivery", 0);
+		for (let loc of locs) {
+			getDistance(from, loc, (err, res) => {
+				if (err) {
+					console.log(err);
+				}
+				if (res) {
+					const dis = res.toObject();
+					handleChange("delivery", userInput.delivery + dis.distance);
+				}
+			});
+		}
+	}
+
+	useEffect(() => {
+		handleChange("sumprice", userInput.subtotal + userInput.delivery);
+	}, [userInput.delivery]);
 
 	function submit() {
 		const [errored, err] = checkValidity();
@@ -216,7 +296,7 @@ export default function Form() {
 
 		var quote = GetGRPCQuote(userInput);
 
-		client.newQuote(quote, {}, (err, res) => {
+		newQuote(quote, (err, res) => {
 			if (err) {
 				console.log(err);
 			}
@@ -324,9 +404,7 @@ export default function Form() {
 								placeholder="City"
 								required
 								value={userInput.city}
-								onChange={e =>
-									handleChange("city", e.target.value)
-								}
+								onChange={e => handleAddressChange("city", e)}
 							/>
 							<div
 								className={`invalid-feedback ${
@@ -345,7 +423,7 @@ export default function Form() {
 								value={userInput.address}
 								required
 								onChange={e => {
-									handleAddressChange(e);
+									handleAddressChange("address", e);
 								}}
 							/>
 							<div
@@ -400,55 +478,26 @@ export default function Form() {
 					<div className="col-md-9 d-flex flex-column">
 						<ProductTable
 							errored={error.productsList}
-							onQtyChange={(id, value) => onQtyChange(id, value)}
+							onQtyChange={(id, value) =>
+								onProductQtyChange(id, value)
+							}
 							products={userInput.productsList}
 						/>
-						<div className="float-right font-weight-bold">
-							Total: R$ {userInput.sumprice.toFixed(2)}
-						</div>
 
-						<table className="table mt-5 border-bottom table-responsive">
-							<thead className="bg-primary text-white">
-								<tr>
-									<th scope="col">Service type</th>
-									<th scope="col">Labor</th>
-									<th scope="col">Charges K/PM</th>
-									<th scope="col">Charges P/Day</th>
+						<ServiceTable
+							onQtyChange={(id, value) =>
+								onServiceQtyChange(id, value)
+							}
+							services={userInput.servicesList}
+						/>
 
-									<th scope="col">Total</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">Service ID</th>
-									<td>R$ 000.000,000</td>
-									<td>R$ 000.000,000</td>
-									<td>R$ 000.000,000</td>
-									<td>R$ 000.000,000</td>
-								</tr>
-							</tbody>
-						</table>
-						<div className="float-right font-weight-bold">
-							Total: R$ 000.000,000
-						</div>
 						<div className="row">
 							<div className="col-md-7"></div>
-							<div className="col-md-5">
-								<div className="font-weight-bold">
-									Subtotal: R$ 000.000,000
-								</div>
-								<div className="text-danger">
-									<div>Tax A % : 00 R$ 000.000,000</div>
-									<div>Tax B % : 00 R$ 000.000,000</div>
-									<div>Tax C % : 00 R$ 000.000,000</div>
-								</div>
-								<div className="text-success">
-									Discount in % : 00 R$ 000.000,000
-								</div>
-								<div className="mt-3 bg-primary w-75 p-3 rounded text-white">
-									Grand total: R$ 000.000,000
-								</div>
-							</div>
+							<Total
+								subtotal={userInput.subtotal}
+								total={userInput.sumprice}
+								delivery={userInput.delivery}
+							/>
 						</div>
 					</div>
 				</div>

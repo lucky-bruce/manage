@@ -11,7 +11,9 @@ import (
 	"github.com/Beaxhem/manage/backend/internal/products"
 	"github.com/Beaxhem/manage/backend/internal/quotes"
 	"github.com/Beaxhem/manage/backend/internal/utils"
+	"github.com/kr/pretty"
 	qrcode "github.com/skip2/go-qrcode"
+	"googlemaps.github.io/maps"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -133,7 +135,7 @@ func (s *Server) EditQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Re
 
 func NewQRCode(quote *quotes.Quote) {
 	var png []byte
-	png, err := qrcode.Encode("http://192.168.0.107:3000/quote/"+quote.Id+"/status-update", qrcode.Medium, 256)
+	png, err := qrcode.Encode("http://192.168.0.106:3000/quote/"+quote.Id+"/status-update", qrcode.Medium, 256)
 	if err != nil {
 		logger.ErrorFunc(err)
 		return
@@ -241,4 +243,33 @@ func (s *Server) GetStatistics(ctx context.Context, q *products.Query) (*quotes.
 	}
 
 	return &stats, nil
+}
+
+func (s *Server) GetDistance(ctx context.Context, params *quotes.DistanceParams) (*quotes.Distance, error) {
+	logger.InfoFunc(params.From, params.To)
+	c, err := maps.NewClient(maps.WithAPIKey("AIzaSyDbT2dcYKnJTXxQymnL4LRpxM87cVkcEPw"))
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(quotes.Distance), err
+	}
+
+	d := maps.DistanceMatrixRequest{
+		Origins: []string{
+			params.From,
+		},
+		Destinations: []string{
+			params.To,
+		},
+	}
+
+	distance, err := c.DistanceMatrix(context.Background(), &d)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(quotes.Distance), err
+	}
+
+	pretty.Println(distance)
+	km := distance.Rows[0].Elements[0].Distance.Meters / 1000
+
+	return &quotes.Distance{Distance: int32(km)}, nil
 }

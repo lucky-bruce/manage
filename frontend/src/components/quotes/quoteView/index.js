@@ -18,6 +18,7 @@ import {
 import { navigate } from "hookrouter";
 import ProductTable from "./productTable";
 import Img from "../../img";
+import Total from "../quoteForm/total";
 
 export default function View(props) {
 	const context = useContext(Context);
@@ -369,6 +370,11 @@ export default function View(props) {
 					}}
 					user={user}
 					products={userInput.productsList}
+				/>
+				<Total
+					subtotal={userInput.subtotal}
+					total={userInput.sumprice}
+					delivery={userInput.delivery}
 				/>
 			</div>
 		</div>
