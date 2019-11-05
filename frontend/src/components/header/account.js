@@ -3,8 +3,14 @@ import { isLoggedIn, GetProfile } from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { A } from "hookrouter";
+import { withStyles } from "@material-ui/core/styles";
 
-export default function Account() {
+const styles = {
+	boxShadow: "none",
+	backgroundColor: "transparent !important"
+};
+
+function Account() {
 	const profile = GetProfile();
 
 	var acc = (
@@ -20,7 +26,14 @@ export default function Account() {
 
 	if (isLoggedIn()) {
 		acc = (
-			<div className="d-flex flex-column mr-3">
+			<div
+				className={styles}
+				className="d-flex flex-column mr-3"
+				style={{
+					boxShadow: "none!important",
+					background: "transparent"
+				}}
+			>
 				<div style={{ whiteSpace: "nowrap" }}>
 					{profile.firstName + " " + profile.lastName}{" "}
 					<FontAwesomeIcon icon={faUser} />
@@ -60,3 +73,5 @@ export default function Account() {
 	}
 	return acc;
 }
+
+export default withStyles(styles)(Account);

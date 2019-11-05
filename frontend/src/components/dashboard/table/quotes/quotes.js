@@ -33,7 +33,7 @@ export default function QuotesTable(props) {
 
 	function GetQuotes() {
 		let query = new Query();
-		query.setSortfieldsList(["-id"]);
+		query.setSortfieldsList(["-timestamp"]);
 
 		var id;
 		if (GetProfile().role === "supplier") {

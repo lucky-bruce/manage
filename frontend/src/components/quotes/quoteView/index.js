@@ -19,12 +19,15 @@ import { navigate } from "hookrouter";
 import ProductTable from "./productTable";
 import Img from "../../img";
 import Total from "../quoteForm/total";
-
+import ServiceTable from "./serviceTable";
+import { getDistance, getUser } from "../../../utils/backend";
 export default function View(props) {
 	const context = useContext(Context);
 	const client = context.quotes;
 
 	const user = GetProfile();
+
+	const [timeout, settimeout] = useState(0);
 
 	const [error] = useState({
 		name: false,
@@ -49,14 +52,15 @@ export default function View(props) {
 	};
 
 	function Validate(st) {
-		var q = userInput.quote;
+		var q = GetGRPCQuote(userInput);
 		let sups = userInput.supplieridsList;
 		q.setSupplieridsList(undefined);
 
 		for (let sup of sups) {
 			let s = new Suppliers();
+			console.log(sup, user);
+
 			s.setId(sup.id);
-			console.log(sup.id, user.id);
 
 			if (sup.id === user.id) {
 				s.setValid(true);
@@ -153,6 +157,82 @@ export default function View(props) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	function subtotalPrice() {
+		var total = 0;
+		for (const unit of userInput.productsList) {
+			total += unit.product.sellingprice * unit.qty;
+		}
+		for (const unit of userInput.servicesList) {
+			total += unit.service.chargevalue * unit.qty;
+		}
+
+		handleChange("subtotal", total);
+	}
+
+	useEffect(() => {
+		console.log("Change");
+
+		subtotalPrice();
+	}, [userInput.servicesList, userInput.productsList]);
+
+	useEffect(() => {
+		handleChange("sumprice", userInput.delivery + userInput.subtotal);
+	}, [userInput.subtotal]);
+
+	const handleAddressChange = (field, e) => {
+		handleChange(field, e.target.value);
+		handleChange("delivery", 0);
+		if (timeout) clearTimeout(timeout);
+		settimeout(
+			setTimeout(() => {
+				DistanceCalculator(userInput.suppliersLoc);
+			}, 1500)
+		);
+	};
+
+	const GetSupplier = id => {
+		getUser(id, (err, res) => {
+			if (err) {
+				console.log(err);
+			} else {
+				let u = res.toObject();
+				handleChange("suppliersLoc", [
+					...userInput.suppliersLoc,
+					`${u.address}, ${u.city}, ${u.state}`
+				]);
+			}
+		});
+	};
+
+	useEffect(() => {
+		for (let id of userInput.supplieridsList) {
+			GetSupplier(id.id);
+		}
+	}, [userInput.supplieridsList]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			DistanceCalculator(userInput.suppliersLoc);
+		}, 1500);
+	}, [userInput.suppliersLoc]);
+
+	async function DistanceCalculator(locs) {
+		let from = `${userInput.address}, ${userInput.city}, ${userInput.state}`;
+
+		await handleChange("delivery", 0);
+		for (let loc of locs) {
+			getDistance(from, loc, (err, res) => {
+				if (err) {
+					console.log(err);
+				}
+				if (res) {
+					const dis = res.toObject();
+					handleChange("delivery", userInput.delivery + dis.distance);
+				}
+			});
+		}
+	}
 
 	return (
 		<div>
@@ -286,7 +366,7 @@ export default function View(props) {
 								readOnly={userInput.dis}
 								value={userInput.city}
 								onChange={e =>
-									handleChange("city", e.target.value)
+									handleAddressChange("city", e.target.value)
 								}
 							/>
 							<div
@@ -307,7 +387,10 @@ export default function View(props) {
 								readOnly={userInput.dis}
 								value={userInput.address}
 								onChange={e =>
-									handleChange("address", e.target.value)
+									handleAddressChange(
+										"address",
+										e.target.value
+									)
 								}
 							/>
 							<div
@@ -367,9 +450,19 @@ export default function View(props) {
 					onProductChange={products => {
 						handleChange("productsList", products);
 						setchanged(true);
+						subtotalPrice();
 					}}
 					user={user}
 					products={userInput.productsList}
+				/>
+				<ServiceTable
+					onServiceChange={services => {
+						handleChange("servicesList", services);
+						setchanged(true);
+						subtotalPrice();
+					}}
+					user={user}
+					services={userInput.servicesList}
 				/>
 				<Total
 					subtotal={userInput.subtotal}

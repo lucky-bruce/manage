@@ -21,7 +21,8 @@ export default function SupplierTable(props) {
 		} else {
 			id = `"supplierids.id":"${profile.companyid}"`;
 		}
-		query.setQuerystring(`${id}}`);
+		query.setQuerystring(`{${id}}`);
+		query.setSortfieldsList(["-timestamp"]);
 
 		client.getQuotes(query, {}, (err, res) => {
 			if (err) {

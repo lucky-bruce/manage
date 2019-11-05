@@ -4,6 +4,8 @@ import "./index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "mdbreact/dist/css/mdb.css";
+import "./components/main/Components/Layouts/index.css";
 import Dashboard from "./routes/dashboard/Dashboard";
 import * as serviceWorker from "./serviceWorker";
 import NotFoundPage from "./routes/NotFoundPage";
@@ -17,7 +19,7 @@ import QuoteForm from "./routes/quotes/QuoteForm";
 import QuoteEdit from "./routes/quotes/QuoteEdit";
 import ProductForm from "./routes/products/ProductForm";
 import ProductView from "./routes/products/ProductView";
-import Main from "./routes/Main";
+import Main from "./components/main/Components/Layouts/Pages/Main";
 import Test from "./routes/Test";
 import QuoteView from "./routes/quotes/QuoteView";
 import FinancialPage from "./routes/dashboard/Financial";
@@ -28,12 +30,32 @@ import NotPermittedPage from "./routes/NotPermitted";
 import StaffForm from "./routes/accounts/StaffRegistration";
 import { GetClients } from "./clients";
 import StatusUpdate from "./routes/quotes/StatusUpdate";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { red, blue } from "@material-ui/core/colors";
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: blue[500]
+		},
+		secondary: red,
+		type: "light"
+	},
+	spacing: 10,
+	overrides: {
+		shadows: ["none"]
+	}
+});
 
 require("jquery");
 require("bootstrap");
 
 const routes = {
-	"/": () => <Main />,
+	"/": () => (
+		<MuiThemeProvider theme={theme}>
+			<Main />
+		</MuiThemeProvider>
+	),
 	"/not-permitted": () => <NotPermittedPage />,
 	"/dashboard": () => <Dashboard />,
 	"/register": () => <Register />,

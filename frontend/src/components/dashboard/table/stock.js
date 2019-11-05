@@ -22,6 +22,7 @@ export default function StockTable() {
 				user.role === "supplier" ? user.id : user.companyid
 			}"}`
 		);
+		query.setSortfieldsList(["-addedtime"]);
 		params.setQuery(query);
 
 		client.getProducts(params, {}, (err, res) => {

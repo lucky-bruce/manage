@@ -18,7 +18,7 @@ export default function Profile() {
 				<div className="col-12 col-md-3">
 					<img
 						className="w-75 m-auto "
-						src="/img/profile.png"
+						src="/images/profile.png"
 						alt=""
 					/>
 					<div className="mt-4">

@@ -30,9 +30,27 @@ func (s *Server) NewQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Res
 		logger.ErrorFunc(err)
 		return new(quotes.Response), err
 	}
+
 	err = store.Insert(quote)
 
 	return &quotes.Response{Id: quote.GetId()}, err
+}
+
+func UpdateStock(products []*quotes.QuoteProduct) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "products")
+
+	for _, q := range products {
+		product := q.Product
+
+		err := store.C.Update(bson.M{"id": product.Id}, bson.M{"$inc": bson.M{"qtyinstock": -1}})
+		if err != nil {
+			logger.ErrorFunc(err)
+			return
+		}
+	}
 }
 
 func (s *Server) GetQuotes(ctx context.Context, query *products.Query) (*quotes.QuoteResponse, error) {
@@ -105,6 +123,8 @@ func (s *Server) EditQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Re
 		go DeleteIncome(quote)
 
 		go NewIncome(quote)
+
+		go UpdateStock(quote.Products)
 
 		go NewQRCode(quote)
 		quote.Qrcodeurl = "images/qrcode/" + quote.Id + ".png"

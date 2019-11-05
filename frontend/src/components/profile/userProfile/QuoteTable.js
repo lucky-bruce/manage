@@ -14,7 +14,7 @@ export default function QuoteTable() {
 		const profile = GetProfile();
 
 		var q = new Query();
-		q.setSortfieldsList(["-id"]);
+		q.setSortfieldsList(["-timestamp"]);
 		q.setQuerystring(`{"userid":"${profile.id}"}`);
 
 		client.getQuotes(q, {}, (err, res) => {

@@ -43,7 +43,7 @@ export default function Services(props) {
 
 	return (
 		<div>
-			<A href="/new/service">
+			<A href="/new/product">
 				<Button variant="primary">New service</Button>
 			</A>
 

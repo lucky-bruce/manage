@@ -36,8 +36,6 @@ export default function ProductTable(props) {
 				<tbody>
 					{props.products
 						? props.products.map((p, i) => {
-								console.log(p);
-
 								let dis =
 									p.product.userid !== GetProfile().id &&
 									p.product.userid !== GetProfile().companyid;
@@ -63,6 +61,7 @@ export default function ProductTable(props) {
 												type="number"
 												value={p.qty}
 											/>
+											{p.product.portionunit}
 										</td>
 										<td>{`${p.product.sizel.toFixed(
 											1

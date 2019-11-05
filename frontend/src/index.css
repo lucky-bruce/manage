@@ -241,3 +241,8 @@ span.active:not(.tab-indicator) {
 .form-control.product::placeholder {
 	color: white;
 }
+
+.flex-column {
+	background: transparent !important;
+	box-shadow: none !important;
+}

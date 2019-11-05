@@ -38,16 +38,17 @@ export const productInput = {
 	portionvalue: "0",
 	chargetype: "Per day",
 	chargevalue: 0,
-	userid: ""
+	userid: "",
+	addedtime: 0
 };
 
 export const quoteInput = {
 	id: "",
-	name: user.firstName + " " + user.lastName || "",
-	email: user.email || "",
-	phonenumber: user.phonenumber || "+",
-	city: user.city || "",
-	address: user.address || "",
+	name: user ? user.firstName + " " + user.lastName : "",
+	email: user ? user.email : "",
+	phonenumber: user ? user.phonenumber : "+",
+	city: user ? user.city : "",
+	address: user ? user.address : "",
 	zip: "",
 	size: "",
 	sector: "",
@@ -55,8 +56,8 @@ export const quoteInput = {
 	product: {},
 	productsList: [],
 	sumprice: 0,
-	userid: "",
-	qrcodeurl: "",
+	userid: user ? user.id : "",
+	qrcodeurl: "qrcode",
 	status: 0,
 	timestamp: 0,
 	service: {},
@@ -90,6 +91,7 @@ export const GetGRPCProduct = obj => {
 	product.setSubcategory(obj.subcategory);
 	product.setBuyingprice(obj.buyingprice);
 	product.setDesiredprofit(obj.desiredprofit);
+	product.setAddedtime(obj.addedtime);
 	product.setSellingprice(
 		obj.buyingprice + (obj.buyingprice * obj.desiredprofit) / 100
 	);
@@ -157,7 +159,7 @@ export const GetGRPCQuote = obj => {
 		sq.setService(s);
 		sq.setQty(service.qty);
 
-		quote.addServices(s);
+		quote.addServices(sq);
 	}
 
 	return quote;
@@ -205,6 +207,7 @@ export function GetProductObjFromGRPCProduct(handleChange, obj) {
 	handleChange("portionvalue", obj.portionvalue);
 	handleChange("brand", obj.brand);
 	handleChange("brandmodel", obj.brandmodel);
+	handleChange("addedtime", obj.addedtime);
 }
 
 export const GetQuoteObjFromGRPC = (handleChange, obj) => {
@@ -217,7 +220,7 @@ export const GetQuoteObjFromGRPC = (handleChange, obj) => {
 	handleChange("zip", obj.zip);
 	handleChange("size", obj.size);
 	handleChange("userid", obj.userid);
-	handleChange("totalprice", obj.totalprice);
+	handleChange("sumprice", obj.sumprice);
 	handleChange("timestamp", obj.timestamp);
 	handleChange("status", obj.status);
 	handleChange("qrcodeurl", obj.qrcodeurl);

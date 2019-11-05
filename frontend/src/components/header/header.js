@@ -95,7 +95,7 @@ export default () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-success text-white ">
 			<div className="container">
-				<A className="navbar-brand" href="#">
+				<A className="navbar-brand" href="/">
 					<h2>Logo</h2>
 				</A>
 				<button

@@ -284,7 +284,7 @@ export default function Form() {
 
 	useEffect(() => {
 		handleChange("sumprice", userInput.subtotal + userInput.delivery);
-	}, [userInput.delivery]);
+	}, [userInput.delivery, userInput.subtotal]);
 
 	function submit() {
 		const [errored, err] = checkValidity();

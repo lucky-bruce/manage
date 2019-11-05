@@ -82,14 +82,14 @@ message DistanceParams {
 }
 message Quote {
   string id = 1;
-  float quotationPrice = 2;
+  
   string phonenumber = 3;
   int64 timestamp = 4;
   string email = 5;
   repeated Suppliers   supplierids = 6;
   repeated QuoteProduct products = 7;
 
-  string jwt = 9;
+  
   
   string name = 10;
   string city = 11;

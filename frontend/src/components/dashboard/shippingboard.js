@@ -31,7 +31,7 @@ export default function ShippingBoard({ from, to }) {
 	useEffect(() => {
 		GetStats();
 		//eslint-disable-next-line
-	}, []);
+	}, [from, to]);
 
 	return (
 		<div className="pt-3 d-flex flex-column">

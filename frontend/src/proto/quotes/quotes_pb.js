@@ -1967,7 +1967,6 @@ proto.quotes.Quote.prototype.toObject = function(opt_includeInstance) {
 proto.quotes.Quote.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    quotationprice: +jspb.Message.getFieldWithDefault(msg, 2, 0.0),
     phonenumber: jspb.Message.getFieldWithDefault(msg, 3, ""),
     timestamp: jspb.Message.getFieldWithDefault(msg, 4, 0),
     email: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -1975,7 +1974,6 @@ proto.quotes.Quote.toObject = function(includeInstance, msg) {
     proto.quotes.Suppliers.toObject, includeInstance),
     productsList: jspb.Message.toObjectList(msg.getProductsList(),
     proto.quotes.QuoteProduct.toObject, includeInstance),
-    jwt: jspb.Message.getFieldWithDefault(msg, 9, ""),
     name: jspb.Message.getFieldWithDefault(msg, 10, ""),
     city: jspb.Message.getFieldWithDefault(msg, 11, ""),
     address: jspb.Message.getFieldWithDefault(msg, 12, ""),
@@ -2029,10 +2027,6 @@ proto.quotes.Quote.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
-    case 2:
-      var value = /** @type {number} */ (reader.readFloat());
-      msg.setQuotationprice(value);
-      break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setPhonenumber(value);
@@ -2054,10 +2048,6 @@ proto.quotes.Quote.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.quotes.QuoteProduct;
       reader.readMessage(value,proto.quotes.QuoteProduct.deserializeBinaryFromReader);
       msg.addProducts(value);
-      break;
-    case 9:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setJwt(value);
       break;
     case 10:
       var value = /** @type {string} */ (reader.readString());
@@ -2144,13 +2134,6 @@ proto.quotes.Quote.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getQuotationprice();
-  if (f !== 0.0) {
-    writer.writeFloat(
-      2,
-      f
-    );
-  }
   f = message.getPhonenumber();
   if (f.length > 0) {
     writer.writeString(
@@ -2186,13 +2169,6 @@ proto.quotes.Quote.serializeBinaryToWriter = function(message, writer) {
       7,
       f,
       proto.quotes.QuoteProduct.serializeBinaryToWriter
-    );
-  }
-  f = message.getJwt();
-  if (f.length > 0) {
-    writer.writeString(
-      9,
-      f
     );
   }
   f = message.getName();
@@ -2295,21 +2271,6 @@ proto.quotes.Quote.prototype.getId = function() {
 /** @param {string} value */
 proto.quotes.Quote.prototype.setId = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional float quotationPrice = 2;
- * @return {number}
- */
-proto.quotes.Quote.prototype.getQuotationprice = function() {
-  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 2, 0.0));
-};
-
-
-/** @param {number} value */
-proto.quotes.Quote.prototype.setQuotationprice = function(value) {
-  jspb.Message.setProto3FloatField(this, 2, value);
 };
 
 
@@ -2417,21 +2378,6 @@ proto.quotes.Quote.prototype.addProducts = function(opt_value, opt_index) {
 
 proto.quotes.Quote.prototype.clearProductsList = function() {
   this.setProductsList([]);
-};
-
-
-/**
- * optional string jwt = 9;
- * @return {string}
- */
-proto.quotes.Quote.prototype.getJwt = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
-};
-
-
-/** @param {string} value */
-proto.quotes.Quote.prototype.setJwt = function(value) {
-  jspb.Message.setProto3StringField(this, 9, value);
 };
 
 

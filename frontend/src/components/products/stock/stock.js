@@ -16,7 +16,7 @@ export default function Stock() {
 		let params = new ProductParams();
 		var query = new Query();
 
-		query.setSortfieldsList(["-_id"]);
+		query.setSortfieldsList(["addedtime"]);
 
 		if (user.role !== "user") {
 			query.setQuerystring(
