@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+service LandingService {
+  rpc NewTeam(Team) returns (Response);
+  rpc GetTeams(Params) returns (Teams);
+  rpc DeleteTeam(Params) returns (Response);
+
+  rpc NewPortfolio(Portfolio) returns (Response);
+  rpc GetPortfolios(Params) returns (Portfolios);
+  rpc DeletePortfolio(Params) returns (Response);
+}
+
+message Teams {
+  repeated Team teams = 1;
+}
+
+message Team {
+  string name = 1;
+  float rating = 2;
+  string image = 3;
+  string description = 4;
+  int64 timestamp = 5;
+}
+
+message Portfolio {
+  string details = 1;
+  string sector = 2;
+  string image = 3;
+  int64 timestamp = 4;
+  string id = 5;
+}
+
+message Portfolios {
+  repeated Portfolio portfolios = 1;
+}
+
+message Response {
+
+}
+
+message Params {
+  string name = 1;
+  string id = 2;
+}

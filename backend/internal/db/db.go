@@ -3,6 +3,7 @@ package db
 import (
 	"strconv"
 
+	"github.com/Beaxhem/manage/backend/internal/landing"
 	"github.com/Beaxhem/manage/backend/internal/logger"
 	"github.com/Beaxhem/manage/backend/internal/products"
 	"github.com/Beaxhem/manage/backend/internal/quotes"
@@ -187,6 +188,7 @@ func IdGenerator(item interface{}) error {
 		item.(*products.Product).Id = newID
 		return nil
 	case *services.Service:
+
 		store := GetStore(dataStore, "services")
 
 		var lastProduct services.Service
@@ -207,6 +209,28 @@ func IdGenerator(item interface{}) error {
 
 		item.(*services.Service).Id = newID
 		return nil
+	case *landing.Portfolio:
+		store := GetStore(dataStore, "portfolios")
+
+		var lastProduct landing.Portfolio
+		err := store.GetLastItem(&lastProduct)
+
+		if err != nil {
+
+			item.(*landing.Portfolio).Id = "0000001F"
+			return nil
+		}
+		prevID := lastProduct.GetId()
+		num, err := NewID(prevID)
+		if err != nil {
+			logger.ErrorFunc(err)
+			return err
+		}
+		newID := num + "F"
+
+		item.(*landing.Portfolio).Id = newID
+		return nil
+
 	}
 
 	logger.ErrorFunc("Something went wrong")

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { MDBContainer, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBRow, MDBCol } from "mdbreact";
 import Team from './Team';
+
 class TabsDefault extends Component {
 
     state = {
@@ -13,28 +14,6 @@ class TabsDefault extends Component {
         data: []
     };
 
-    componentDidMount() {
-        let _this = this;
-        fetch('/mix', {
-            method: 'GET',
-        }).then(res => res.json())
-            .then((res) => {
-                if (!!res.info) {
-                    let we = res.info.find(item => item.title === 'How We Are');
-                    let mission = res.info.find(item => item.title === 'Our Mission');
-                    let values = res.info.find(item => item.title === 'Our Values');
-                    _this.setState({ we, mission, values });
-                }
-            })
-        fetch(`/team`)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({ team: res.result });
-            })
-            .catch(error => {
-                console.log('Please check your connection..!');
-            })
-    }
     toggle = tab => e => {
         if (this.state.activeItem !== tab) {
             this.setState({
@@ -120,7 +99,7 @@ class TabsDefault extends Component {
                                     </MDBRow>
                                 </MDBTabPane>
                                 <MDBTabPane tabId="4" role="tabpanel" >
-                                    <Team team={this.state.team} />
+                                    <Team  />
 
                                 </MDBTabPane>
                             </MDBTabContent>

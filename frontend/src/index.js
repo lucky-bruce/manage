@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "mdbreact/dist/css/mdb.css";
+import "./editor.css";
 import "./components/main/Components/Layouts/index.css";
 import Dashboard from "./routes/dashboard/Dashboard";
 import * as serviceWorker from "./serviceWorker";
@@ -19,6 +20,7 @@ import QuoteForm from "./routes/quotes/QuoteForm";
 import QuoteEdit from "./routes/quotes/QuoteEdit";
 import ProductForm from "./routes/products/ProductForm";
 import ProductView from "./routes/products/ProductView";
+import About from "./routes/landing/Dashboard/Editor/About";
 import Main from "./components/main/Components/Layouts/Pages/Main";
 import Test from "./routes/Test";
 import QuoteView from "./routes/quotes/QuoteView";
@@ -32,6 +34,9 @@ import { GetClients } from "./clients";
 import StatusUpdate from "./routes/quotes/StatusUpdate";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { red, blue } from "@material-ui/core/colors";
+import Portfolio from "./routes/landing/Dashboard/Editor/Portfolio";
+import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
+import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
 
 const theme = createMuiTheme({
 	palette: {
@@ -49,6 +54,7 @@ const theme = createMuiTheme({
 
 require("jquery");
 require("bootstrap");
+require("dotenv").config();
 
 const routes = {
 	"/": () => (
@@ -73,7 +79,10 @@ const routes = {
 	"/quotes": () => <QuotesPage />,
 	"/logout": () => <LogOut />,
 	"/test": () => <Test />,
-
+	"/sectors": () => <Sectors />,
+	"/portfolio": () => <Portfolio />,
+	"/team": () => <OurTeam />,
+	"/editor/about": () => <About />,
 	"/login": () => <Login />
 };
 

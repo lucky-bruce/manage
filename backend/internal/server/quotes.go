@@ -155,7 +155,7 @@ func (s *Server) EditQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Re
 
 func NewQRCode(quote *quotes.Quote) {
 	var png []byte
-	png, err := qrcode.Encode("http://192.168.0.106:3000/quote/"+quote.Id+"/status-update", qrcode.Medium, 256)
+	png, err := qrcode.Encode("${process.env.REACT_APP_SERVER_LOCAL_IP}:3000/quote/"+quote.Id+"/status-update", qrcode.Medium, 256)
 	if err != nil {
 		logger.ErrorFunc(err)
 		return

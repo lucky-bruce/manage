@@ -5,6 +5,8 @@ import (
 	"log"
 	"net"
 
+	"github.com/Beaxhem/manage/backend/internal/landing"
+
 	"github.com/Beaxhem/manage/backend/internal/chunker"
 	"github.com/Beaxhem/manage/backend/internal/financial"
 	"github.com/Beaxhem/manage/backend/internal/products"
@@ -43,6 +45,7 @@ func main() {
 	services.RegisterServicesServer(srv, &server.Server{})
 	financial.RegisterFinancialServiceServer(srv, &server.Server{})
 	chunker.RegisterChunkerServer(srv, &server.Server{})
+	landing.RegisterLandingServiceServer(srv, &server.Server{})
 
 	db.RegisterDbServiceServer(srv, &server.Server{})
 	if e := srv.Serve(listener); e != nil {

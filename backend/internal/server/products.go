@@ -24,7 +24,7 @@ import (
 	"github.com/chai2010/webp"
 )
 
-const chunkSize = 64 * 1024 // 64 KiB
+const chunkSize = 16 * 1024 // 16 KiB
 
 func (s *Server) NewProduct(ctx context.Context, product *products.Product) (*products.Product, error) {
 	dataStore := db.NewDataStore()
@@ -126,7 +126,12 @@ func DeleteFiles(product products.Product) {
 }
 
 func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer) error {
+
 	path, err := filepath.Abs(req.Url)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return err
+	}
 
 	file, err := os.Open(path)
 
@@ -136,7 +141,10 @@ func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer
 	}
 
 	img, _, err := image.Decode(file)
-
+	if err != nil {
+		logger.ErrorFunc(err)
+		return err
+	}
 	buf := new(bytes.Buffer)
 	err = webp.Encode(buf, img, nil)
 	if err != nil {
@@ -145,6 +153,7 @@ func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer
 	}
 
 	c := buf.Bytes()
+
 	chnk := &chunker.Chunk{}
 
 	for currentByte := 0; currentByte < len(c); currentByte += chunkSize {
@@ -154,6 +163,7 @@ func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer
 			chnk.Chunk = c[currentByte : currentByte+chunkSize]
 		}
 		if err := srv.Send(chnk); err != nil {
+			logger.ErrorFunc(err)
 			return err
 		}
 	}
@@ -162,7 +172,8 @@ func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer
 }
 
 func (s *Server) UploadImage(ctx context.Context, img *products.Image) (*products.ImageResponse, error) {
-	fp := fmt.Sprintf("images/%d/%d/%d", time.Now().Year(), time.Now().Month(), time.Now().Day())
+	t := time.Now()
+	fp := fmt.Sprintf("images/%d/%d/%d", t.Year(), t.Month(), t.Day())
 
 	dst, err := NewImageFromString(img.Image, img.Ext, fp)
 	if err != nil {
@@ -205,7 +216,7 @@ func NewImageFromString(img, ext, path string) (*os.File, error) {
 		return nil, err
 	}
 
-	dst, err := os.Create(path + "/" + fmt.Sprintf("%d.webp", time.Now().Unix()))
+	dst, err := os.Create(path + fmt.Sprintf("/%d.webp", time.Now().Unix()))
 	if err != nil {
 		logger.ErrorFunc("os.Create(src) error:", err)
 		return nil, err

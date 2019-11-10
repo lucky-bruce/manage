@@ -5,39 +5,24 @@ import { FinancialServiceClient } from "./proto/financial/financial_grpc_web_pb"
 import { ChunkerClient } from "./proto/chunker/chunker_grpc_web_pb";
 import { DbServiceClient } from "./proto/db/db_grpc_web_pb";
 import { ServicesClient } from "./proto/services/services_grpc_web_pb";
+import { LandingServiceClient } from "./proto/landing/landing_grpc_web_pb";
 
 export function GetClients() {
-	const quotes = new QuoteServiceClient(
-		"http://192.168.0.106:8080",
-		null,
-		null
-	);
-	const auth = new AuthorizationServiceClient(
-		"http://192.168.0.106:8080",
-		null,
-		null
-	);
-	const products = new ProductServiceClient(
-		"http://192.168.0.106:8080",
-		null,
-		null
-	);
+	const ip = `${process.env.REACT_APP_SERVER_LOCAL_IP}:8080`;
 
-	const finances = new FinancialServiceClient(
-		"http://192.168.0.106:8080",
-		null,
-		null
-	);
+	const quotes = new QuoteServiceClient(ip, null, null);
+	const auth = new AuthorizationServiceClient(ip, null, null);
+	const products = new ProductServiceClient(ip, null, null);
 
-	const db = new DbServiceClient("http://192.168.0.106:8080", null, null);
+	const finances = new FinancialServiceClient(ip, null, null);
 
-	const chunker = new ChunkerClient("http://192.168.0.106:8080", null, null);
+	const db = new DbServiceClient(ip, null, null);
 
-	const services = new ServicesClient(
-		"http://192.168.0.106:8080",
-		null,
-		null
-	);
+	const chunker = new ChunkerClient(ip, null, null);
+
+	const services = new ServicesClient(ip, null, null);
+
+	const landing = new LandingServiceClient(ip, null, null);
 
 	return {
 		quotes,
@@ -46,6 +31,7 @@ export function GetClients() {
 		auth,
 		db,
 		chunker,
+		landing,
 		services
 	};
 }

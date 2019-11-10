@@ -5,42 +5,46 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 import './editor.css';
 import { Modal } from 'antd';
-import EditIcon from '@material-ui/icons/Edit';
-import Upload from './Upload'
+import Upload from './Upload';
+
 const { confirm } = Modal;
 
-const Portfolio = () => {
-    // detail, sector
-    const [sector, setSector] = useState('');
-    const [detail, setDetail] = useState('');
-    const [image, setImage] = useState('');
-    const [portfolios, setPortfolios] = useState('');
+const News = () => {
 
+    const [sector, setSector] = useState('');
+    const [title, setTitle] = useState('');
+    const [des, setDes] = useState('');
+    const [image, setImage] = useState('');
+    const [news, setNews] = useState('');
     const [id, setId] = useState('');
     const [editsector, setEditSector] = useState('');
-    const [editdetail, setEditdetail] = useState('');
+    const [edittitle, setEditTitle] = useState('');
+    const [editdes, setEditDes] = useState('');
     const [editimage, seteditImage] = useState('');
     const [visible, setVisible] = useState(false);
     const [defaultimage, setDefaultImage] = useState(undefined);
 
     useEffect(() => {
-        fetchPortfolioData();
+        fetchNewsData();
     }, []);
+    
     const submitHandler = (e) => {
         e.preventDefault();
         let data = new FormData();
-        data.append('detail', detail);
+        data.append('title', title);
+        data.append('description', des);
         data.append('sector', sector);
         data.append('file', image);
-        fetch('/portfolio', {
+        fetch('/news', {
             method: 'POST',
             body: data
         })
             .then(res => {
                 if (res.status === 200) {
-                    fetchPortfolioData()
+                    fetchNewsData()
                 }
             })
             .catch(error => {
@@ -54,61 +58,66 @@ const Portfolio = () => {
     const imageSelectedEditHandler = (file) => {
         seteditImage(file)
     }
-    const fetchPortfolioData = () => {
-        setDetail('');
-        setSector('');
+    const fetchNewsData = () => {
+        setDes('');
         setImage('');
-        fetch(`/portfolio`)
+        setSector('');
+        setTitle('');
+        fetch(`/news`)
             .then(res => res.json())
             .then(res => {
-                setPortfolios(res.result)
+                setNews(res.result)
             })
             .catch(error => {
-                console.log('Please check your connection..!');
+                console.log('Please check your internet connection..!');
             })
     }
     const edit = (id) => {
-        let editableArrary = portfolios.filter(item => item._id === id);
+        let editableArrary = news.filter(item => item._id === id);
         const [editable = {}] = editableArrary;
-        const { _id = '', detail = '', sector = '' , image = ''} = editable;
+        const { _id = '', description = '', title = '', sector = '', image = '' } = editable;
         setId(_id);
         setEditSector(sector);
+        setEditTitle(title);
         setDefaultImage(image);
-        setEditdetail(detail);
+        setEditDes(description);
         setVisible(!visible);
     }
     const handleEdit = (e) => {
         e.preventDefault()
         let data = new FormData();
-        data.append('detail', editdetail);
+        data.append('title', edittitle);
+        data.append('description', editdes);
         data.append('sector', editsector);
-        if (editimage !== '') {
+        if(editimage !== ''){
             data.append('file', editimage);
-        } else {
+        }else{
             data.append('file', image);
         }
-        fetch(`/portfolio/${id}`, {
+        fetch(`/news/${id}`, {
             method: 'PATCH',
             body: data,
         }).then(res => {
             if (res.status === 201) {
                 setId('');
                 setEditSector('');
-                setEditdetail('');
+                setEditTitle('');
+                setEditDes('');
                 seteditImage('');
                 setVisible(!visible);
-                fetchPortfolioData();
+                fetchNewsData();
             }
         })
     }
+
     const deleteHandler = (id) => {
-        fetch(`/portfolio/${id}`, {
+        fetch(`/news/${id}`, {
             method: 'DELETE',
             headers: { 'content-type': 'application/json' }
         })
             .then(res => {
                 if (res.status === 200) {
-                    fetchPortfolioData();
+                    fetchNewsData();
                 }
             })
     }
@@ -124,21 +133,21 @@ const Portfolio = () => {
         });
     }
 
+
     return (
-        <MDBContainer>
-            <p className="h4 text-center mb-4">Portfolio</p>
+        <MDBContainer className="text-center">
+            <p className="h4 text-center mb-4">News</p>
             <MDBRow>
                 <MDBCol md="6">
                     <form onSubmit={submitHandler} encType='multipart/form-data'>
-
                         <MDBRow>
                             <MDBCol md="12">
                                 <MDBInput
-                                    label="Details"
+                                    label="Title"
                                     type="text"
-                                    value={detail}
+                                    value={title}
                                     onChange={(e) => {
-                                        setDetail(e.target.value);
+                                        setTitle(e.target.value);
                                     }}
                                 />
                             </MDBCol>
@@ -146,6 +155,18 @@ const Portfolio = () => {
 
                         <MDBRow>
                             <MDBCol md="12">
+                                <MDBInput
+                                    value={des}
+                                    onChange={(e) => {
+                                        setDes(e.target.value);
+                                    }}
+                                    type="textarea" label=" News Description" rows="3" />
+                            </MDBCol>
+                        </MDBRow>
+
+
+                        <MDBRow style={{ marginTop: '2%' }}>
+                            <MDBCol md={12}>
                                 <FormControl style={{ width: '100%', textAlign: 'left' }}>
                                     <InputLabel htmlFor="Sector" style={{ width: '100%', textAlign: 'left' }}>Sector</InputLabel>
                                     <Select
@@ -168,10 +189,13 @@ const Portfolio = () => {
                         </MDBRow>
                         <MDBRow>
                             <MDBCol md="12">
-                                <Upload handleImage={handleImage}  />
+                                <Upload handleImage={handleImage} />
+                                {/* <input
+                                    type='file'
+                                    onChange={handleImage}
+                                /> */}
                             </MDBCol>
                         </MDBRow>
-
                         <div className="text-center mt-4">
                             <MDBBtn color="info" outline type="submit">
                                 Save <MDBIcon far icon="paper-plane" className="ml-2" />
@@ -184,6 +208,7 @@ const Portfolio = () => {
                         <MDBTableHead >
                             <tr>
                                 <th>Image</th>
+                                <th>Title</th>
                                 <th>Details</th>
                                 <th>Sector</th>
                                 <th>Actions</th>
@@ -191,18 +216,19 @@ const Portfolio = () => {
                         </MDBTableHead>
                         <MDBTableBody>
                             {
-                                portfolios.length ?
-                                    portfolios.map(item => {
+                                news.length ?
+                                    news.map(item => {
                                         return (
                                             <tr key={item._id}>
                                                 <td>
                                                     <img
                                                         width={50}
-                                                        alt={item._id}
+                                                        alt={item.title}
                                                         src={`/${item.image}`}
                                                     />
                                                 </td>
-                                                <td>{item.detail.substring(0, 35)}</td>
+                                                <td>{item.title}</td>
+                                                <td>{item.description.substring(0, 35)}</td>
                                                 <td>{item.sector}</td>
                                                 <td>
                                                     <DeleteForeverIcon onClick={() => showDeleteConfirm(item._id)} />
@@ -219,7 +245,7 @@ const Portfolio = () => {
             </MDBRow>
             <Modal
                 visible={visible}
-                title="Edit News"
+                title="Edit Portfolio"
                 onOk={handleEdit}
                 onCancel={() => { setVisible(!visible) }}
             >
@@ -227,16 +253,30 @@ const Portfolio = () => {
                     <MDBRow>
                         <MDBCol md="12">
                             <MDBInput
-                                label="Detail"
+                                label="Title"
                                 type="text"
-                                value={editdetail}
+                                value={edittitle}
                                 onChange={(e) => {
-                                    let editdetail = e.target.value;
-                                    setEditdetail(editdetail);
+                                    let title = e.target.value;
+                                    setEditTitle(title);
                                 }}
                             />
                         </MDBCol>
                     </MDBRow>
+
+                    <MDBRow>
+                        <MDBCol md="12">
+                            <MDBInput
+                                value={editdes}
+                                onChange={(e) => {
+                                    let description = e.target.value;
+                                    setEditDes(description);
+
+                                }}
+                                type="textarea" label=" News Description" rows="3" />
+                        </MDBCol>
+                    </MDBRow>
+
 
                     <MDBRow style={{ marginTop: '2%' }}>
                         <MDBCol md={12}>
@@ -265,6 +305,10 @@ const Portfolio = () => {
                     <MDBRow>
                         <MDBCol md="12">
                             <Upload handleImage={imageSelectedEditHandler} defaultV = {`/${defaultimage}`} />
+                            {/* <input
+                                type='file'
+                                onChange={imageSelectedEditHandler}
+                            /> */}
                         </MDBCol>
                     </MDBRow>
                 </form>
@@ -273,4 +317,4 @@ const Portfolio = () => {
     );
 };
 
-export default Portfolio;
+export default News;

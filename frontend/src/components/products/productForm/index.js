@@ -1,5 +1,5 @@
 import React, { useState, useContext, useReducer } from "react";
-import { Image } from "../../../proto/products/products_pb";
+
 import Context from "../../context/context";
 import {
 	GetGRPCProduct,
@@ -12,6 +12,7 @@ import { TopBar } from "../../ui/index";
 import Dropzone from "react-dropzone";
 import Product from "./product";
 import Service from "./service";
+import { processFiles } from "../../../utils/backend";
 
 export default function ProductForm() {
 	const context = useContext(Context);
@@ -26,46 +27,6 @@ export default function ProductForm() {
 	const handleChange = (name, value) => {
 		setUserInput({ [name]: value });
 	};
-
-	function readFileAsync(file) {
-		return new Promise((resolve, reject) => {
-			let reader = new FileReader();
-
-			reader.onload = e => {
-				resolve(e.target.result);
-			};
-
-			reader.onerror = reject;
-
-			reader.readAsDataURL(file);
-		});
-	}
-
-	async function processFiles(files) {
-		for (let file of files) {
-			try {
-				let image = new Image();
-				let exts = file.name.split(".");
-
-				image.setExt(`.${exts[exts.length - 1]}`);
-				let content = await readFileAsync(file);
-				image.setImage(content);
-
-				context.products.uploadImage(image, {}, (err, res) => {
-					if (err) {
-						console.log(err);
-					} else {
-						handleChange("images", [
-							...userInput.images,
-							res.toObject().url
-						]);
-					}
-				});
-			} catch (err) {
-				console.log(err);
-			}
-		}
-	}
 
 	function submit() {
 		switch (tab) {

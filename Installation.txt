@@ -15,7 +15,9 @@ Lastly type this to start React app:
 
   npm install
 
-  npm start
+  npm run build
+
+  serve -s build
   
 
 

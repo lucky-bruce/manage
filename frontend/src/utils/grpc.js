@@ -7,6 +7,7 @@ import {
 	ServiceInQuote
 } from "../proto/quotes/quotes_pb";
 import { GetProfile } from "./utils";
+import { Team, Portfolio } from "../proto/landing/landing_pb";
 
 const user = GetProfile();
 
@@ -67,6 +68,21 @@ export const quoteInput = {
 	suppliersLoc: [],
 	subtotal: 0,
 	total: 0
+};
+
+export const teamInput = {
+	name: "",
+	rating: "",
+	image: "",
+	description: "",
+	timestamp: 0
+};
+
+export const portfolioInput = {
+	image: "",
+	details: "",
+	sector: "",
+	timestamp: ""
 };
 
 export function ToGRPCObject(obj) {
@@ -165,6 +181,18 @@ export const GetGRPCQuote = obj => {
 	return quote;
 };
 
+export const GetGRPCTeam = obj => {
+	let team = new Team();
+
+	team.setName(obj.name);
+	team.setRating(obj.rating);
+	team.setImage(obj.image);
+	team.setDescription(obj.description);
+	team.setTimestamp(obj.timestamp);
+
+	return team;
+};
+
 export function GetGRPCService(obj) {
 	let s = new Service();
 
@@ -177,6 +205,17 @@ export function GetGRPCService(obj) {
 
 	return s;
 }
+
+export const GetGRPCPortfolio = obj => {
+	let p = new Portfolio();
+
+	p.setDetails(obj.details);
+	p.setSector(obj.sector);
+	p.setImage(obj.image);
+	p.setTimestamp(obj.timestamp);
+
+	return p;
+};
 
 export function GetProductObjFromGRPCProduct(handleChange, obj) {
 	handleChange("id", obj.id);
@@ -228,4 +267,12 @@ export const GetQuoteObjFromGRPC = (handleChange, obj) => {
 	handleChange("supplieridsList", obj.supplieridsList);
 	handleChange("servicesList", obj.servicesList);
 	handleChange("delivery", obj.delivery);
+};
+
+export const GetTeamFromGRPC = (handleChange, obj) => {
+	handleChange("name", obj.name);
+	handleChange("rating", obj.rating);
+	handleChange("image", obj.image);
+	handleChange("description", obj.description);
+	handleChange("timestamp", obj.timestamp);
 };

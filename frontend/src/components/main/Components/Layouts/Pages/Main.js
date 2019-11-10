@@ -7,38 +7,22 @@ import {
 	MDBView,
 	MDBContainer,
 	MDBFormInline,
+	MDBBtn,
 	MDBAnimation
 } from "mdbreact";
 import Header from "../Header";
-import {
-	About,
-	Contact,
-	Portfolio,
-	Sectors,
-	Quotes,
-	Signup,
-	Signin
-} from "../Pages";
+import { About, Contact, Portfolio, Sectors, Quotes } from "../Pages";
 import { TinyButton as ScrollUpButton } from "react-scroll-up-button";
 import BackgroundSlideshow from "react-background-slider";
 import image2 from "../../../images/b.jpg";
 import image3 from "../../../images/c.jpg";
+import { A } from "hookrouter";
 
 class Main extends Component {
 	state = {
 		data: []
 	};
-	componentDidMount() {
-		fetch("/mix", {
-			method: "GET"
-		})
-			.then(res => res.json())
-			.then(res => {
-				if (!!res.info) {
-					this.setState({ data: res.info });
-				}
-			});
-	}
+
 	render() {
 		const image1 =
 			"http://4.bp.blogspot.com/-LVDJIaNyM1A/UoAL7AIswrI/AAAAAAAAAAc/O1IPVytbLwE/s1600/_piscina_04.jpg";
@@ -70,8 +54,16 @@ class Main extends Component {
 											as vantajes.
 										</h6>
 										<MDBFormInline>
-											<Signin />
-											<Signup />
+											<A href="/login">
+												<MDBBtn color="white">
+													Fazer Login
+												</MDBBtn>
+											</A>
+											<A href="/register">
+												<MDBBtn outline color="white">
+													Cadastre-se
+												</MDBBtn>
+											</A>
 										</MDBFormInline>
 									</MDBAnimation>
 								</MDBCol>
