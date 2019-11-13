@@ -8,6 +8,31 @@ service LandingService {
   rpc NewPortfolio(Portfolio) returns (Response);
   rpc GetPortfolios(Params) returns (Portfolios);
   rpc DeletePortfolio(Params) returns (Response);
+
+  rpc NewMix(Mix) returns (Response);
+  rpc GetMixes(Params) returns (Mixes);
+  rpc DeleteMix(Params) returns (Response);
+
+  rpc NewBasic(Basic) returns (Response);
+  rpc GetBasic(Params) returns (Basic);
+
+  rpc NewSector(Sector) returns (Response);
+  rpc GetSectors(Params) returns (Sectors);
+  rpc DeleteSector(Params) returns (Response);
+
+  rpc NewNews(News) returns (Response);
+  rpc GetNews(Params) returns (NewsList);
+  rpc DeleteNews(Params) returns (Response);
+}
+
+message Basic {
+  string sitename = 1;
+  string primaryemail = 2;
+  string secondaryemail = 3;
+  string primaryphone = 4;
+  string workinghours = 5;
+  string address1 = 6;
+  string address2 = 7;
 }
 
 message Teams {
@@ -30,6 +55,17 @@ message Portfolio {
   string id = 5;
 }
 
+message Mix {
+  string title = 1;
+  string description = 2;
+  string image = 3;
+  
+}
+
+message Mixes {
+  repeated Mix mixes = 1;
+}
+
 message Portfolios {
   repeated Portfolio portfolios = 1;
 }
@@ -41,4 +77,25 @@ message Response {
 message Params {
   string name = 1;
   string id = 2;
+}
+
+message Sector {
+  string title = 1;
+  string description = 2;
+  string image = 3;
+}
+
+message Sectors {
+  repeated Sector sectors = 1;
+}
+
+message News {
+  string title = 1;
+  string description = 2;
+  string sector = 3;
+  string image = 4;
+}
+
+message NewsList {
+  repeated News news = 1;
 }

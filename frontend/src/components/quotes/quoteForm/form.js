@@ -92,7 +92,7 @@ export default function Form() {
 				userInput.product
 			]);
 
-			var isIn = false;
+			let isIn = false;
 			for (var i in userInput.supplieridsList) {
 				if (
 					userInput.supplieridsList[i] ===
@@ -114,13 +114,14 @@ export default function Form() {
 
 			handleChange("product", null);
 		}
+
 		if (!isEmpty(userInput.service)) {
 			handleChange("servicesList", [
 				...userInput.servicesList,
 				{ service: userInput.service, qty: 1 }
 			]);
 
-			var isIn = false;
+			let isIn = false;
 			for (var supplier of userInput.supplieridsList) {
 				if (supplier === userInput.service.userid) {
 					isIn = true;
@@ -257,12 +258,14 @@ export default function Form() {
 		for (let id of userInput.supplieridsList) {
 			GetSupplier(id.id);
 		}
+		//eslint-disable-next-line
 	}, [userInput.supplieridsList]);
 
 	useEffect(() => {
 		setTimeout(() => {
 			DistanceCalculator(userInput.suppliersLoc);
 		}, 1500);
+		//eslint-disable-next-line
 	}, [userInput.suppliersLoc]);
 
 	async function DistanceCalculator(locs) {
@@ -284,6 +287,7 @@ export default function Form() {
 
 	useEffect(() => {
 		handleChange("sumprice", userInput.subtotal + userInput.delivery);
+		//eslint-disable-next-line
 	}, [userInput.delivery, userInput.subtotal]);
 
 	function submit() {

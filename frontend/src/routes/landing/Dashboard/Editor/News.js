@@ -1,320 +1,288 @@
-import React, { useState, useEffect } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
-import './editor.css';
-import { Modal } from 'antd';
-import Upload from './Upload';
+import React, { useState, useEffect, useReducer } from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import { Modal } from "antd";
+import Upload from "./Upload";
+import {
+  getNews,
+  getSectors,
+  newNews,
+  deleteNews
+} from "../../../../utils/backend";
+import { newsInput, GetGRPCNews } from "../../../../utils/grpc";
+import Img from "../../../../components/img/index";
+import { usePath } from "hookrouter";
+import { limitedAccess } from "../../../../utils/utils";
+import NewsTable from "../../../../components/landing/news/NewsTable";
 
 const { confirm } = Modal;
 
 const News = () => {
+  const [userInput, setUserInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    newsInput
+  );
 
-    const [sector, setSector] = useState('');
-    const [title, setTitle] = useState('');
-    const [des, setDes] = useState('');
-    const [image, setImage] = useState('');
-    const [news, setNews] = useState('');
-    const [id, setId] = useState('');
-    const [editsector, setEditSector] = useState('');
-    const [edittitle, setEditTitle] = useState('');
-    const [editdes, setEditDes] = useState('');
-    const [editimage, seteditImage] = useState('');
-    const [visible, setVisible] = useState(false);
-    const [defaultimage, setDefaultImage] = useState(undefined);
+  const handleChange = (name, value) => {
+    setUserInput({ [name]: value });
+  };
 
-    useEffect(() => {
+  const [sectors, setSectors] = useState([]);
+
+  const [editsector, setEditSector] = useState("");
+  const [edittitle, setEditTitle] = useState("");
+  const [editdes, setEditDes] = useState("");
+
+  const [news, setNews] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const GetSectors = () => {
+    getSectors((err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const s = res.toObject().sectorsList;
+
+        setSectors(s);
+      }
+    });
+  };
+
+  const path = usePath();
+
+  useEffect(() => {
+    fetchNewsData();
+    GetSectors();
+    limitedAccess(["admin"], path);
+    //eslint-disable-next-line
+  }, []);
+
+  const fetchNewsData = () => {
+    getNews((err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setNews(res.toObject().newsList);
+      }
+    });
+  };
+
+  const submitHandler = e => {
+    e.preventDefault();
+    let n = GetGRPCNews(userInput);
+
+    newNews(n, (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
         fetchNewsData();
-    }, []);
-    
-    const submitHandler = (e) => {
-        e.preventDefault();
-        let data = new FormData();
-        data.append('title', title);
-        data.append('description', des);
-        data.append('sector', sector);
-        data.append('file', image);
-        fetch('/news', {
-            method: 'POST',
-            body: data
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    fetchNewsData()
-                }
-            })
-            .catch(error => {
-                console.log('Please check your connection');
-            })
-    }
+      }
+    });
+  };
 
-    const handleImage = (file) => {
-        setImage(file)
-    }
-    const imageSelectedEditHandler = (file) => {
-        seteditImage(file)
-    }
-    const fetchNewsData = () => {
-        setDes('');
-        setImage('');
-        setSector('');
-        setTitle('');
-        fetch(`/news`)
-            .then(res => res.json())
-            .then(res => {
-                setNews(res.result)
-            })
-            .catch(error => {
-                console.log('Please check your internet connection..!');
-            })
-    }
-    const edit = (id) => {
-        let editableArrary = news.filter(item => item._id === id);
-        const [editable = {}] = editableArrary;
-        const { _id = '', description = '', title = '', sector = '', image = '' } = editable;
-        setId(_id);
-        setEditSector(sector);
-        setEditTitle(title);
-        setDefaultImage(image);
-        setEditDes(description);
-        setVisible(!visible);
-    }
-    const handleEdit = (e) => {
-        e.preventDefault()
-        let data = new FormData();
-        data.append('title', edittitle);
-        data.append('description', editdes);
-        data.append('sector', editsector);
-        if(editimage !== ''){
-            data.append('file', editimage);
-        }else{
-            data.append('file', image);
+  // const edit = id => {};
+
+  const handleEdit = e => {};
+
+  const deleteHandler = title => {
+    var p = new Promise(res => {
+      deleteNews(title, (err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(res.toObject());
         }
-        fetch(`/news/${id}`, {
-            method: 'PATCH',
-            body: data,
-        }).then(res => {
-            if (res.status === 201) {
-                setId('');
-                setEditSector('');
-                setEditTitle('');
-                setEditDes('');
-                seteditImage('');
-                setVisible(!visible);
-                fetchNewsData();
-            }
-        })
-    }
+      });
+      res();
+    });
 
-    const deleteHandler = (id) => {
-        fetch(`/news/${id}`, {
-            method: 'DELETE',
-            headers: { 'content-type': 'application/json' }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    fetchNewsData();
-                }
-            })
-    }
-    const showDeleteConfirm = (id) => {
-        confirm({
-            title: 'Do you Want to delete this item?',
-            onOk() {
-                deleteHandler(id);
-            },
-            onCancel() {
-                console.log('Cancel', id);
-            },
-        });
-    }
+    p.then(fetchNewsData());
+  };
 
+  const showDeleteConfirm = title => {
+    confirm({
+      title: "Do you Want to delete this item?",
+      onOk() {
+        deleteHandler(title);
+      },
+      onCancel() {
+        console.log("Cancel", title);
+      }
+    });
+  };
 
-    return (
-        <MDBContainer className="text-center">
-            <p className="h4 text-center mb-4">News</p>
+  return (
+    <MDBContainer className="text-center">
+      <p className="h4 text-center mb-4">News</p>
+      <MDBRow>
+        <MDBCol md="6">
+          <form onSubmit={submitHandler}>
             <MDBRow>
-                <MDBCol md="6">
-                    <form onSubmit={submitHandler} encType='multipart/form-data'>
-                        <MDBRow>
-                            <MDBCol md="12">
-                                <MDBInput
-                                    label="Title"
-                                    type="text"
-                                    value={title}
-                                    onChange={(e) => {
-                                        setTitle(e.target.value);
-                                    }}
-                                />
-                            </MDBCol>
-                        </MDBRow>
-
-                        <MDBRow>
-                            <MDBCol md="12">
-                                <MDBInput
-                                    value={des}
-                                    onChange={(e) => {
-                                        setDes(e.target.value);
-                                    }}
-                                    type="textarea" label=" News Description" rows="3" />
-                            </MDBCol>
-                        </MDBRow>
-
-
-                        <MDBRow style={{ marginTop: '2%' }}>
-                            <MDBCol md={12}>
-                                <FormControl style={{ width: '100%', textAlign: 'left' }}>
-                                    <InputLabel htmlFor="Sector" style={{ width: '100%', textAlign: 'left' }}>Sector</InputLabel>
-                                    <Select
-                                        style={{ width: '100%', textAlign: 'left' }}
-                                        value={sector}
-                                        onChange={(e) => {
-                                            setSector(e.target.value);
-                                        }}
-                                        inputProps={{
-                                            name: 'Sector',
-                                            id: 'Sector',
-                                        }}
-                                    >
-                                        <MenuItem value='A'>Sector A</MenuItem>
-                                        <MenuItem value='B'>Sector B</MenuItem>
-                                        <MenuItem value='C'>Sector C</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </MDBCol>
-                        </MDBRow>
-                        <MDBRow>
-                            <MDBCol md="12">
-                                <Upload handleImage={handleImage} />
-                                {/* <input
-                                    type='file'
-                                    onChange={handleImage}
-                                /> */}
-                            </MDBCol>
-                        </MDBRow>
-                        <div className="text-center mt-4">
-                            <MDBBtn color="info" outline type="submit">
-                                Save <MDBIcon far icon="paper-plane" className="ml-2" />
-                            </MDBBtn>
-                        </div>
-                    </form>
-                </MDBCol>
-                <MDBCol md="6">
-                    <MDBTable style={{ marginTop: '25px', }}>
-                        <MDBTableHead >
-                            <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Details</th>
-                                <th>Sector</th>
-                                <th>Actions</th>
-                            </tr>
-                        </MDBTableHead>
-                        <MDBTableBody>
-                            {
-                                news.length ?
-                                    news.map(item => {
-                                        return (
-                                            <tr key={item._id}>
-                                                <td>
-                                                    <img
-                                                        width={50}
-                                                        alt={item.title}
-                                                        src={`/${item.image}`}
-                                                    />
-                                                </td>
-                                                <td>{item.title}</td>
-                                                <td>{item.description.substring(0, 35)}</td>
-                                                <td>{item.sector}</td>
-                                                <td>
-                                                    <DeleteForeverIcon onClick={() => showDeleteConfirm(item._id)} />
-                                                    <EditIcon onClick={() => edit(item._id)} />
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                    : null
-                            }
-                        </MDBTableBody>
-                    </MDBTable>
-                </MDBCol>
+              <MDBCol md="12">
+                <MDBInput
+                  label="Title"
+                  type="text"
+                  value={userInput.title}
+                  onChange={e => {
+                    handleChange("title", e.target.value);
+                  }}
+                />
+              </MDBCol>
             </MDBRow>
-            <Modal
-                visible={visible}
-                title="Edit Portfolio"
-                onOk={handleEdit}
-                onCancel={() => { setVisible(!visible) }}
-            >
-                <form encType='multipart/form-data'>
-                    <MDBRow>
-                        <MDBCol md="12">
-                            <MDBInput
-                                label="Title"
-                                type="text"
-                                value={edittitle}
-                                onChange={(e) => {
-                                    let title = e.target.value;
-                                    setEditTitle(title);
-                                }}
-                            />
-                        </MDBCol>
-                    </MDBRow>
 
-                    <MDBRow>
-                        <MDBCol md="12">
-                            <MDBInput
-                                value={editdes}
-                                onChange={(e) => {
-                                    let description = e.target.value;
-                                    setEditDes(description);
+            <MDBRow>
+              <MDBCol md="12">
+                <MDBInput
+                  value={userInput.description}
+                  onChange={e => {
+                    handleChange("description", e.target.value);
+                  }}
+                  type="textarea"
+                  label=" News Description"
+                  rows="3"
+                />
+              </MDBCol>
+            </MDBRow>
 
-                                }}
-                                type="textarea" label=" News Description" rows="3" />
-                        </MDBCol>
-                    </MDBRow>
+            <MDBRow style={{ marginTop: "2%" }}>
+              <MDBCol md={12}>
+                <FormControl style={{ width: "100%", textAlign: "left" }}>
+                  <InputLabel
+                    htmlFor="Sector"
+                    style={{
+                      width: "100%",
+                      textAlign: "left"
+                    }}
+                  >
+                    Sector
+                  </InputLabel>
+                  <Select
+                    style={{
+                      width: "100%",
+                      textAlign: "left"
+                    }}
+                    value={userInput.sector}
+                    onChange={e => {
+                      handleChange("sector", e.target.value);
+                    }}
+                    inputProps={{
+                      name: "Sector",
+                      id: "Sector"
+                    }}
+                  >
+                    {sectors.map((sector, i) => (
+                      <MenuItem value={sector.title}>{sector.title}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="12">
+                <Upload setImage={image => handleChange("image", image)} />
+                {userInput.image ? (
+                  <Img className="img-thumb " src={userInput.image} />
+                ) : (
+                  ""
+                )}
+              </MDBCol>
+            </MDBRow>
+            <div className="text-center mt-4">
+              <MDBBtn color="info" type="submit">
+                Save{" "}
+              </MDBBtn>
+            </div>
+          </form>
+        </MDBCol>
+        <MDBCol md="6">
+          <NewsTable
+            showDeleteConfirm={title => showDeleteConfirm(title)}
+            news={news}
+          />
+        </MDBCol>
+      </MDBRow>
+      <Modal
+        visible={visible}
+        title="Edit Portfolio"
+        onOk={handleEdit}
+        onCancel={() => {
+          setVisible(!visible);
+        }}
+      >
+        <form encType="multipart/form-data">
+          <MDBRow>
+            <MDBCol md="12">
+              <MDBInput
+                label="Title"
+                type="text"
+                value={edittitle}
+                onChange={e => {
+                  let title = e.target.value;
+                  setEditTitle(title);
+                }}
+              />
+            </MDBCol>
+          </MDBRow>
 
+          <MDBRow>
+            <MDBCol md="12">
+              <MDBInput
+                value={editdes}
+                onChange={e => {
+                  let description = e.target.value;
+                  setEditDes(description);
+                }}
+                type="textarea"
+                label=" News Description"
+                rows="3"
+              />
+            </MDBCol>
+          </MDBRow>
 
-                    <MDBRow style={{ marginTop: '2%' }}>
-                        <MDBCol md={12}>
-                            <FormControl style={{ width: '100%', textAlign: 'left' }}>
-                                <InputLabel htmlFor="Sector" style={{ width: '100%', textAlign: 'left' }}>Sector</InputLabel>
-                                <Select
-                                    style={{ width: '100%', textAlign: 'left' }}
-                                    value={editsector}
-                                    onChange={(e) => {
-                                        let editsector = e.target.value;
-                                        setEditSector(editsector);
-
-                                    }}
-                                    inputProps={{
-                                        name: 'Sector',
-                                        id: 'Sector',
-                                    }}
-                                >
-                                    <MenuItem value='A'>Sector A</MenuItem>
-                                    <MenuItem value='B'>Sector B</MenuItem>
-                                    <MenuItem value='C'>Sector C</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol md="12">
-                            <Upload handleImage={imageSelectedEditHandler} defaultV = {`/${defaultimage}`} />
-                            {/* <input
+          <MDBRow style={{ marginTop: "2%" }}>
+            <MDBCol md={12}>
+              <FormControl style={{ width: "100%", textAlign: "left" }}>
+                <InputLabel
+                  htmlFor="Sector"
+                  style={{ width: "100%", textAlign: "left" }}
+                >
+                  Sector
+                </InputLabel>
+                <Select
+                  style={{ width: "100%", textAlign: "left" }}
+                  value={editsector}
+                  onChange={e => {
+                    let editsector = e.target.value;
+                    setEditSector(editsector);
+                  }}
+                  inputProps={{
+                    name: "Sector",
+                    id: "Sector"
+                  }}
+                >
+                  <MenuItem value="A">Sector A</MenuItem>
+                  <MenuItem value="B">Sector B</MenuItem>
+                  <MenuItem value="C">Sector C</MenuItem>
+                </Select>
+              </FormControl>
+            </MDBCol>
+          </MDBRow>
+          <MDBRow>
+            <MDBCol md="12">
+              <Upload />
+              {/* <input
                                 type='file'
                                 onChange={imageSelectedEditHandler}
                             /> */}
-                        </MDBCol>
-                    </MDBRow>
-                </form>
-            </Modal>
-        </MDBContainer>
-    );
+            </MDBCol>
+          </MDBRow>
+        </form>
+      </Modal>
+    </MDBContainer>
+  );
 };
 
 export default News;

@@ -120,6 +120,66 @@ export const deletePortfolio = (id, callback) => {
 	client.landing.deletePortfolio(params, {}, callback);
 };
 
+export const newMix = (mix, callback) => {
+	client.landing.newMix(mix, {}, callback);
+};
+
+export const getMixes = (params, callback) => {
+	client.landing.getMixes(params || new LandingParams(), {}, callback);
+};
+
+export const deleteMix = (title, callback) => {
+	let params = new LandingParams();
+
+	params.setName(title);
+
+	client.landing.deleteMix(params, {}, callback);
+};
+
+export const getBasic = callback => {
+	let params = new LandingParams();
+
+	client.landing.getBasic(params, {}, callback);
+};
+
+export const newBasic = (basic, callback) => {
+	client.landing.newBasic(basic, {}, callback);
+};
+
+export const newSector = (sector, callback) => {
+	client.landing.newSector(sector, {}, callback);
+};
+
+export const getSectors = callback => {
+	let params = new LandingParams();
+
+	client.landing.getSectors(params, {}, callback);
+};
+
+export const deleteSector = (title, callback) => {
+	let params = new LandingParams();
+
+	params.setName(title);
+
+	client.landing.deleteSector(params, {}, callback);
+};
+
+export const getNews = callback => {
+	client.landing.getNews(new LandingParams(), {}, callback);
+};
+
+export const newNews = (news, callback) => {
+	client.landing.newNews(news, {}, callback);
+};
+
+export const deleteNews = (title, callback) => {
+	let params = new LandingParams();
+
+	params.setName(title);
+
+	client.landing.deleteNews(params, {}, callback);
+};
+
 export function readFileAsync(file) {
 	return new Promise((resolve, reject) => {
 		let reader = new FileReader();

@@ -37,6 +37,8 @@ import { red, blue } from "@material-ui/core/colors";
 import Portfolio from "./routes/landing/Dashboard/Editor/Portfolio";
 import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
 import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
+import MainDash from "./routes/landing/Dashboard/Editor/Dashboard";
+import News from "./routes/landing/Dashboard/Editor/News";
 
 const theme = createMuiTheme({
 	palette: {
@@ -79,10 +81,12 @@ const routes = {
 	"/quotes": () => <QuotesPage />,
 	"/logout": () => <LogOut />,
 	"/test": () => <Test />,
-	"/sectors": () => <Sectors />,
-	"/portfolio": () => <Portfolio />,
-	"/team": () => <OurTeam />,
+	"/editor/sectors": () => <Sectors />,
+	"/editor/portfolio": () => <Portfolio />,
+	"/editor/team": () => <OurTeam />,
 	"/editor/about": () => <About />,
+	"/editor/main": () => <MainDash />,
+	"/editor/news": () => <News />,
 	"/login": () => <Login />
 };
 

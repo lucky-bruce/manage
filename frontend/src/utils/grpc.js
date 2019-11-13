@@ -7,7 +7,14 @@ import {
 	ServiceInQuote
 } from "../proto/quotes/quotes_pb";
 import { GetProfile } from "./utils";
-import { Team, Portfolio } from "../proto/landing/landing_pb";
+import {
+	Team,
+	Portfolio,
+	Mix,
+	Basic,
+	Sector,
+	News
+} from "../proto/landing/landing_pb";
 
 const user = GetProfile();
 
@@ -83,6 +90,35 @@ export const portfolioInput = {
 	details: "",
 	sector: "",
 	timestamp: ""
+};
+
+export const mixInput = {
+	mixesList: [
+		{ title: "Who we are", description: "" },
+		{ title: "Our mision", description: "" },
+		{ title: "Our values", description: "" }
+	]
+};
+
+export const basicInput = {
+	sitename: "",
+	primaryemail: "",
+	secondaryemail: "",
+	primaryname: "",
+	workinghours: "",
+	address1: "",
+	address2: ""
+};
+
+export const sectorsInput = {
+	sectorsList: []
+};
+
+export const newsInput = {
+	title: "",
+	description: "",
+	sector: "",
+	image: ""
 };
 
 export function ToGRPCObject(obj) {
@@ -215,6 +251,67 @@ export const GetGRPCPortfolio = obj => {
 	p.setTimestamp(obj.timestamp);
 
 	return p;
+};
+
+export const GetGRPCMix = obj => {
+	let m = new Mix();
+
+	m.setTitle(obj.title);
+	m.setDescription(obj.description);
+	m.setImage(obj.image);
+
+	return m;
+};
+
+export const getGRPCBasic = obj => {
+	let b = new Basic();
+
+	b.setSitename(obj.sitename);
+	b.setPrimaryemail(obj.primaryemail);
+	b.setSecondaryemail(obj.secondaryemail);
+	b.setPrimaryphone(obj.primaryphone);
+	b.setWorkinghours(obj.workinghours);
+	b.setAddress1(obj.address1);
+	b.setAddress2(obj.address2);
+
+	return b;
+};
+
+export const getGRPCSector = obj => {
+	let s = new Sector();
+
+	s.setTitle(obj.title);
+	s.setDescription(obj.description);
+	s.setImage(obj.image);
+
+	return s;
+};
+
+export const GetGRPCNews = obj => {
+	let n = new News();
+
+	n.setTitle(obj.title);
+	n.setDescription(obj.description);
+	n.setSector(obj.sector);
+	n.setImage(obj.image);
+
+	return n;
+};
+
+export const getBasicFromGRPC = (handleChange, obj) => {
+	handleChange("sitename", obj.sitename);
+	handleChange("primaryemail", obj.primaryemail);
+	handleChange("secondaryemail", obj.secondaryemail);
+	handleChange("primaryphone", obj.primaryphone);
+	handleChange("workinghours", obj.workinghours);
+	handleChange("address1", obj.address1);
+	handleChange("address1", obj.address2);
+};
+
+export const GetMixFromGRPC = (handleChange, obj) => {
+	handleChange("title", obj.title);
+	handleChange("description", obj.description);
+	handleChange("image", obj.image);
 };
 
 export function GetProductObjFromGRPCProduct(handleChange, obj) {
