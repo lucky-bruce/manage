@@ -115,16 +115,16 @@ const FormPage = () => {
             <MDBInput
               label="Address"
               type="text"
-              value={userInput.address1}
-              onChange={e => handleChange("address1", e.target.value)}
+              value={userInput.primaryaddress}
+              onChange={e => handleChange("primaryaddress", e.target.value)}
             />
           </MDBCol>
           <MDBCol md="6">
             <MDBInput
               label="Address 2"
               type="text"
-              value={userInput.address2}
-              onChange={e => handleChange("address2", e.target.value)}
+              value={userInput.secondaryaddress}
+              onChange={e => handleChange("secondaryaddress", e.target.value)}
             />
           </MDBCol>
         </MDBRow>

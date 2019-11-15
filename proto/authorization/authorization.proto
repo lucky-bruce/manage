@@ -5,6 +5,7 @@ package authorization;
 service AuthorizationService {
   rpc Register (User) returns (Response);
   rpc Login (LoginParams) returns (Response);
+  rpc ChangePassword(PasswordChange) returns (Response);
   rpc GetUser (Params) returns (User);
   rpc GetUsers (Params) returns (Response);
   rpc GetStats (Params) returns (Stats);
@@ -28,6 +29,12 @@ message User {
   string Zip = 15;
   string Username = 16;
   string Companyid = 17;
+}
+
+message PasswordChange {
+  string id = 1;
+  string old = 2;
+  string new = 3;
 }
 
 message LoginParams {

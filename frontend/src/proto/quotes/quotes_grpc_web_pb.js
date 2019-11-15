@@ -5,7 +5,9 @@
  */
 
 // GENERATED CODE -- DO NOT EDIT!
+
 /* eslint-disable */
+
 const grpc = {};
 grpc.web = require("grpc-web");
 
@@ -24,29 +26,29 @@ proto.quotes = require("./quotes_pb.js");
  * @final
  */
 proto.quotes.QuoteServiceClient = function(hostname, credentials, options) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -58,33 +60,33 @@ proto.quotes.QuoteServiceClient = function(hostname, credentials, options) {
  * @final
  */
 proto.quotes.QuoteServicePromiseClient = function(
-	hostname,
-	credentials,
-	options
+  hostname,
+  credentials,
+  options
 ) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -94,15 +96,15 @@ proto.quotes.QuoteServicePromiseClient = function(
  *   !proto.quotes.Response>}
  */
 const methodDescriptor_QuoteService_NewQuote = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/NewQuote",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.Quote,
-	proto.quotes.Response,
-	/** @param {!proto.quotes.Quote} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  "/quotes.QuoteService/NewQuote",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.Quote,
+  proto.quotes.Response,
+  /** @param {!proto.quotes.Quote} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -112,12 +114,12 @@ const methodDescriptor_QuoteService_NewQuote = new grpc.web.MethodDescriptor(
  *   !proto.quotes.Response>}
  */
 const methodInfo_QuoteService_NewQuote = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Response,
-	/** @param {!proto.quotes.Quote} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  proto.quotes.Response,
+  /** @param {!proto.quotes.Quote} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -131,17 +133,17 @@ const methodInfo_QuoteService_NewQuote = new grpc.web.AbstractClientBase.MethodI
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.newQuote = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/NewQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_NewQuote,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/NewQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_NewQuote,
+    callback
+  );
 };
 
 /**
@@ -153,15 +155,15 @@ proto.quotes.QuoteServiceClient.prototype.newQuote = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.newQuote = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/NewQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_NewQuote
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/NewQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_NewQuote
+  );
 };
 
 /**
@@ -171,15 +173,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.newQuote = function(
  *   !proto.quotes.QuoteResponse>}
  */
 const methodDescriptor_QuoteService_GetQuotes = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/GetQuotes",
-	grpc.web.MethodType.UNARY,
-	products_products_pb.Query,
-	proto.quotes.QuoteResponse,
-	/** @param {!proto.products.Query} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.QuoteResponse.deserializeBinary
+  "/quotes.QuoteService/GetQuotes",
+  grpc.web.MethodType.UNARY,
+  products_products_pb.Query,
+  proto.quotes.QuoteResponse,
+  /** @param {!proto.products.Query} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.QuoteResponse.deserializeBinary
 );
 
 /**
@@ -189,12 +191,12 @@ const methodDescriptor_QuoteService_GetQuotes = new grpc.web.MethodDescriptor(
  *   !proto.quotes.QuoteResponse>}
  */
 const methodInfo_QuoteService_GetQuotes = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.QuoteResponse,
-	/** @param {!proto.products.Query} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.QuoteResponse.deserializeBinary
+  proto.quotes.QuoteResponse,
+  /** @param {!proto.products.Query} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.QuoteResponse.deserializeBinary
 );
 
 /**
@@ -208,17 +210,17 @@ const methodInfo_QuoteService_GetQuotes = new grpc.web.AbstractClientBase.Method
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.getQuotes = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/GetQuotes",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetQuotes,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/GetQuotes",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetQuotes,
+    callback
+  );
 };
 
 /**
@@ -230,15 +232,15 @@ proto.quotes.QuoteServiceClient.prototype.getQuotes = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.getQuotes = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/GetQuotes",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetQuotes
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/GetQuotes",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetQuotes
+  );
 };
 
 /**
@@ -248,15 +250,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.getQuotes = function(
  *   !proto.quotes.Quote>}
  */
 const methodDescriptor_QuoteService_GetQuoteByID = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/GetQuoteByID",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.QuoteParams,
-	proto.quotes.Quote,
-	/** @param {!proto.quotes.QuoteParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Quote.deserializeBinary
+  "/quotes.QuoteService/GetQuoteByID",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.QuoteParams,
+  proto.quotes.Quote,
+  /** @param {!proto.quotes.QuoteParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Quote.deserializeBinary
 );
 
 /**
@@ -266,12 +268,12 @@ const methodDescriptor_QuoteService_GetQuoteByID = new grpc.web.MethodDescriptor
  *   !proto.quotes.Quote>}
  */
 const methodInfo_QuoteService_GetQuoteByID = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Quote,
-	/** @param {!proto.quotes.QuoteParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Quote.deserializeBinary
+  proto.quotes.Quote,
+  /** @param {!proto.quotes.QuoteParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Quote.deserializeBinary
 );
 
 /**
@@ -285,17 +287,17 @@ const methodInfo_QuoteService_GetQuoteByID = new grpc.web.AbstractClientBase.Met
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.getQuoteByID = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/GetQuoteByID",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetQuoteByID,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/GetQuoteByID",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetQuoteByID,
+    callback
+  );
 };
 
 /**
@@ -307,15 +309,15 @@ proto.quotes.QuoteServiceClient.prototype.getQuoteByID = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.getQuoteByID = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/GetQuoteByID",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetQuoteByID
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/GetQuoteByID",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetQuoteByID
+  );
 };
 
 /**
@@ -325,15 +327,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.getQuoteByID = function(
  *   !proto.quotes.Response>}
  */
 const methodDescriptor_QuoteService_DeleteQuote = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/DeleteQuote",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.QuoteParams,
-	proto.quotes.Response,
-	/** @param {!proto.quotes.QuoteParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  "/quotes.QuoteService/DeleteQuote",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.QuoteParams,
+  proto.quotes.Response,
+  /** @param {!proto.quotes.QuoteParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -343,12 +345,12 @@ const methodDescriptor_QuoteService_DeleteQuote = new grpc.web.MethodDescriptor(
  *   !proto.quotes.Response>}
  */
 const methodInfo_QuoteService_DeleteQuote = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Response,
-	/** @param {!proto.quotes.QuoteParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  proto.quotes.Response,
+  /** @param {!proto.quotes.QuoteParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -362,17 +364,17 @@ const methodInfo_QuoteService_DeleteQuote = new grpc.web.AbstractClientBase.Meth
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.deleteQuote = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/DeleteQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_DeleteQuote,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/DeleteQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_DeleteQuote,
+    callback
+  );
 };
 
 /**
@@ -384,15 +386,15 @@ proto.quotes.QuoteServiceClient.prototype.deleteQuote = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.deleteQuote = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/DeleteQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_DeleteQuote
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/DeleteQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_DeleteQuote
+  );
 };
 
 /**
@@ -402,15 +404,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.deleteQuote = function(
  *   !proto.quotes.Response>}
  */
 const methodDescriptor_QuoteService_EditQuote = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/EditQuote",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.Quote,
-	proto.quotes.Response,
-	/** @param {!proto.quotes.Quote} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  "/quotes.QuoteService/EditQuote",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.Quote,
+  proto.quotes.Response,
+  /** @param {!proto.quotes.Quote} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -420,12 +422,12 @@ const methodDescriptor_QuoteService_EditQuote = new grpc.web.MethodDescriptor(
  *   !proto.quotes.Response>}
  */
 const methodInfo_QuoteService_EditQuote = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Response,
-	/** @param {!proto.quotes.Quote} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  proto.quotes.Response,
+  /** @param {!proto.quotes.Quote} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -439,17 +441,17 @@ const methodInfo_QuoteService_EditQuote = new grpc.web.AbstractClientBase.Method
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.editQuote = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/EditQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_EditQuote,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/EditQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_EditQuote,
+    callback
+  );
 };
 
 /**
@@ -461,15 +463,15 @@ proto.quotes.QuoteServiceClient.prototype.editQuote = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.editQuote = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/EditQuote",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_EditQuote
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/EditQuote",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_EditQuote
+  );
 };
 
 /**
@@ -479,15 +481,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.editQuote = function(
  *   !proto.quotes.Response>}
  */
 const methodDescriptor_QuoteService_ChangeShippingStatus = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/ChangeShippingStatus",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.StatusParams,
-	proto.quotes.Response,
-	/** @param {!proto.quotes.StatusParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  "/quotes.QuoteService/ChangeShippingStatus",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.StatusParams,
+  proto.quotes.Response,
+  /** @param {!proto.quotes.StatusParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -497,12 +499,12 @@ const methodDescriptor_QuoteService_ChangeShippingStatus = new grpc.web.MethodDe
  *   !proto.quotes.Response>}
  */
 const methodInfo_QuoteService_ChangeShippingStatus = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Response,
-	/** @param {!proto.quotes.StatusParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Response.deserializeBinary
+  proto.quotes.Response,
+  /** @param {!proto.quotes.StatusParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Response.deserializeBinary
 );
 
 /**
@@ -516,17 +518,17 @@ const methodInfo_QuoteService_ChangeShippingStatus = new grpc.web.AbstractClient
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.changeShippingStatus = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_ChangeShippingStatus,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_ChangeShippingStatus,
+    callback
+  );
 };
 
 /**
@@ -538,15 +540,15 @@ proto.quotes.QuoteServiceClient.prototype.changeShippingStatus = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.changeShippingStatus = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_ChangeShippingStatus
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/ChangeShippingStatus",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_ChangeShippingStatus
+  );
 };
 
 /**
@@ -556,15 +558,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.changeShippingStatus = function
  *   !proto.quotes.Stats>}
  */
 const methodDescriptor_QuoteService_GetStatistics = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/GetStatistics",
-	grpc.web.MethodType.UNARY,
-	products_products_pb.Query,
-	proto.quotes.Stats,
-	/** @param {!proto.products.Query} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Stats.deserializeBinary
+  "/quotes.QuoteService/GetStatistics",
+  grpc.web.MethodType.UNARY,
+  products_products_pb.Query,
+  proto.quotes.Stats,
+  /** @param {!proto.products.Query} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Stats.deserializeBinary
 );
 
 /**
@@ -574,12 +576,12 @@ const methodDescriptor_QuoteService_GetStatistics = new grpc.web.MethodDescripto
  *   !proto.quotes.Stats>}
  */
 const methodInfo_QuoteService_GetStatistics = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Stats,
-	/** @param {!proto.products.Query} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Stats.deserializeBinary
+  proto.quotes.Stats,
+  /** @param {!proto.products.Query} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Stats.deserializeBinary
 );
 
 /**
@@ -593,17 +595,17 @@ const methodInfo_QuoteService_GetStatistics = new grpc.web.AbstractClientBase.Me
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.getStatistics = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/GetStatistics",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetStatistics,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/GetStatistics",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetStatistics,
+    callback
+  );
 };
 
 /**
@@ -615,15 +617,15 @@ proto.quotes.QuoteServiceClient.prototype.getStatistics = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.getStatistics = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/GetStatistics",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetStatistics
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/GetStatistics",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetStatistics
+  );
 };
 
 /**
@@ -633,15 +635,15 @@ proto.quotes.QuoteServicePromiseClient.prototype.getStatistics = function(
  *   !proto.quotes.Distance>}
  */
 const methodDescriptor_QuoteService_GetDistance = new grpc.web.MethodDescriptor(
-	"/quotes.QuoteService/GetDistance",
-	grpc.web.MethodType.UNARY,
-	proto.quotes.DistanceParams,
-	proto.quotes.Distance,
-	/** @param {!proto.quotes.DistanceParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Distance.deserializeBinary
+  "/quotes.QuoteService/GetDistance",
+  grpc.web.MethodType.UNARY,
+  proto.quotes.DistanceParams,
+  proto.quotes.Distance,
+  /** @param {!proto.quotes.DistanceParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Distance.deserializeBinary
 );
 
 /**
@@ -651,12 +653,12 @@ const methodDescriptor_QuoteService_GetDistance = new grpc.web.MethodDescriptor(
  *   !proto.quotes.Distance>}
  */
 const methodInfo_QuoteService_GetDistance = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.quotes.Distance,
-	/** @param {!proto.quotes.DistanceParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.quotes.Distance.deserializeBinary
+  proto.quotes.Distance,
+  /** @param {!proto.quotes.DistanceParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.quotes.Distance.deserializeBinary
 );
 
 /**
@@ -670,17 +672,17 @@ const methodInfo_QuoteService_GetDistance = new grpc.web.AbstractClientBase.Meth
  *     The XHR Node Readable Stream
  */
 proto.quotes.QuoteServiceClient.prototype.getDistance = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/quotes.QuoteService/GetDistance",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetDistance,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/quotes.QuoteService/GetDistance",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetDistance,
+    callback
+  );
 };
 
 /**
@@ -692,15 +694,15 @@ proto.quotes.QuoteServiceClient.prototype.getDistance = function(
  *     A native promise that resolves to the response
  */
 proto.quotes.QuoteServicePromiseClient.prototype.getDistance = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/quotes.QuoteService/GetDistance",
-		request,
-		metadata || {},
-		methodDescriptor_QuoteService_GetDistance
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/quotes.QuoteService/GetDistance",
+    request,
+    metadata || {},
+    methodDescriptor_QuoteService_GetDistance
+  );
 };
 
 module.exports = proto.quotes;

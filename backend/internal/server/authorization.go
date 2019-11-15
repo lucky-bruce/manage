@@ -8,6 +8,7 @@ import (
 	"github.com/Beaxhem/manage/backend/internal/logger"
 	"github.com/Beaxhem/manage/backend/internal/quotes"
 	"github.com/Beaxhem/manage/backend/internal/utils"
+	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -100,4 +101,41 @@ func (s *Server) GetStats(ctx context.Context, params *authorization.Params) (*a
 	}
 
 	return &statts, nil
+}
+
+func (s *Server) ChangePassword(ctx context.Context, params *authorization.PasswordChange) (*authorization.Response, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "users")
+
+	var user authorization.User
+
+	err := store.GetElement(&user, bson.M{"id": params.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(params.Old))
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	hpass, err := bcrypt.GenerateFromPassword([]byte(params.New), bcrypt.DefaultCost)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	user.Password = string(hpass)
+
+	err = store.C.Update(bson.M{"id": params.Id}, user)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	return new(authorization.Response), nil
 }

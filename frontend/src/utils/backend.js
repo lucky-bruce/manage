@@ -1,222 +1,232 @@
 import { GetClients } from "../clients";
 import {
-	QuoteParams,
-	StatusParams,
-	DistanceParams
+  QuoteParams,
+  StatusParams,
+  DistanceParams
 } from "../proto/quotes/quotes_pb";
 import { ProductParams, Query, Image } from "../proto/products/products_pb";
 import { Params as DbParams } from "../proto/db/db_pb";
 import { Params as ServiceParams } from "../proto/services/services_pb";
-import { Params as AuthorizationParams } from "../proto/authorization/authorization_pb";
+import {
+  Params as AuthorizationParams,
+  PasswordChange
+} from "../proto/authorization/authorization_pb";
 import { Params as LandingParams } from "../proto/landing/landing_pb";
 
 const client = GetClients();
 
 export const newQuote = (quote, callback) => {
-	client.quotes.newQuote(quote, {}, (err, res) => callback(err, res));
+  client.quotes.newQuote(quote, {}, (err, res) => callback(err, res));
 };
 
 export function GetQuote(id, callback) {
-	let params = new QuoteParams();
-	params.setId(id);
+  let params = new QuoteParams();
+  params.setId(id);
 
-	client.quotes.getQuoteByID(params, {}, (err, res) => {
-		callback(err, res);
-	});
+  client.quotes.getQuoteByID(params, {}, (err, res) => {
+    callback(err, res);
+  });
 }
 
 export function changeShippingStatus(id, callback) {
-	let params = new StatusParams();
-	params.setId(id);
+  let params = new StatusParams();
+  params.setId(id);
 
-	client.quotes.changeShippingStatus(params, {}, (err, res) => {
-		callback(err, res);
-	});
+  client.quotes.changeShippingStatus(params, {}, (err, res) => {
+    callback(err, res);
+  });
 }
 
 export const getDistance = (from, to, callback) => {
-	let params = new DistanceParams();
+  let params = new DistanceParams();
 
-	params.setFrom(from);
-	params.setTo(to);
+  params.setFrom(from);
+  params.setTo(to);
 
-	client.quotes.getDistance(params, {}, (err, res) => callback(err, res));
+  client.quotes.getDistance(params, {}, (err, res) => callback(err, res));
 };
 
 export const GetProductByID = (id, callback) => {
-	let params = new ProductParams();
-	params.setId(id);
+  let params = new ProductParams();
+  params.setId(id);
 
-	client.products.getProductByID(params, {}, (err, res) =>
-		callback(err, res)
-	);
+  client.products.getProductByID(params, {}, (err, res) => callback(err, res));
 };
 
 export const editProduct = (prod, callback) => {
-	client.products.editProduct(prod, {}, (err, res) => callback(err, res));
+  client.products.editProduct(prod, {}, (err, res) => callback(err, res));
 };
 
 export const getServices = (q, callback) => {
-	let params = new ServiceParams();
+  let params = new ServiceParams();
 
-	let query = new Query();
-	query.setQuerystring(q);
-	params.setQuery(query);
+  let query = new Query();
+  query.setQuerystring(q);
+  params.setQuery(query);
 
-	client.services.getServices(params, {}, (err, res) => callback(err, res));
+  client.services.getServices(params, {}, (err, res) => callback(err, res));
 };
 
 export const getUser = (id, callback) => {
-	let params = new AuthorizationParams();
+  let params = new AuthorizationParams();
 
-	params.setId(id);
+  params.setId(id);
 
-	client.auth.getUser(params, {}, (err, res) => callback(err, res));
+  client.auth.getUser(params, {}, (err, res) => callback(err, res));
+};
+
+export const changePassword = (obj, callback) => {
+  let params = new PasswordChange();
+  params.setId(obj.id);
+  params.setOld(obj.old);
+  params.setNew(obj.new);
+
+  client.auth.changePassword(params, {}, callback);
 };
 
 export const getUniqueFields = (field, collection, callback) => {
-	let params = new DbParams();
+  let params = new DbParams();
 
-	params.setField(field);
-	params.setCollection(collection);
+  params.setField(field);
+  params.setCollection(collection);
 
-	client.db.getUnique(params, {}, (err, res) => callback(err, res));
+  client.db.getUnique(params, {}, (err, res) => callback(err, res));
 };
 
 export const newTeam = (team, callback) => {
-	client.landing.newTeam(team, {}, (err, res) => callback(err, res));
+  client.landing.newTeam(team, {}, (err, res) => callback(err, res));
 };
 
 export const getTeams = callback => {
-	let params = new LandingParams();
-	client.landing.getTeams(params, {}, (err, res) => callback(err, res));
+  let params = new LandingParams();
+  client.landing.getTeams(params, {}, (err, res) => callback(err, res));
 };
 
 export const deleteTeam = (name, callback) => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	params.setName(name);
+  params.setName(name);
 
-	client.landing.deleteTeam(params, {}, callback);
+  client.landing.deleteTeam(params, {}, callback);
 };
 
 export const getPortfolios = (params, callback) => {
-	client.landing.getPortfolios(
-		params ? params : new LandingParams(),
-		{},
-		callback
-	);
+  client.landing.getPortfolios(
+    params ? params : new LandingParams(),
+    {},
+    callback
+  );
 };
 
 export const newPortfolio = (portfolio, callback) => {
-	client.landing.newPortfolio(portfolio, {}, callback);
+  client.landing.newPortfolio(portfolio, {}, callback);
 };
 
 export const deletePortfolio = (id, callback) => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	params.setId(id);
+  params.setId(id);
 
-	client.landing.deletePortfolio(params, {}, callback);
+  client.landing.deletePortfolio(params, {}, callback);
 };
 
 export const newMix = (mix, callback) => {
-	client.landing.newMix(mix, {}, callback);
+  client.landing.newMix(mix, {}, callback);
 };
 
 export const getMixes = (params, callback) => {
-	client.landing.getMixes(params || new LandingParams(), {}, callback);
+  client.landing.getMixes(params || new LandingParams(), {}, callback);
 };
 
 export const deleteMix = (title, callback) => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	params.setName(title);
+  params.setName(title);
 
-	client.landing.deleteMix(params, {}, callback);
+  client.landing.deleteMix(params, {}, callback);
 };
 
 export const getBasic = callback => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	client.landing.getBasic(params, {}, callback);
+  client.landing.getBasic(params, {}, callback);
 };
 
 export const newBasic = (basic, callback) => {
-	client.landing.newBasic(basic, {}, callback);
+  client.landing.newBasic(basic, {}, callback);
 };
 
 export const newSector = (sector, callback) => {
-	client.landing.newSector(sector, {}, callback);
+  client.landing.newSector(sector, {}, callback);
 };
 
 export const getSectors = callback => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	client.landing.getSectors(params, {}, callback);
+  client.landing.getSectors(params, {}, callback);
 };
 
 export const deleteSector = (title, callback) => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	params.setName(title);
+  params.setName(title);
 
-	client.landing.deleteSector(params, {}, callback);
+  client.landing.deleteSector(params, {}, callback);
 };
 
 export const getNews = callback => {
-	client.landing.getNews(new LandingParams(), {}, callback);
+  client.landing.getNews(new LandingParams(), {}, callback);
 };
 
 export const newNews = (news, callback) => {
-	client.landing.newNews(news, {}, callback);
+  client.landing.newNews(news, {}, callback);
 };
 
 export const deleteNews = (title, callback) => {
-	let params = new LandingParams();
+  let params = new LandingParams();
 
-	params.setName(title);
+  params.setName(title);
 
-	client.landing.deleteNews(params, {}, callback);
+  client.landing.deleteNews(params, {}, callback);
 };
 
 export function readFileAsync(file) {
-	return new Promise((resolve, reject) => {
-		let reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
 
-		reader.onload = e => {
-			resolve(e.target.result);
-		};
+    reader.onload = e => {
+      resolve(e.target.result);
+    };
 
-		reader.onerror = reject;
+    reader.onerror = reject;
 
-		reader.readAsDataURL(file);
-	});
+    reader.readAsDataURL(file);
+  });
 }
 
 export function processFiles(files) {
-	return new Promise(async res => {
-		let urls = [];
-		for (let file of files) {
-			let image = new Image();
-			let exts = file.name.split(".");
+  return new Promise(async res => {
+    let urls = [];
+    for (let file of files) {
+      let image = new Image();
+      let exts = file.name.split(".");
 
-			image.setExt(`.${exts[exts.length - 1]}`);
-			await new Promise(res => {
-				let content = readFileAsync(file);
-				res(content);
-			}).then(content => image.setImage(content));
+      image.setExt(`.${exts[exts.length - 1]}`);
+      await new Promise(res => {
+        let content = readFileAsync(file);
+        res(content);
+      }).then(content => image.setImage(content));
 
-			await new Promise(resolve => {
-				client.products.uploadImage(image, {}, (err, res) => {
-					if (err) {
-						console.log(err);
-					} else {
-						resolve(res.toObject().url);
-					}
-				});
-			}).then(url => urls.push(url));
-		}
-		res(urls);
-	});
+      await new Promise(resolve => {
+        client.products.uploadImage(image, {}, (err, res) => {
+          if (err) {
+            console.log(err);
+          } else {
+            resolve(res.toObject().url);
+          }
+        });
+      }).then(url => urls.push(url));
+    }
+    res(urls);
+  });
 }

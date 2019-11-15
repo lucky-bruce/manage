@@ -54,13 +54,14 @@ function Account() {
             <A className="dropdown-item" href="/profile">
               My profile
             </A>
-            <A className="dropdown-item" href="/logout">
-              Log out
+            <A className="dropdown-item" href="/profile/settings">
+              Settings
             </A>
 
             <div className="dropdown-divider"></div>
-            <A className="dropdown-item" href="#">
-              Something else here
+
+            <A className="dropdown-item" href="/logout">
+              Log out
             </A>
           </div>
         </div>

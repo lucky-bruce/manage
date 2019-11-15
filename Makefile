@@ -26,3 +26,5 @@ envoy_start:
 							sudo docker run  -p 8080:8080 --net=host  envoy:v1
 							@echo "Envoy started"
 
+img_server_start:
+							cd image_server && flask run -h 0.0.0.0 -p 8081

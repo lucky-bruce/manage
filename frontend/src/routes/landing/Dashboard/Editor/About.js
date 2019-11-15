@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
-import Upload from "./Upload";
+import Upload from "../../../../components/upload/Upload";
 import { mixInput, GetGRPCMix } from "../../../../utils/grpc";
 import Img from "../../../../components/img/index";
 import { newMix, getMixes } from "../../../../utils/backend";

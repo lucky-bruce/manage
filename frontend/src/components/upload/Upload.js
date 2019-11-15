@@ -1,6 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone";
-import { processFiles } from "../../../../utils/backend";
+import { processFiles } from "../../utils/backend";
 
 export default class Avatar extends React.Component {
   constructor() {

@@ -10,7 +10,7 @@ import {
 import Rating from "@material-ui/lab/Rating";
 import { Modal } from "antd";
 
-import Upload from "./Upload";
+import Upload from "../../../../components/upload/Upload";
 import { teamInput, GetGRPCTeam } from "../../../../utils/grpc";
 import { newTeam, getTeams } from "../../../../utils/backend";
 import TeamTable from "../../../../components/landing/team/TeamTable";

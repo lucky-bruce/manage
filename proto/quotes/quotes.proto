@@ -61,6 +61,10 @@ message Stats {
 message QuoteProduct {
   products.Product product = 1;
   uint32 qty = 2;
+  float sizel = 3;
+  float sizew = 4;
+  float sizeh = 5;
+  float sizer = 6;
 }
 
 message ServiceInQuote {

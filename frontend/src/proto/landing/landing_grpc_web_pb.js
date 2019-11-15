@@ -22,29 +22,29 @@ const proto = require("./landing_pb.js");
  * @final
  */
 proto.LandingServiceClient = function(hostname, credentials, options) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -56,29 +56,29 @@ proto.LandingServiceClient = function(hostname, credentials, options) {
  * @final
  */
 proto.LandingServicePromiseClient = function(hostname, credentials, options) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -88,15 +88,15 @@ proto.LandingServicePromiseClient = function(hostname, credentials, options) {
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewTeam = new grpc.web.MethodDescriptor(
-	"/LandingService/NewTeam",
-	grpc.web.MethodType.UNARY,
-	proto.Team,
-	proto.Response,
-	/** @param {!proto.Team} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewTeam",
+  grpc.web.MethodType.UNARY,
+  proto.Team,
+  proto.Response,
+  /** @param {!proto.Team} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -106,12 +106,12 @@ const methodDescriptor_LandingService_NewTeam = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewTeam = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Team} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Team} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -125,17 +125,17 @@ const methodInfo_LandingService_NewTeam = new grpc.web.AbstractClientBase.Method
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newTeam = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewTeam",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewTeam,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewTeam",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewTeam,
+    callback
+  );
 };
 
 /**
@@ -147,15 +147,15 @@ proto.LandingServiceClient.prototype.newTeam = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newTeam = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewTeam",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewTeam
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewTeam",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewTeam
+  );
 };
 
 /**
@@ -165,15 +165,15 @@ proto.LandingServicePromiseClient.prototype.newTeam = function(
  *   !proto.Teams>}
  */
 const methodDescriptor_LandingService_GetTeams = new grpc.web.MethodDescriptor(
-	"/LandingService/GetTeams",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Teams,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Teams.deserializeBinary
+  "/LandingService/GetTeams",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Teams,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Teams.deserializeBinary
 );
 
 /**
@@ -183,12 +183,12 @@ const methodDescriptor_LandingService_GetTeams = new grpc.web.MethodDescriptor(
  *   !proto.Teams>}
  */
 const methodInfo_LandingService_GetTeams = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Teams,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Teams.deserializeBinary
+  proto.Teams,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Teams.deserializeBinary
 );
 
 /**
@@ -202,17 +202,17 @@ const methodInfo_LandingService_GetTeams = new grpc.web.AbstractClientBase.Metho
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getTeams = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetTeams",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetTeams,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetTeams",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetTeams,
+    callback
+  );
 };
 
 /**
@@ -224,15 +224,15 @@ proto.LandingServiceClient.prototype.getTeams = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getTeams = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetTeams",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetTeams
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetTeams",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetTeams
+  );
 };
 
 /**
@@ -242,15 +242,15 @@ proto.LandingServicePromiseClient.prototype.getTeams = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_DeleteTeam = new grpc.web.MethodDescriptor(
-	"/LandingService/DeleteTeam",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/DeleteTeam",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -260,12 +260,12 @@ const methodDescriptor_LandingService_DeleteTeam = new grpc.web.MethodDescriptor
  *   !proto.Response>}
  */
 const methodInfo_LandingService_DeleteTeam = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -279,17 +279,17 @@ const methodInfo_LandingService_DeleteTeam = new grpc.web.AbstractClientBase.Met
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.deleteTeam = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/DeleteTeam",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteTeam,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/DeleteTeam",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteTeam,
+    callback
+  );
 };
 
 /**
@@ -301,15 +301,15 @@ proto.LandingServiceClient.prototype.deleteTeam = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.deleteTeam = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/DeleteTeam",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteTeam
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/DeleteTeam",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteTeam
+  );
 };
 
 /**
@@ -319,15 +319,15 @@ proto.LandingServicePromiseClient.prototype.deleteTeam = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewPortfolio = new grpc.web.MethodDescriptor(
-	"/LandingService/NewPortfolio",
-	grpc.web.MethodType.UNARY,
-	proto.Portfolio,
-	proto.Response,
-	/** @param {!proto.Portfolio} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewPortfolio",
+  grpc.web.MethodType.UNARY,
+  proto.Portfolio,
+  proto.Response,
+  /** @param {!proto.Portfolio} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -337,12 +337,12 @@ const methodDescriptor_LandingService_NewPortfolio = new grpc.web.MethodDescript
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewPortfolio = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Portfolio} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Portfolio} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -356,17 +356,17 @@ const methodInfo_LandingService_NewPortfolio = new grpc.web.AbstractClientBase.M
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newPortfolio = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewPortfolio",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewPortfolio,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewPortfolio",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewPortfolio,
+    callback
+  );
 };
 
 /**
@@ -378,15 +378,15 @@ proto.LandingServiceClient.prototype.newPortfolio = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newPortfolio = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewPortfolio",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewPortfolio
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewPortfolio",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewPortfolio
+  );
 };
 
 /**
@@ -396,15 +396,15 @@ proto.LandingServicePromiseClient.prototype.newPortfolio = function(
  *   !proto.Portfolios>}
  */
 const methodDescriptor_LandingService_GetPortfolios = new grpc.web.MethodDescriptor(
-	"/LandingService/GetPortfolios",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Portfolios,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Portfolios.deserializeBinary
+  "/LandingService/GetPortfolios",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Portfolios,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Portfolios.deserializeBinary
 );
 
 /**
@@ -414,12 +414,12 @@ const methodDescriptor_LandingService_GetPortfolios = new grpc.web.MethodDescrip
  *   !proto.Portfolios>}
  */
 const methodInfo_LandingService_GetPortfolios = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Portfolios,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Portfolios.deserializeBinary
+  proto.Portfolios,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Portfolios.deserializeBinary
 );
 
 /**
@@ -433,17 +433,17 @@ const methodInfo_LandingService_GetPortfolios = new grpc.web.AbstractClientBase.
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getPortfolios = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetPortfolios",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetPortfolios,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetPortfolios",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetPortfolios,
+    callback
+  );
 };
 
 /**
@@ -455,15 +455,15 @@ proto.LandingServiceClient.prototype.getPortfolios = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getPortfolios = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetPortfolios",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetPortfolios
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetPortfolios",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetPortfolios
+  );
 };
 
 /**
@@ -473,15 +473,15 @@ proto.LandingServicePromiseClient.prototype.getPortfolios = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_DeletePortfolio = new grpc.web.MethodDescriptor(
-	"/LandingService/DeletePortfolio",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/DeletePortfolio",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -491,12 +491,12 @@ const methodDescriptor_LandingService_DeletePortfolio = new grpc.web.MethodDescr
  *   !proto.Response>}
  */
 const methodInfo_LandingService_DeletePortfolio = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -510,17 +510,17 @@ const methodInfo_LandingService_DeletePortfolio = new grpc.web.AbstractClientBas
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.deletePortfolio = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/DeletePortfolio",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeletePortfolio,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/DeletePortfolio",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeletePortfolio,
+    callback
+  );
 };
 
 /**
@@ -532,15 +532,15 @@ proto.LandingServiceClient.prototype.deletePortfolio = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.deletePortfolio = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/DeletePortfolio",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeletePortfolio
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/DeletePortfolio",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeletePortfolio
+  );
 };
 
 /**
@@ -550,15 +550,15 @@ proto.LandingServicePromiseClient.prototype.deletePortfolio = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewMix = new grpc.web.MethodDescriptor(
-	"/LandingService/NewMix",
-	grpc.web.MethodType.UNARY,
-	proto.Mix,
-	proto.Response,
-	/** @param {!proto.Mix} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewMix",
+  grpc.web.MethodType.UNARY,
+  proto.Mix,
+  proto.Response,
+  /** @param {!proto.Mix} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -568,12 +568,12 @@ const methodDescriptor_LandingService_NewMix = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewMix = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Mix} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Mix} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -587,17 +587,17 @@ const methodInfo_LandingService_NewMix = new grpc.web.AbstractClientBase.MethodI
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newMix = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewMix",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewMix,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewMix",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewMix,
+    callback
+  );
 };
 
 /**
@@ -609,15 +609,15 @@ proto.LandingServiceClient.prototype.newMix = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newMix = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewMix",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewMix
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewMix",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewMix
+  );
 };
 
 /**
@@ -627,15 +627,15 @@ proto.LandingServicePromiseClient.prototype.newMix = function(
  *   !proto.Mixes>}
  */
 const methodDescriptor_LandingService_GetMixes = new grpc.web.MethodDescriptor(
-	"/LandingService/GetMixes",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Mixes,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Mixes.deserializeBinary
+  "/LandingService/GetMixes",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Mixes,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Mixes.deserializeBinary
 );
 
 /**
@@ -645,12 +645,12 @@ const methodDescriptor_LandingService_GetMixes = new grpc.web.MethodDescriptor(
  *   !proto.Mixes>}
  */
 const methodInfo_LandingService_GetMixes = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Mixes,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Mixes.deserializeBinary
+  proto.Mixes,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Mixes.deserializeBinary
 );
 
 /**
@@ -664,17 +664,17 @@ const methodInfo_LandingService_GetMixes = new grpc.web.AbstractClientBase.Metho
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getMixes = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetMixes",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetMixes,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetMixes",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetMixes,
+    callback
+  );
 };
 
 /**
@@ -686,15 +686,15 @@ proto.LandingServiceClient.prototype.getMixes = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getMixes = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetMixes",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetMixes
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetMixes",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetMixes
+  );
 };
 
 /**
@@ -704,15 +704,15 @@ proto.LandingServicePromiseClient.prototype.getMixes = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_DeleteMix = new grpc.web.MethodDescriptor(
-	"/LandingService/DeleteMix",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/DeleteMix",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -722,12 +722,12 @@ const methodDescriptor_LandingService_DeleteMix = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_DeleteMix = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -741,17 +741,17 @@ const methodInfo_LandingService_DeleteMix = new grpc.web.AbstractClientBase.Meth
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.deleteMix = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/DeleteMix",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteMix,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/DeleteMix",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteMix,
+    callback
+  );
 };
 
 /**
@@ -763,15 +763,15 @@ proto.LandingServiceClient.prototype.deleteMix = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.deleteMix = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/DeleteMix",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteMix
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/DeleteMix",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteMix
+  );
 };
 
 /**
@@ -781,15 +781,15 @@ proto.LandingServicePromiseClient.prototype.deleteMix = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewBasic = new grpc.web.MethodDescriptor(
-	"/LandingService/NewBasic",
-	grpc.web.MethodType.UNARY,
-	proto.Basic,
-	proto.Response,
-	/** @param {!proto.Basic} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewBasic",
+  grpc.web.MethodType.UNARY,
+  proto.Basic,
+  proto.Response,
+  /** @param {!proto.Basic} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -799,12 +799,12 @@ const methodDescriptor_LandingService_NewBasic = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewBasic = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Basic} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Basic} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -818,17 +818,17 @@ const methodInfo_LandingService_NewBasic = new grpc.web.AbstractClientBase.Metho
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newBasic = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewBasic",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewBasic,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewBasic",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewBasic,
+    callback
+  );
 };
 
 /**
@@ -840,15 +840,15 @@ proto.LandingServiceClient.prototype.newBasic = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newBasic = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewBasic",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewBasic
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewBasic",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewBasic
+  );
 };
 
 /**
@@ -858,15 +858,15 @@ proto.LandingServicePromiseClient.prototype.newBasic = function(
  *   !proto.Basic>}
  */
 const methodDescriptor_LandingService_GetBasic = new grpc.web.MethodDescriptor(
-	"/LandingService/GetBasic",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Basic,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Basic.deserializeBinary
+  "/LandingService/GetBasic",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Basic,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Basic.deserializeBinary
 );
 
 /**
@@ -876,12 +876,12 @@ const methodDescriptor_LandingService_GetBasic = new grpc.web.MethodDescriptor(
  *   !proto.Basic>}
  */
 const methodInfo_LandingService_GetBasic = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Basic,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Basic.deserializeBinary
+  proto.Basic,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Basic.deserializeBinary
 );
 
 /**
@@ -895,17 +895,17 @@ const methodInfo_LandingService_GetBasic = new grpc.web.AbstractClientBase.Metho
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getBasic = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetBasic",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetBasic,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetBasic",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetBasic,
+    callback
+  );
 };
 
 /**
@@ -917,15 +917,15 @@ proto.LandingServiceClient.prototype.getBasic = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getBasic = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetBasic",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetBasic
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetBasic",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetBasic
+  );
 };
 
 /**
@@ -935,15 +935,15 @@ proto.LandingServicePromiseClient.prototype.getBasic = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewSector = new grpc.web.MethodDescriptor(
-	"/LandingService/NewSector",
-	grpc.web.MethodType.UNARY,
-	proto.Sector,
-	proto.Response,
-	/** @param {!proto.Sector} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewSector",
+  grpc.web.MethodType.UNARY,
+  proto.Sector,
+  proto.Response,
+  /** @param {!proto.Sector} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -953,12 +953,12 @@ const methodDescriptor_LandingService_NewSector = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewSector = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Sector} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Sector} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -972,17 +972,17 @@ const methodInfo_LandingService_NewSector = new grpc.web.AbstractClientBase.Meth
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newSector = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewSector",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewSector,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewSector",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewSector,
+    callback
+  );
 };
 
 /**
@@ -994,15 +994,15 @@ proto.LandingServiceClient.prototype.newSector = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newSector = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewSector",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewSector
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewSector",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewSector
+  );
 };
 
 /**
@@ -1012,15 +1012,15 @@ proto.LandingServicePromiseClient.prototype.newSector = function(
  *   !proto.Sectors>}
  */
 const methodDescriptor_LandingService_GetSectors = new grpc.web.MethodDescriptor(
-	"/LandingService/GetSectors",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Sectors,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Sectors.deserializeBinary
+  "/LandingService/GetSectors",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Sectors,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Sectors.deserializeBinary
 );
 
 /**
@@ -1030,12 +1030,12 @@ const methodDescriptor_LandingService_GetSectors = new grpc.web.MethodDescriptor
  *   !proto.Sectors>}
  */
 const methodInfo_LandingService_GetSectors = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Sectors,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Sectors.deserializeBinary
+  proto.Sectors,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Sectors.deserializeBinary
 );
 
 /**
@@ -1049,17 +1049,17 @@ const methodInfo_LandingService_GetSectors = new grpc.web.AbstractClientBase.Met
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getSectors = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetSectors",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetSectors,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetSectors",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetSectors,
+    callback
+  );
 };
 
 /**
@@ -1071,15 +1071,15 @@ proto.LandingServiceClient.prototype.getSectors = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getSectors = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetSectors",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetSectors
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetSectors",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetSectors
+  );
 };
 
 /**
@@ -1089,15 +1089,15 @@ proto.LandingServicePromiseClient.prototype.getSectors = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_DeleteSector = new grpc.web.MethodDescriptor(
-	"/LandingService/DeleteSector",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/DeleteSector",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1107,12 +1107,12 @@ const methodDescriptor_LandingService_DeleteSector = new grpc.web.MethodDescript
  *   !proto.Response>}
  */
 const methodInfo_LandingService_DeleteSector = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1126,17 +1126,17 @@ const methodInfo_LandingService_DeleteSector = new grpc.web.AbstractClientBase.M
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.deleteSector = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/DeleteSector",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteSector,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/DeleteSector",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteSector,
+    callback
+  );
 };
 
 /**
@@ -1148,15 +1148,15 @@ proto.LandingServiceClient.prototype.deleteSector = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.deleteSector = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/DeleteSector",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteSector
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/DeleteSector",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteSector
+  );
 };
 
 /**
@@ -1166,15 +1166,15 @@ proto.LandingServicePromiseClient.prototype.deleteSector = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_NewNews = new grpc.web.MethodDescriptor(
-	"/LandingService/NewNews",
-	grpc.web.MethodType.UNARY,
-	proto.News,
-	proto.Response,
-	/** @param {!proto.News} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/NewNews",
+  grpc.web.MethodType.UNARY,
+  proto.News,
+  proto.Response,
+  /** @param {!proto.News} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1184,12 +1184,12 @@ const methodDescriptor_LandingService_NewNews = new grpc.web.MethodDescriptor(
  *   !proto.Response>}
  */
 const methodInfo_LandingService_NewNews = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.News} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.News} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1203,17 +1203,17 @@ const methodInfo_LandingService_NewNews = new grpc.web.AbstractClientBase.Method
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.newNews = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/NewNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewNews,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/NewNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewNews,
+    callback
+  );
 };
 
 /**
@@ -1225,15 +1225,15 @@ proto.LandingServiceClient.prototype.newNews = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.newNews = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/NewNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_NewNews
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/NewNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_NewNews
+  );
 };
 
 /**
@@ -1243,15 +1243,15 @@ proto.LandingServicePromiseClient.prototype.newNews = function(
  *   !proto.NewsList>}
  */
 const methodDescriptor_LandingService_GetNews = new grpc.web.MethodDescriptor(
-	"/LandingService/GetNews",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.NewsList,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.NewsList.deserializeBinary
+  "/LandingService/GetNews",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.NewsList,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.NewsList.deserializeBinary
 );
 
 /**
@@ -1261,12 +1261,12 @@ const methodDescriptor_LandingService_GetNews = new grpc.web.MethodDescriptor(
  *   !proto.NewsList>}
  */
 const methodInfo_LandingService_GetNews = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.NewsList,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.NewsList.deserializeBinary
+  proto.NewsList,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.NewsList.deserializeBinary
 );
 
 /**
@@ -1280,17 +1280,17 @@ const methodInfo_LandingService_GetNews = new grpc.web.AbstractClientBase.Method
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.getNews = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/GetNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetNews,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/GetNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetNews,
+    callback
+  );
 };
 
 /**
@@ -1302,15 +1302,15 @@ proto.LandingServiceClient.prototype.getNews = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.getNews = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/GetNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_GetNews
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/GetNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_GetNews
+  );
 };
 
 /**
@@ -1320,15 +1320,15 @@ proto.LandingServicePromiseClient.prototype.getNews = function(
  *   !proto.Response>}
  */
 const methodDescriptor_LandingService_DeleteNews = new grpc.web.MethodDescriptor(
-	"/LandingService/DeleteNews",
-	grpc.web.MethodType.UNARY,
-	proto.Params,
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  "/LandingService/DeleteNews",
+  grpc.web.MethodType.UNARY,
+  proto.Params,
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1338,12 +1338,12 @@ const methodDescriptor_LandingService_DeleteNews = new grpc.web.MethodDescriptor
  *   !proto.Response>}
  */
 const methodInfo_LandingService_DeleteNews = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.Response,
-	/** @param {!proto.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.Response.deserializeBinary
+  proto.Response,
+  /** @param {!proto.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.Response.deserializeBinary
 );
 
 /**
@@ -1357,17 +1357,17 @@ const methodInfo_LandingService_DeleteNews = new grpc.web.AbstractClientBase.Met
  *     The XHR Node Readable Stream
  */
 proto.LandingServiceClient.prototype.deleteNews = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/LandingService/DeleteNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteNews,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/LandingService/DeleteNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteNews,
+    callback
+  );
 };
 
 /**
@@ -1379,15 +1379,15 @@ proto.LandingServiceClient.prototype.deleteNews = function(
  *     A native promise that resolves to the response
  */
 proto.LandingServicePromiseClient.prototype.deleteNews = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/LandingService/DeleteNews",
-		request,
-		metadata || {},
-		methodDescriptor_LandingService_DeleteNews
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/LandingService/DeleteNews",
+    request,
+    metadata || {},
+    methodDescriptor_LandingService_DeleteNews
+  );
 };
 
 module.exports = proto;

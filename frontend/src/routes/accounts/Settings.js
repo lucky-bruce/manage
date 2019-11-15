@@ -1,16 +1,14 @@
 import React from "react";
 import Header from "../../components/header/header";
-import Form from "../../components/quotes/quoteForm/form";
+import Setups from "../../components/profile/settings/Settings";
 
-function QuoteForm() {
+export default function Settings() {
   return (
-    <div className="container-fluid p-0 ">
+    <div className="container-fluid p-0">
       <Header />
       <div className="container mt-3 p-0 shadow pb-5">
-        <Form />
+        <Setups />
       </div>
     </div>
   );
 }
-
-export default QuoteForm;

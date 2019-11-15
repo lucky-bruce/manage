@@ -12,7 +12,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import { Modal } from "antd";
-import Upload from "./Upload";
+import Upload from "../../../../components/upload/Upload";
 import PortfolioTable from "../../../../components/landing/portfolio/PortfolioTable";
 import { portfolioInput, GetGRPCPortfolio } from "../../../../utils/grpc";
 import Img from "../../../../components/img/index";

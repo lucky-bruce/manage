@@ -6,7 +6,9 @@
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
+
 /* eslint-disable */
+
 var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
@@ -76,8 +78,8 @@ proto.Basic.toObject = function(includeInstance, msg) {
     secondaryemail: jspb.Message.getFieldWithDefault(msg, 3, ""),
     primaryphone: jspb.Message.getFieldWithDefault(msg, 4, ""),
     workinghours: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    address1: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    address2: jspb.Message.getFieldWithDefault(msg, 7, "")
+    primaryaddress: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    secondaryaddress: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -136,11 +138,11 @@ proto.Basic.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddress1(value);
+      msg.setPrimaryaddress(value);
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddress2(value);
+      msg.setSecondaryaddress(value);
       break;
     default:
       reader.skipField();
@@ -206,14 +208,14 @@ proto.Basic.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAddress1();
+  f = message.getPrimaryaddress();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
-  f = message.getAddress2();
+  f = message.getSecondaryaddress();
   if (f.length > 0) {
     writer.writeString(
       7,
@@ -299,31 +301,31 @@ proto.Basic.prototype.setWorkinghours = function(value) {
 
 
 /**
- * optional string address1 = 6;
+ * optional string primaryaddress = 6;
  * @return {string}
  */
-proto.Basic.prototype.getAddress1 = function() {
+proto.Basic.prototype.getPrimaryaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /** @param {string} value */
-proto.Basic.prototype.setAddress1 = function(value) {
+proto.Basic.prototype.setPrimaryaddress = function(value) {
   jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string address2 = 7;
+ * optional string secondaryaddress = 7;
  * @return {string}
  */
-proto.Basic.prototype.getAddress2 = function() {
+proto.Basic.prototype.getSecondaryaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
 /** @param {string} value */
-proto.Basic.prototype.setAddress2 = function(value) {
+proto.Basic.prototype.setSecondaryaddress = function(value) {
   jspb.Message.setProto3StringField(this, 7, value);
 };
 

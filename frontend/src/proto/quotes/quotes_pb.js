@@ -1106,7 +1106,11 @@ proto.quotes.QuoteProduct.prototype.toObject = function(opt_includeInstance) {
 proto.quotes.QuoteProduct.toObject = function(includeInstance, msg) {
   var f, obj = {
     product: (f = msg.getProduct()) && products_products_pb.Product.toObject(includeInstance, f),
-    qty: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    qty: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    sizel: +jspb.Message.getFieldWithDefault(msg, 3, 0.0),
+    sizew: +jspb.Message.getFieldWithDefault(msg, 4, 0.0),
+    sizeh: +jspb.Message.getFieldWithDefault(msg, 5, 0.0),
+    sizer: +jspb.Message.getFieldWithDefault(msg, 6, 0.0)
   };
 
   if (includeInstance) {
@@ -1152,6 +1156,22 @@ proto.quotes.QuoteProduct.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readUint32());
       msg.setQty(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setSizel(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setSizew(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setSizeh(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setSizer(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1193,6 +1213,34 @@ proto.quotes.QuoteProduct.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       2,
+      f
+    );
+  }
+  f = message.getSizel();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      3,
+      f
+    );
+  }
+  f = message.getSizew();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      4,
+      f
+    );
+  }
+  f = message.getSizeh();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      5,
+      f
+    );
+  }
+  f = message.getSizer();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      6,
       f
     );
   }
@@ -1241,6 +1289,66 @@ proto.quotes.QuoteProduct.prototype.getQty = function() {
 /** @param {number} value */
 proto.quotes.QuoteProduct.prototype.setQty = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional float sizel = 3;
+ * @return {number}
+ */
+proto.quotes.QuoteProduct.prototype.getSizel = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 3, 0.0));
+};
+
+
+/** @param {number} value */
+proto.quotes.QuoteProduct.prototype.setSizel = function(value) {
+  jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional float sizew = 4;
+ * @return {number}
+ */
+proto.quotes.QuoteProduct.prototype.getSizew = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 4, 0.0));
+};
+
+
+/** @param {number} value */
+proto.quotes.QuoteProduct.prototype.setSizew = function(value) {
+  jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional float sizeh = 5;
+ * @return {number}
+ */
+proto.quotes.QuoteProduct.prototype.getSizeh = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 5, 0.0));
+};
+
+
+/** @param {number} value */
+proto.quotes.QuoteProduct.prototype.setSizeh = function(value) {
+  jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional float sizer = 6;
+ * @return {number}
+ */
+proto.quotes.QuoteProduct.prototype.getSizer = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 6, 0.0));
+};
+
+
+/** @param {number} value */
+proto.quotes.QuoteProduct.prototype.setSizer = function(value) {
+  jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 

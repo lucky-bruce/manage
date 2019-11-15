@@ -1,112 +1,112 @@
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 .nav-link.active {
-	border-bottom: 2px solid white;
+  border-bottom: 2px solid white;
 }
 
 .table-selector {
-	margin: 1rem;
-	cursor: pointer;
+  margin: 1rem;
+  cursor: pointer;
 }
 
 .table-selector.active {
-	border-bottom: 2px solid red;
+  border-bottom: 2px solid red;
 }
 
 .dashboard .table-responsive {
-	max-height: 500px;
+  max-height: 500px;
 }
 
 .form-signin {
-	width: 100%;
-	max-width: 600px;
-	padding: 15px;
+  width: 100%;
+  max-width: 600px;
+  padding: 15px;
 
-	margin: auto;
+  margin: auto;
 }
 
 .tab-indicator {
-	background: lightgrey;
-	border-radius: 50%;
-	color: grey;
-	width: 2.5rem;
-	height: 2.5rem;
-	margin: 1.8rem 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background: lightgrey;
+  border-radius: 50%;
+  color: grey;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 1.8rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tab-indicator:not(:last-child)::after {
-	content: "";
-	position: relative;
-	height: 2.4rem;
-	width: 0.15rem;
-	border-radius: 10px;
-	top: 120%;
-	left: -10%;
-	background: grey;
+  content: "";
+  position: relative;
+  height: 2.4rem;
+  width: 0.15rem;
+  border-radius: 10px;
+  top: 120%;
+  left: -10%;
+  background: grey;
 }
 
 .tab-indicator.active {
-	background: green;
-	color: white;
+  background: green;
+  color: white;
 }
 
 .error {
-	padding: 0.5rem 1rem;
-	color: #d8000c;
-	background-color: #ffd2d2;
-	border-radius: 10px;
+  padding: 0.5rem 1rem;
+  color: #d8000c;
+  background-color: #ffd2d2;
+  border-radius: 10px;
 }
 
 .quote-input {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 .quote-input input {
-	width: 100%;
+  width: 100%;
 }
 
 .inputs .invalid-feedback {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .custom-input {
-	height: calc(1.5em + 0.75rem + 2px);
-	/* padding: 0.375rem 1.75rem 0.375rem 0.75rem; */
-	padding: 0 0.2rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #495057;
-	vertical-align: middle;
-	width: 25%;
+  height: calc(1.5em + 0.75rem + 2px);
+  /* padding: 0.375rem 1.75rem 0.375rem 0.75rem; */
+  padding: 0 0.2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  vertical-align: middle;
+  width: 25%;
 }
 
 @media (max-width: 576px) {
-	.custom-input {
-		padding: 0 0.2rem;
-		width: 100%;
-	}
-	.dashboard .right-border {
-		border-right: 0 !important;
-	}
+  .custom-input {
+    padding: 0 0.2rem;
+    width: 100%;
+  }
+  .dashboard .right-border {
+    border-right: 0 !important;
+  }
 }
 
 .inputs .invalid-feedback {
-	position: absolute;
+  position: absolute;
 }
 
 /* .inputs input {
@@ -114,135 +114,137 @@ code {
 } */
 
 .wrap-slick2 {
-	overflow: hidden;
-	width: 100%;
-	position: relative;
-	margin-right: -15px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  margin-right: -15px;
 }
 
 .no-dots {
-	list-style: none;
+  list-style: none;
 }
 
 .chart tspan {
-	overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .mb-2rem {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .invalid {
-	position: absolute;
-	color: #d8000c;
+  position: absolute;
+  color: #d8000c;
 }
 
 .c-select {
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	border: 1px solid #ced4da;
-	border-radius: 0.25rem;
-	padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem;
 }
 
 .drop {
-	background: white;
-	border: 1px solid #ced4da;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* border: 1px solid #ced4da; */
 }
 
 .drop div {
-	padding: 0.1rem 0.5rem;
+  padding: 0.1rem 0.5rem;
 }
 
-.drop *:not(input):hover {
-	background: blue;
-	color: white;
-	cursor: pointer;
+.drop:not(.no-hover) *:not(input):hover {
+  background: blue;
+  color: white;
+  cursor: pointer;
 }
 
 .income-input {
-	width: 75%;
-	margin: 1rem auto;
-	color: white;
+  width: 75%;
+  margin: 1rem auto;
+  color: white;
 }
 
 .tab-link.active {
-	border-bottom: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .cal {
-	position: relative;
-	right: 50px;
+  position: relative;
+  right: 50px;
 }
 
 .img-thumb {
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 2px;
-	width: 100px;
-	margin: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 2px;
+  width: 100px;
+  margin: 0.5rem;
 }
 .img-thumb:first-child {
-	margin-left: 0 !important;
+  margin-left: 0 !important;
 }
 /* Add a hover effect (blue shadow) */
 .img-thumb:hover {
-	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 table {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 span.active:not(.tab-indicator) {
-	border-bottom: 2px solid red;
+  border-bottom: 2px solid red;
 }
 
 .dashboard .right-border {
-	border-right: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
 }
 
 .react-datepicker.cal {
-	z-index: 1000;
+  z-index: 1000;
 }
 
 .image-drop {
-	background: #e4e4e4;
-	border: 2px dashed #bdbdbd;
+  background: #e4e4e4;
+  border: 2px dashed #bdbdbd;
 }
 
 .product-form-image {
-	width: 50%;
-	padding: 1rem;
+  width: 50%;
+  padding: 1rem;
 }
 
 .disabled {
-	color: #6c757d !important;
+  color: #6c757d !important;
 }
 
 .autocomplete {
-	position: absolute;
-	width: 100%;
-	z-index: 3;
-	background: white;
-	border: 1px solid black;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  background: white;
+  border: 1px solid black;
 }
 
 .autocomplete div {
-	padding: 0.3rem 0.5rem;
+  padding: 0.3rem 0.5rem;
 }
 
 .autocomplete div:hover {
-	background: blue;
-	color: white;
+  background: blue;
+  color: white;
 }
 
 .form-control.product::placeholder {
-	color: white;
+  color: white;
 }
 
 .flex-column {
-	background: transparent !important;
-	box-shadow: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }

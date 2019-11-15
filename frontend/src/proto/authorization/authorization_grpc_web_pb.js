@@ -24,33 +24,33 @@ proto.authorization = require("./authorization_pb.js");
  * @final
  */
 proto.authorization.AuthorizationServiceClient = function(
-	hostname,
-	credentials,
-	options
+  hostname,
+  credentials,
+  options
 ) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -62,33 +62,33 @@ proto.authorization.AuthorizationServiceClient = function(
  * @final
  */
 proto.authorization.AuthorizationServicePromiseClient = function(
-	hostname,
-	credentials,
-	options
+  hostname,
+  credentials,
+  options
 ) {
-	if (!options) options = {};
-	options["format"] = "text";
+  if (!options) options = {};
+  options["format"] = "text";
 
-	/**
-	 * @private @const {!grpc.web.GrpcWebClientBase} The client
-	 */
-	this.client_ = new grpc.web.GrpcWebClientBase(options);
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
 
-	/**
-	 * @private @const {string} The hostname
-	 */
-	this.hostname_ = hostname;
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
 
-	/**
-	 * @private @const {?Object} The credentials to be used to connect
-	 *    to the server
-	 */
-	this.credentials_ = credentials;
+  /**
+   * @private @const {?Object} The credentials to be used to connect
+   *    to the server
+   */
+  this.credentials_ = credentials;
 
-	/**
-	 * @private @const {?Object} Options for the client
-	 */
-	this.options_ = options;
+  /**
+   * @private @const {?Object} Options for the client
+   */
+  this.options_ = options;
 };
 
 /**
@@ -98,15 +98,15 @@ proto.authorization.AuthorizationServicePromiseClient = function(
  *   !proto.authorization.Response>}
  */
 const methodDescriptor_AuthorizationService_Register = new grpc.web.MethodDescriptor(
-	"/authorization.AuthorizationService/Register",
-	grpc.web.MethodType.UNARY,
-	proto.authorization.User,
-	proto.authorization.Response,
-	/** @param {!proto.authorization.User} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  "/authorization.AuthorizationService/Register",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.User,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.User} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -116,12 +116,12 @@ const methodDescriptor_AuthorizationService_Register = new grpc.web.MethodDescri
  *   !proto.authorization.Response>}
  */
 const methodInfo_AuthorizationService_Register = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.authorization.Response,
-	/** @param {!proto.authorization.User} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  proto.authorization.Response,
+  /** @param {!proto.authorization.User} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -135,17 +135,17 @@ const methodInfo_AuthorizationService_Register = new grpc.web.AbstractClientBase
  *     The XHR Node Readable Stream
  */
 proto.authorization.AuthorizationServiceClient.prototype.register = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/authorization.AuthorizationService/Register",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_Register,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/Register",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_Register,
+    callback
+  );
 };
 
 /**
@@ -157,15 +157,15 @@ proto.authorization.AuthorizationServiceClient.prototype.register = function(
  *     A native promise that resolves to the response
  */
 proto.authorization.AuthorizationServicePromiseClient.prototype.register = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/authorization.AuthorizationService/Register",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_Register
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/Register",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_Register
+  );
 };
 
 /**
@@ -175,15 +175,15 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.register = funct
  *   !proto.authorization.Response>}
  */
 const methodDescriptor_AuthorizationService_Login = new grpc.web.MethodDescriptor(
-	"/authorization.AuthorizationService/Login",
-	grpc.web.MethodType.UNARY,
-	proto.authorization.LoginParams,
-	proto.authorization.Response,
-	/** @param {!proto.authorization.LoginParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  "/authorization.AuthorizationService/Login",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.LoginParams,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.LoginParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -193,12 +193,12 @@ const methodDescriptor_AuthorizationService_Login = new grpc.web.MethodDescripto
  *   !proto.authorization.Response>}
  */
 const methodInfo_AuthorizationService_Login = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.authorization.Response,
-	/** @param {!proto.authorization.LoginParams} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  proto.authorization.Response,
+  /** @param {!proto.authorization.LoginParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -212,17 +212,17 @@ const methodInfo_AuthorizationService_Login = new grpc.web.AbstractClientBase.Me
  *     The XHR Node Readable Stream
  */
 proto.authorization.AuthorizationServiceClient.prototype.login = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/authorization.AuthorizationService/Login",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_Login,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/Login",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_Login,
+    callback
+  );
 };
 
 /**
@@ -234,15 +234,92 @@ proto.authorization.AuthorizationServiceClient.prototype.login = function(
  *     A native promise that resolves to the response
  */
 proto.authorization.AuthorizationServicePromiseClient.prototype.login = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/authorization.AuthorizationService/Login",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_Login
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/Login",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_Login
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.authorization.PasswordChange,
+ *   !proto.authorization.Response>}
+ */
+const methodDescriptor_AuthorizationService_ChangePassword = new grpc.web.MethodDescriptor(
+  "/authorization.AuthorizationService/ChangePassword",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.PasswordChange,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.PasswordChange} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.authorization.PasswordChange,
+ *   !proto.authorization.Response>}
+ */
+const methodInfo_AuthorizationService_ChangePassword = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.authorization.Response,
+  /** @param {!proto.authorization.PasswordChange} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @param {!proto.authorization.PasswordChange} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.authorization.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.authorization.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.authorization.AuthorizationServiceClient.prototype.changePassword = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/ChangePassword",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_ChangePassword,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.authorization.PasswordChange} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.authorization.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.authorization.AuthorizationServicePromiseClient.prototype.changePassword = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/ChangePassword",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_ChangePassword
+  );
 };
 
 /**
@@ -252,15 +329,15 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.login = function
  *   !proto.authorization.User>}
  */
 const methodDescriptor_AuthorizationService_GetUser = new grpc.web.MethodDescriptor(
-	"/authorization.AuthorizationService/GetUser",
-	grpc.web.MethodType.UNARY,
-	proto.authorization.Params,
-	proto.authorization.User,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.User.deserializeBinary
+  "/authorization.AuthorizationService/GetUser",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.Params,
+  proto.authorization.User,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.User.deserializeBinary
 );
 
 /**
@@ -270,12 +347,12 @@ const methodDescriptor_AuthorizationService_GetUser = new grpc.web.MethodDescrip
  *   !proto.authorization.User>}
  */
 const methodInfo_AuthorizationService_GetUser = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.authorization.User,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.User.deserializeBinary
+  proto.authorization.User,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.User.deserializeBinary
 );
 
 /**
@@ -289,17 +366,17 @@ const methodInfo_AuthorizationService_GetUser = new grpc.web.AbstractClientBase.
  *     The XHR Node Readable Stream
  */
 proto.authorization.AuthorizationServiceClient.prototype.getUser = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetUser",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetUser,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetUser",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetUser,
+    callback
+  );
 };
 
 /**
@@ -311,15 +388,15 @@ proto.authorization.AuthorizationServiceClient.prototype.getUser = function(
  *     A native promise that resolves to the response
  */
 proto.authorization.AuthorizationServicePromiseClient.prototype.getUser = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetUser",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetUser
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetUser",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetUser
+  );
 };
 
 /**
@@ -329,15 +406,15 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.getUser = functi
  *   !proto.authorization.Response>}
  */
 const methodDescriptor_AuthorizationService_GetUsers = new grpc.web.MethodDescriptor(
-	"/authorization.AuthorizationService/GetUsers",
-	grpc.web.MethodType.UNARY,
-	proto.authorization.Params,
-	proto.authorization.Response,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  "/authorization.AuthorizationService/GetUsers",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.Params,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -347,12 +424,12 @@ const methodDescriptor_AuthorizationService_GetUsers = new grpc.web.MethodDescri
  *   !proto.authorization.Response>}
  */
 const methodInfo_AuthorizationService_GetUsers = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.authorization.Response,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Response.deserializeBinary
+  proto.authorization.Response,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
 );
 
 /**
@@ -366,17 +443,17 @@ const methodInfo_AuthorizationService_GetUsers = new grpc.web.AbstractClientBase
  *     The XHR Node Readable Stream
  */
 proto.authorization.AuthorizationServiceClient.prototype.getUsers = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetUsers",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetUsers,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetUsers",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetUsers,
+    callback
+  );
 };
 
 /**
@@ -388,15 +465,15 @@ proto.authorization.AuthorizationServiceClient.prototype.getUsers = function(
  *     A native promise that resolves to the response
  */
 proto.authorization.AuthorizationServicePromiseClient.prototype.getUsers = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetUsers",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetUsers
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetUsers",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetUsers
+  );
 };
 
 /**
@@ -406,15 +483,15 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.getUsers = funct
  *   !proto.authorization.Stats>}
  */
 const methodDescriptor_AuthorizationService_GetStats = new grpc.web.MethodDescriptor(
-	"/authorization.AuthorizationService/GetStats",
-	grpc.web.MethodType.UNARY,
-	proto.authorization.Params,
-	proto.authorization.Stats,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Stats.deserializeBinary
+  "/authorization.AuthorizationService/GetStats",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.Params,
+  proto.authorization.Stats,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Stats.deserializeBinary
 );
 
 /**
@@ -424,12 +501,12 @@ const methodDescriptor_AuthorizationService_GetStats = new grpc.web.MethodDescri
  *   !proto.authorization.Stats>}
  */
 const methodInfo_AuthorizationService_GetStats = new grpc.web.AbstractClientBase.MethodInfo(
-	proto.authorization.Stats,
-	/** @param {!proto.authorization.Params} request */
-	function(request) {
-		return request.serializeBinary();
-	},
-	proto.authorization.Stats.deserializeBinary
+  proto.authorization.Stats,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Stats.deserializeBinary
 );
 
 /**
@@ -443,17 +520,17 @@ const methodInfo_AuthorizationService_GetStats = new grpc.web.AbstractClientBase
  *     The XHR Node Readable Stream
  */
 proto.authorization.AuthorizationServiceClient.prototype.getStats = function(
-	request,
-	metadata,
-	callback
+  request,
+  metadata,
+  callback
 ) {
-	return this.client_.rpcCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetStats",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetStats,
-		callback
-	);
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetStats",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetStats,
+    callback
+  );
 };
 
 /**
@@ -465,15 +542,15 @@ proto.authorization.AuthorizationServiceClient.prototype.getStats = function(
  *     A native promise that resolves to the response
  */
 proto.authorization.AuthorizationServicePromiseClient.prototype.getStats = function(
-	request,
-	metadata
+  request,
+  metadata
 ) {
-	return this.client_.unaryCall(
-		this.hostname_ + "/authorization.AuthorizationService/GetStats",
-		request,
-		metadata || {},
-		methodDescriptor_AuthorizationService_GetStats
-	);
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/GetStats",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_GetStats
+  );
 };
 
 module.exports = proto.authorization;

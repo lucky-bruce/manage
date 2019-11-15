@@ -31,8 +31,8 @@ message Basic {
   string secondaryemail = 3;
   string primaryphone = 4;
   string workinghours = 5;
-  string address1 = 6;
-  string address2 = 7;
+  string primaryaddress = 6;
+  string secondaryaddress = 7;
 }
 
 message Teams {

@@ -39,19 +39,21 @@ import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
 import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
 import MainDash from "./routes/landing/Dashboard/Editor/Dashboard";
 import News from "./routes/landing/Dashboard/Editor/News";
+import Private from "./routes/PrivateRoute";
+import Settings from "./routes/accounts/Settings";
 
 const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: blue[500]
-		},
-		secondary: red,
-		type: "light"
-	},
-	spacing: 10,
-	overrides: {
-		shadows: ["none"]
-	}
+  palette: {
+    primary: {
+      main: blue[500]
+    },
+    secondary: red,
+    type: "light"
+  },
+  spacing: 10,
+  overrides: {
+    shadows: ["none"]
+  }
 });
 
 require("jquery");
@@ -59,48 +61,95 @@ require("bootstrap");
 require("dotenv").config();
 
 const routes = {
-	"/": () => (
-		<MuiThemeProvider theme={theme}>
-			<Main />
-		</MuiThemeProvider>
-	),
-	"/not-permitted": () => <NotPermittedPage />,
-	"/dashboard": () => <Dashboard />,
-	"/register": () => <Register />,
-	"/profile": () => <UserProfile />,
-	"/new/quote": () => <QuoteForm />,
-	"/new/product": () => <ProductForm />,
-	"/new/staff": () => <StaffForm />,
-	"/edit/quote/:id": ({ id }) => <QuoteEdit id={id} />,
-	"/edit/product/:id": ({ id }) => <ProductEdit id={id} />,
-	"/quote/:id": ({ id }) => <QuoteView id={id} />,
-	"/product/:id": ({ id }) => <ProductView id={id} />,
-	"/quote/:id/status-update": ({ id }) => <StatusUpdate id={id} />,
-	"/financial": () => <FinancialPage />,
-	"/stock": () => <StockPage />,
-	"/quotes": () => <QuotesPage />,
-	"/logout": () => <LogOut />,
-	"/test": () => <Test />,
-	"/editor/sectors": () => <Sectors />,
-	"/editor/portfolio": () => <Portfolio />,
-	"/editor/team": () => <OurTeam />,
-	"/editor/about": () => <About />,
-	"/editor/main": () => <MainDash />,
-	"/editor/news": () => <News />,
-	"/login": () => <Login />
+  "/": () => (
+    <MuiThemeProvider theme={theme}>
+      <Main />
+    </MuiThemeProvider>
+  ),
+  "/not-permitted": () => <NotPermittedPage />,
+
+  "/dashboard": () => (
+    <Private roles={["supplier"]}>
+      <Dashboard />
+    </Private>
+  ),
+  "/register": () => <Register />,
+  "/profile": () => (
+    <Private roles={["user", "supplier", "staff"]}>
+      <UserProfile />
+    </Private>
+  ),
+  "/new/quote": () => (
+    <Private roles={["user"]}>
+      <QuoteForm />
+    </Private>
+  ),
+  "/new/product": () => (
+    <Private roles={["supplier", "staff"]}>
+      <ProductForm />
+    </Private>
+  ),
+  "/new/staff": () => <StaffForm />,
+  "/edit/quote/:id": ({ id }) => (
+    <Private roles={["supplier", "staff"]}>
+      <QuoteEdit id={id} />
+    </Private>
+  ),
+  "/edit/product/:id": ({ id }) => (
+    <Private roles={["supplier"]}>
+      <ProductEdit id={id} />
+    </Private>
+  ),
+  "/quote/:id": ({ id }) => (
+    <Private roles={["user", "supplier", "staff"]}>
+      <QuoteView id={id} />
+    </Private>
+  ),
+  "/product/:id": ({ id }) => <ProductView id={id} />,
+
+  "/quote/:id/status-update": ({ id }) => (
+    <Private roles={["supplier", "staff"]}>
+      <StatusUpdate id={id} />
+    </Private>
+  ),
+  "/financial": () => (
+    <Private roles={["supplier"]}>
+      <FinancialPage />
+    </Private>
+  ),
+  "/stock": () => (
+    <Private roles={["supplier", "user"]}>
+      <StockPage />
+    </Private>
+  ),
+  "/quotes": () => <QuotesPage />,
+  "/logout": () => <LogOut />,
+  "/test": () => <Test />,
+  "/editor/sectors": () => <Sectors />,
+  "/editor/portfolio": () => <Portfolio />,
+  "/editor/team": () => <OurTeam />,
+  "/editor/about": () => <About />,
+  "/editor/main": () => <MainDash />,
+  "/editor/news": () => <News />,
+  "/login": () => <Login />,
+  "/profile/settings": () => (
+    <Private roles={["user", "supplier", "staff"]}>
+      <Settings />
+    </Private>
+  )
 };
 
 const MyApp = () => {
-	const routeResult = useRoutes(routes);
+  const routeResult = useRoutes(routes);
 
-	return routeResult || <NotFoundPage />;
+  return routeResult || <NotFoundPage />;
 };
 
 ReactDOM.render(
-	<Provider value={GetClients()}>
-		<MyApp />
-	</Provider>,
-	document.getElementById("root")
+  <Provider value={GetClients()}>
+    <MyApp />
+  </Provider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
