@@ -28,3 +28,6 @@ envoy_start:
 
 img_server_start:
 							cd image_server && flask run -h 0.0.0.0 -p 8081
+
+landing_page_start:
+							cd landing_page && yarn start
