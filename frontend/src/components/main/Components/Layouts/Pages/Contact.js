@@ -40,8 +40,6 @@ export default () => {
     //eslint-disable-next-line
   }, []);
 
-  console.log(userInput);
-
   return (
     <div id="contact" className="contact-us ">
       <div className="block-title text-center">

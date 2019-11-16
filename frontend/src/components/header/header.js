@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { A, usePath } from "hookrouter";
-
+import { getBasic } from "../../utils/backend";
 import Account from "./account";
 import { GetProfile } from "../../utils/utils";
 
 export default () => {
+  const [logo, setlogo] = useState("");
+
   const path = usePath();
   const routes = [
     {
@@ -87,11 +89,26 @@ export default () => {
     return true;
   }
 
+  const GetBasic = () => {
+    getBasic((err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setlogo(res.toObject().sitename);
+      }
+    });
+  };
+
+  useEffect(() => {
+    GetBasic();
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success text-white ">
       <div className="container">
         <A className="navbar-brand" href="/">
-          <h2 className="text-white">Logo</h2>
+          <h2 className="text-white">{logo}</h2>
         </A>
         <button
           className="navbar-toggler"

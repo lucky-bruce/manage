@@ -1,31 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import IncomePage from "./income/income";
+import Profit from "./profit/profit";
+import Expenses from "./expenses";
+import { getIncomes } from "../../utils/backend";
+import { Params } from "../../proto/financial/financial_pb";
+import { Query } from "../../proto/products/products_pb";
+import { GetProfile } from "../../utils/utils";
+import ToReceive from "./toreceive";
 
-export default function Financial(props) {
+export default function Financial() {
+  const [tab, setTab] = useState(0);
+
+  const [incomes, setIncomes] = useState([]);
+
+  function GetIncomes() {
+    let params = new Params();
+
+    var query = new Query();
+
+    // const timestamp = TimestampSearch(from, to);
+
+    query.setQuerystring(`{"supplierid":"${GetProfile().id}"`);
+
+    params.setQuery(query);
+
+    getIncomes(params, (err, res) => {
+      if (err) {
+        console.log(err);
+      }
+
+      if (res) {
+        setIncomes(res.toObject().incomeList);
+      }
+    });
+  }
+
+  useEffect(() => {
+    GetIncomes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const tabs = [
     {
       title: "Profits",
-      component: ""
+      component: <Profit incomes={incomes} />
     },
     {
       title: "Income",
-      component: <IncomePage />
+      component: <IncomePage incomes={incomes} />
     },
     {
       title: "To receive",
-      component: ""
+      component: <ToReceive incomes={incomes} />
     },
     {
-      title: "Expences",
-      component: ""
-    },
-    {
-      title: "To be paid",
-      component: ""
+      title: "Expenses",
+      component: <Expenses incomes={incomes} />
     }
   ];
-
-  const [tab, setTab] = useState(1);
 
   return (
     <div>

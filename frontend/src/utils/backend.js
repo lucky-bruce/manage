@@ -12,6 +12,7 @@ import {
   PasswordChange
 } from "../proto/authorization/authorization_pb";
 import { Params as LandingParams } from "../proto/landing/landing_pb";
+import { Params as FinancialParams } from "../proto/financial/financial_pb";
 
 const client = GetClients();
 
@@ -82,6 +83,14 @@ export const changePassword = (obj, callback) => {
   params.setNew(obj.new);
 
   client.auth.changePassword(params, {}, callback);
+};
+
+export const getIncomes = (params = new LandingParams(), callback) => {
+  client.finances.getIncome(params, {}, callback);
+};
+
+export const getExpenses = (params = new LandingParams(), callback) => {
+  client.finances.getExpenses(params, {}, callback);
 };
 
 export const getUniqueFields = (field, collection, callback) => {
@@ -230,3 +239,7 @@ export function processFiles(files) {
     res(urls);
   });
 }
+
+export const toDestination = (params, callback) => {
+  client.finances.toDestination(params, {}, callback);
+};

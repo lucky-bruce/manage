@@ -62,7 +62,10 @@ export default function FinancialBoard(props) {
           <div className="d-flex flex-column p-3">
             Income
             <span className="text-primary font-weight-bold">
-              R$ {GetIncome(incomes).toFixed(3)}
+              R${" "}
+              {GetIncome(incomes)
+                .toFixed(3)
+                .toLocaleString("de-DE")}
             </span>
           </div>
           <div className="d-flex flex-column p-3">

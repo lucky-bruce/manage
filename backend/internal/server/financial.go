@@ -109,51 +109,34 @@ func (s *Server) GetBanks(ctx context.Context, req *financial.Request) (*financi
 }
 
 func (s *Server) ToDestination(ctx context.Context, params *financial.Params) (*financial.Response, error) {
+	ex := financial.Expense{Timestamp: time.Now().Unix(), Name: params.Name, Amount: params.Amount}
+	dataStore := db.NewDataStore()
 
-	// 	go func() {
-	// 		dataStore := db.NewDataStore()
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
 
-	// 		defer dataStore.Close()
-
-	// 		store := db.GetStore(dataStore, "income")
-
-	// 		var income financial.Income
-
-	// 		err := store.GetElement(&income, bson.M{"name": params.Name})
-	// 		if err != nil {
-	// 			logger.ErrorFunc(err)
-	// 			return
-	// 		}
-
-	// 		err = store.C.Update(bson.M{"name": params.Name}, bson.M{"name": params.Name, "payoffs": income.Payoffs, "sent": income.Sent + params.Amount})
-	// 		if err != nil {
-	// 			return
-	// 		}
-	// 	}()
-
-	// 	go func() {
-	// 		dataStore := db.NewDataStore()
-
-	// 		defer dataStore.Close()
-	// 		store := db.GetStore(dataStore, "banks")
-
-	// 		var bank financial.Bank
-	// 		query, _ := utils.GetQuery(`{"name":"` + params.To + `"}`)
-
-	// 		err := store.GetElement(&bank, query)
-	// 		if err != nil {
-	// 			logger.ErrorFunc(err)
-	// 			return
-	// 		}
-
-	// 		err = store.C.Update(bson.M{"name": bank.Name}, bson.M{"name": bank.Name, "money": bank.Money + params.Amount, "color": bank.Color})
-	// 		if err != nil {
-	// 			logger.ErrorFunc(err)
-	// 			return
-	// 		}
-
-	// 	}()
+	err := store.Insert(ex)
+	if err != nil {
+		return new(financial.Response), err
+	}
 
 	return new(financial.Response), nil
 
+}
+
+func (s *Server) GetExpenses(ctx context.Context, params *financial.Params) (*financial.Expenses, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	var exps []*financial.Expense
+
+	err := store.GetAll(&exps, nil, nil)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.Expenses), err
+	}
+
+	return &financial.Expenses{Expense: exps}, nil
 }

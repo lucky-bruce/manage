@@ -7,6 +7,9 @@ service FinancialService {
   rpc NewBank(Bank) returns (EmptyResponse);
   rpc GetBanks(Request) returns (Response);
   rpc ToDestination(Params) returns (Response);
+
+  rpc GetExpenses(Params) returns (Expenses);
+  
 }
 
 message Request {
@@ -15,6 +18,16 @@ message Request {
 
 message EmptyResponse {
 
+}
+
+message Expenses {
+  repeated Expense expense = 1;
+}
+
+message Expense {
+  int64 timestamp = 1;
+  string name = 2;
+  float amount = 3;
 }
 
 message Params {

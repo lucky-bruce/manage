@@ -84,14 +84,12 @@ export function GetStatus(num) {
   }
 }
 
-export const TimestampSearch = (from, to, timestampLink) => {
+export const TimestampSearch = (from, to, timestampLink = "timestamp") => {
   from = from.valueOf() / 1000 - 86400;
   to =
     to !== ""
       ? Math.floor(to.valueOf() / 1000 + 86400)
       : new Date().valueOf() / 1000;
-
-  timestampLink = timestampLink || "timestamp";
 
   return `"$and":[{"${timestampLink}":{"$gte": ${from}}},{"${timestampLink}":{"$lte": ${to}}}]`;
 };
