@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "mdbreact/dist/css/mdb.css";
-import "./components/main/Components/Layouts/index.css";
 import Dashboard from "./routes/dashboard/Dashboard";
 import * as serviceWorker from "./serviceWorker";
 import NotFoundPage from "./routes/NotFoundPage";
@@ -19,8 +18,6 @@ import QuoteForm from "./routes/quotes/QuoteForm";
 import QuoteEdit from "./routes/quotes/QuoteEdit";
 import ProductForm from "./routes/products/ProductForm";
 import ProductView from "./routes/products/ProductView";
-import About from "./routes/landing/Dashboard/Editor/About";
-
 import Test from "./routes/Test";
 import QuoteView from "./routes/quotes/QuoteView";
 import FinancialPage from "./routes/dashboard/Financial";
@@ -31,11 +28,6 @@ import NotPermittedPage from "./routes/NotPermitted";
 import StaffForm from "./routes/accounts/StaffRegistration";
 import { GetClients } from "./clients";
 import StatusUpdate from "./routes/quotes/StatusUpdate";
-import Portfolio from "./routes/landing/Dashboard/Editor/Portfolio";
-import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
-import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
-import MainDash from "./routes/landing/Dashboard/Editor/Dashboard";
-import News from "./routes/landing/Dashboard/Editor/News";
 import Private from "./routes/PrivateRoute";
 import Settings from "./routes/accounts/Settings";
 
@@ -103,12 +95,7 @@ const routes = {
   "/quotes": () => <QuotesPage />,
   "/logout": () => <LogOut />,
   "/test": () => <Test />,
-  "/editor/sectors": () => <Sectors />,
-  "/editor/portfolio": () => <Portfolio />,
-  "/editor/team": () => <OurTeam />,
-  "/editor/about": () => <About />,
-  "/editor/main": () => <MainDash />,
-  "/editor/news": () => <News />,
+
   "/login": () => <Login />,
   "/profile/settings": () => (
     <Private roles={["user", "supplier", "staff"]}>
