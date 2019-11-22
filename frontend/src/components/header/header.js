@@ -23,11 +23,11 @@ export default () => {
       link: "/stock",
       title: "Stock"
     },
-    {
-      link: "/clients",
-      title: "Clients",
-      access: ["supplier", "staff"]
-    },
+    // {
+    //   link: "/clients",
+    //   title: "Clients",
+    //   access: ["supplier", "staff"]
+    // },
     {
       link: "/quotes",
       title: "Quotes",
@@ -38,20 +38,20 @@ export default () => {
       title: "Sectors",
       access: ["supplier", "staff"]
     },
-    {
-      link: "/statts",
-      title: "Statts",
-      access: ["supplier", "staff"]
-    },
+    // {
+    //   link: "/statts",
+    //   title: "Statts",
+    //   access: ["supplier", "staff"]
+    // },
     {
       link: "/providers",
       title: "Providers",
       access: ["user"]
-    },
-    {
-      link: "/logs",
-      title: "Logs"
     }
+    // {
+    //   link: "/logs",
+    //   title: "Logs"
+    // }
   ];
 
   var links = [];

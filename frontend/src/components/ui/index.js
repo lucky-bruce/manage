@@ -193,3 +193,38 @@ export const Radio = ({ props }) => {
     </div>
   );
 };
+
+export const Tabs = ({ data }) => {
+  const [active, setActive] = useState({
+    title: data[0].title,
+    component: data[0].component,
+    active: true
+  });
+
+  var nav = [];
+
+  data.forEach((item, i) => {
+    nav.push(
+      <span
+        key={i}
+        className={`table-selector ${
+          item.title === active.title ? "active" : ""
+        }`}
+        onClick={() =>
+          setActive({ title: item.title, component: item.component })
+        }
+      >
+        {item.title}
+      </span>
+    );
+  });
+
+  return (
+    <div className="p-3 dashboard">
+      <div className="d-flex p-3 justify-content-between">
+        <div>{nav}</div>
+      </div>
+      {active.component}
+    </div>
+  );
+};

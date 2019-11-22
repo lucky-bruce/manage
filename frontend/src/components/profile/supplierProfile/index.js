@@ -6,6 +6,7 @@ import $ from "jquery";
 
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import Stats from "../profileStats";
+import { Tabs } from "../../ui";
 
 export default function SupplierProfile() {
   const userData = GetProfile();
@@ -102,7 +103,9 @@ export default function SupplierProfile() {
           <Stats user={userData} />
         </div>
       </div>
-      <SupplierTable />
+      <div className="mt-4">
+        <Tabs data={[{ title: "Quotes", component: <SupplierTable /> }]} />
+      </div>
     </div>
   );
 }

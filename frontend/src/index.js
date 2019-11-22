@@ -10,6 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 import NotFoundPage from "./routes/NotFoundPage";
 import { useRoutes } from "hookrouter";
 import Provider from "./components/context/provider";
+import Main from "./components/main/Components/Layouts/Pages/Main";
 import Register from "./routes/accounts/Register";
 import Login from "./routes/accounts/Login";
 import UserProfile from "./routes/accounts/UserProfile";
@@ -30,12 +31,39 @@ import { GetClients } from "./clients";
 import StatusUpdate from "./routes/quotes/StatusUpdate";
 import Private from "./routes/PrivateRoute";
 import Settings from "./routes/accounts/Settings";
+import Portfolio from "./routes/landing/Dashboard/Editor/Portfolio";
+import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
+import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
+import MainDash from "./routes/landing/Dashboard/Editor/Dashboard";
+import News from "./routes/landing/Dashboard/Editor/News";
+import About from "./routes/landing/Dashboard/Editor/About";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { red, blue } from "@material-ui/core/colors";
 
 require("jquery");
 require("bootstrap");
 require("dotenv").config();
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: blue[500]
+    },
+    secondary: red,
+    type: "light"
+  },
+  spacing: 10,
+  overrides: {
+    shadows: ["none"]
+  }
+});
+
 const routes = {
+  "/": () => (
+    <MuiThemeProvider theme={theme}>
+      <Main />
+    </MuiThemeProvider>
+  ),
   "/not-permitted": () => <NotPermittedPage />,
 
   "/dashboard": () => (
@@ -95,13 +123,18 @@ const routes = {
   "/quotes": () => <QuotesPage />,
   "/logout": () => <LogOut />,
   "/test": () => <Test />,
-
   "/login": () => <Login />,
   "/profile/settings": () => (
     <Private roles={["user", "supplier", "staff"]}>
       <Settings />
     </Private>
-  )
+  ),
+  "/editor/sectors": () => <Sectors />,
+  "/editor/portfolio": () => <Portfolio />,
+  "/editor/team": () => <OurTeam />,
+  "/editor/about": () => <About />,
+  "/editor/main": () => <MainDash />,
+  "/editor/news": () => <News />
 };
 
 const MyApp = () => {
