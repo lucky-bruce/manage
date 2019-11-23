@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 
-	"github.com/Beaxhem/manage/backend/internal/db"
+	"github.com/Beaxhem/manage/backend/pkg/db"
 )
 
 type Server struct{}

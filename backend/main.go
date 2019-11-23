@@ -5,16 +5,14 @@ import (
 	"log"
 	"net"
 
-	"github.com/Beaxhem/manage/backend/internal/landing"
+	"github.com/Beaxhem/manage/backend/pkg/authorization"
+	"github.com/Beaxhem/manage/backend/pkg/db"
+	"github.com/Beaxhem/manage/backend/pkg/financial"
+	"github.com/Beaxhem/manage/backend/pkg/landing"
+	"github.com/Beaxhem/manage/backend/pkg/products"
+	"github.com/Beaxhem/manage/backend/pkg/quotes"
+	"github.com/Beaxhem/manage/backend/pkg/services"
 
-	"github.com/Beaxhem/manage/backend/internal/chunker"
-	"github.com/Beaxhem/manage/backend/internal/financial"
-	"github.com/Beaxhem/manage/backend/internal/products"
-	"github.com/Beaxhem/manage/backend/internal/quotes"
-	"github.com/Beaxhem/manage/backend/internal/services"
-
-	"github.com/Beaxhem/manage/backend/internal/authorization"
-	"github.com/Beaxhem/manage/backend/internal/db"
 	"github.com/Beaxhem/manage/backend/internal/server"
 	"google.golang.org/grpc"
 )
@@ -44,7 +42,6 @@ func main() {
 	products.RegisterProductServiceServer(srv, &server.Server{})
 	services.RegisterServicesServer(srv, &server.Server{})
 	financial.RegisterFinancialServiceServer(srv, &server.Server{})
-	chunker.RegisterChunkerServer(srv, &server.Server{})
 	landing.RegisterLandingServiceServer(srv, &server.Server{})
 
 	db.RegisterDbServiceServer(srv, &server.Server{})

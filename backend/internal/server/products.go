@@ -1,7 +1,6 @@
 package server
 
 import (
-	"bytes"
 	"context"
 	"encoding/base64"
 	"encoding/json"
@@ -12,15 +11,13 @@ import (
 	"image/jpeg"
 	"image/png"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
-	"github.com/Beaxhem/manage/backend/internal/chunker"
-	"github.com/Beaxhem/manage/backend/internal/db"
-	"github.com/Beaxhem/manage/backend/internal/logger"
-	"github.com/Beaxhem/manage/backend/internal/products"
 	"github.com/Beaxhem/manage/backend/internal/utils"
+	"github.com/Beaxhem/manage/backend/pkg/db"
+	"github.com/Beaxhem/manage/backend/pkg/logger"
+	"github.com/Beaxhem/manage/backend/pkg/products"
 	"github.com/chai2010/webp"
 )
 
@@ -123,52 +120,6 @@ func DeleteFiles(product products.Product) {
 			return
 		}
 	}
-}
-
-func (s *Server) Chunker(req *chunker.Request, srv chunker.Chunker_ChunkerServer) error {
-
-	path, err := filepath.Abs(req.Url)
-	if err != nil {
-		logger.ErrorFunc(err)
-		return err
-	}
-
-	file, err := os.Open(path)
-
-	if err != nil {
-		logger.ErrorFunc(err)
-		return err
-	}
-
-	img, _, err := image.Decode(file)
-	if err != nil {
-		logger.ErrorFunc(err)
-		return err
-	}
-	buf := new(bytes.Buffer)
-	err = webp.Encode(buf, img, nil)
-	if err != nil {
-		logger.ErrorFunc(err)
-		return err
-	}
-
-	c := buf.Bytes()
-
-	chnk := &chunker.Chunk{}
-
-	for currentByte := 0; currentByte < len(c); currentByte += chunkSize {
-		if currentByte+chunkSize > len(c) {
-			chnk.Chunk = c[currentByte:len(c)]
-		} else {
-			chnk.Chunk = c[currentByte : currentByte+chunkSize]
-		}
-		if err := srv.Send(chnk); err != nil {
-			logger.ErrorFunc(err)
-			return err
-		}
-	}
-
-	return nil
 }
 
 func (s *Server) UploadImage(ctx context.Context, img *products.Image) (*products.ImageResponse, error) {

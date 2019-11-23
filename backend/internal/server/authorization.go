@@ -3,11 +3,11 @@ package server
 import (
 	"context"
 
-	"github.com/Beaxhem/manage/backend/internal/authorization"
-	"github.com/Beaxhem/manage/backend/internal/db"
-	"github.com/Beaxhem/manage/backend/internal/logger"
-	"github.com/Beaxhem/manage/backend/internal/quotes"
 	"github.com/Beaxhem/manage/backend/internal/utils"
+	"github.com/Beaxhem/manage/backend/pkg/authorization"
+	"github.com/Beaxhem/manage/backend/pkg/db"
+	"github.com/Beaxhem/manage/backend/pkg/logger"
+	"github.com/Beaxhem/manage/backend/pkg/quotes"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2/bson"
 )

@@ -8,7 +8,7 @@ import (
 	fmt "fmt"
 	math "math"
 
-	"github.com/Beaxhem/manage/backend/internal/products"
+	"github.com/Beaxhem/manage/backend/pkg/products"
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"

@@ -5,7 +5,7 @@ build: server_build client_build
 start: client_start server_start envoy_start
 
 server_build:
-							protoc -I proto/ proto/$(input)/$(input).proto   --go_out=plugins=grpc:backend/internal/
+							protoc -I proto/ proto/$(input)/$(input).proto   --go_out=plugins=grpc:backend/pkg/
 							@echo "Server has been built"
 
 server_start:

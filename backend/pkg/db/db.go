@@ -3,13 +3,12 @@ package db
 import (
 	"strconv"
 
-	"github.com/Beaxhem/manage/backend/internal/landing"
-	"github.com/Beaxhem/manage/backend/internal/logger"
-	"github.com/Beaxhem/manage/backend/internal/products"
-	"github.com/Beaxhem/manage/backend/internal/quotes"
-	"github.com/Beaxhem/manage/backend/internal/services"
-
-	"github.com/Beaxhem/manage/backend/internal/authorization"
+	"github.com/Beaxhem/manage/backend/pkg/authorization"
+	"github.com/Beaxhem/manage/backend/pkg/landing"
+	"github.com/Beaxhem/manage/backend/pkg/logger"
+	"github.com/Beaxhem/manage/backend/pkg/products"
+	"github.com/Beaxhem/manage/backend/pkg/quotes"
+	"github.com/Beaxhem/manage/backend/pkg/services"
 
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"

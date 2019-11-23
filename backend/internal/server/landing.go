@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 
-	"github.com/Beaxhem/manage/backend/internal/db"
-	"github.com/Beaxhem/manage/backend/internal/landing"
-	"github.com/Beaxhem/manage/backend/internal/logger"
+	"github.com/Beaxhem/manage/backend/pkg/db"
+	"github.com/Beaxhem/manage/backend/pkg/landing"
+	"github.com/Beaxhem/manage/backend/pkg/logger"
 	"gopkg.in/mgo.v2/bson"
 )
 
