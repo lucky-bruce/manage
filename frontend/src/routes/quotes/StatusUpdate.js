@@ -30,12 +30,10 @@ export default function StatusUpdate({ id }) {
 
   const handleSuccess = () => {
     changeShippingStatus(id, (err, res) => {
-      // navigate("/");
       if (err) {
         console.log(err);
       } else {
         navigate("/", true);
-        console.log(res.toObject());
       }
     });
   };

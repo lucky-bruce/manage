@@ -20,7 +20,7 @@ export default function Financial() {
 
     // const timestamp = TimestampSearch(from, to);
 
-    query.setQuerystring(`{"supplierid":"${GetProfile().id}"`);
+    query.setQuerystring(`{"supplierid":"${GetProfile().id}"}`);
 
     params.setQuery(query);
 

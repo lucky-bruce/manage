@@ -34,6 +34,8 @@ export default function FinancialBoard(props) {
       }
 
       if (res) {
+        console.log(res.toObject());
+
         setIncomes(res.toObject().incomeList);
       }
     });

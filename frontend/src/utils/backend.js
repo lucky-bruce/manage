@@ -9,10 +9,11 @@ import { Params as DbParams } from "../proto/db/db_pb";
 import { Params as ServiceParams } from "../proto/services/services_pb";
 import {
   Params as AuthorizationParams,
-  PasswordChange
+  PasswordChange,
+  PermissionParams,
+  Permission
 } from "../proto/authorization/authorization_pb";
 import { Params as LandingParams } from "../proto/landing/landing_pb";
-import { Params as FinancialParams } from "../proto/financial/financial_pb";
 
 const client = GetClients();
 
@@ -33,9 +34,7 @@ export function changeShippingStatus(id, callback) {
   let params = new StatusParams();
   params.setId(id);
 
-  client.quotes.changeShippingStatus(params, {}, (err, res) => {
-    callback(err, res);
-  });
+  client.quotes.changeShippingStatus(params, {}, callback);
 }
 
 export const getDistance = (from, to, callback) => {
@@ -83,6 +82,20 @@ export const changePassword = (obj, callback) => {
   params.setNew(obj.new);
 
   client.auth.changePassword(params, {}, callback);
+};
+
+export const changePermission = (id, permissions, callback) => {
+  let pp = new PermissionParams();
+  pp.setId(id);
+
+  let p = new Permission();
+  p.setQuotes(permissions.quotes);
+  p.setStock(permissions.stock);
+  p.setFinancial(permissions.financial);
+
+  pp.setPermission(p);
+
+  client.auth.changePermissions(pp, {}, callback);
 };
 
 export const getIncomes = (params = new LandingParams(), callback) => {

@@ -78,18 +78,42 @@ const routes = {
     </Private>
   ),
   "/new/quote": () => (
-    <Private roles={["user"]}>
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["quotes"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["user"]}
+    >
       <QuoteForm />
     </Private>
   ),
   "/new/product": () => (
-    <Private roles={["supplier", "staff"]}>
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["stock"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["supplier", "staff"]}
+    >
       <ProductForm />
     </Private>
   ),
   "/new/staff": () => <StaffForm />,
   "/edit/quote/:id": ({ id }) => (
-    <Private roles={["supplier", "staff"]}>
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["quotes"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["supplier", "staff"]}
+    >
       <QuoteEdit id={id} />
     </Private>
   ),
@@ -106,12 +130,28 @@ const routes = {
   "/product/:id": ({ id }) => <ProductView id={id} />,
 
   "/quote/:id/status-update": ({ id }) => (
-    <Private roles={["supplier", "staff"]}>
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["stock"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["supplier", "staff"]}
+    >
       <StatusUpdate id={id} />
     </Private>
   ),
   "/financial": () => (
-    <Private roles={["supplier"]}>
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["financial"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["supplier", "staff"]}
+    >
       <FinancialPage />
     </Private>
   ),
@@ -120,7 +160,19 @@ const routes = {
       <StockPage />
     </Private>
   ),
-  "/quotes": () => <QuotesPage />,
+  "/quotes": () => (
+    <Private
+      permission={u => {
+        if (u.permission) {
+          return u.permission["quotes"] ? true : false;
+        }
+        return false;
+      }}
+      roles={["supplier", "staff"]}
+    >
+      <QuotesPage />
+    </Private>
+  ),
   "/logout": () => <LogOut />,
   "/test": () => <Test />,
   "/login": () => <Login />,

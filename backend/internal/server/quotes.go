@@ -117,11 +117,11 @@ func (s *Server) EditQuote(ctx context.Context, quote *quotes.Quote) (*quotes.Re
 
 	}
 
-	if quote.Status == quotes.Status_CLIENT_APPLIED {
+	if int(quote.Status) == int(quotes.Status_CLIENT_APPLIED) {
 
-		go DeleteIncome(quote)
+		DeleteIncome(quote)
 
-		go NewIncome(quote)
+		NewIncome(quote)
 
 		go UpdateStock(quote.Products)
 
@@ -179,7 +179,7 @@ func (s *Server) ChangeShippingStatus(ctx context.Context, params *quotes.Status
 
 	if params.GetStatus() != 0 {
 
-		err := store.C.Update(bson.M{"id": params.Id}, bson.M{"$set": bson.M{"shipping": params.Status}})
+		err := store.C.Update(bson.M{"id": params.Id}, bson.M{"$set": bson.M{"status": params.Status}})
 		if err != nil {
 			logger.ErrorFunc(err)
 
@@ -187,7 +187,7 @@ func (s *Server) ChangeShippingStatus(ctx context.Context, params *quotes.Status
 		return new(quotes.Response), err
 	}
 
-	err := store.C.Update(bson.M{"id": params.Id}, bson.M{"$inc": bson.M{"shipping": 1}})
+	err := store.C.Update(bson.M{"id": params.Id}, bson.M{"$inc": bson.M{"status": 1}})
 	if err != nil {
 		logger.ErrorFunc(err)
 		return new(quotes.Response), err

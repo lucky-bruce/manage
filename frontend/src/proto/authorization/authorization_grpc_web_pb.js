@@ -553,4 +553,81 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.getStats = funct
   );
 };
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.authorization.PermissionParams,
+ *   !proto.authorization.Response>}
+ */
+const methodDescriptor_AuthorizationService_ChangePermissions = new grpc.web.MethodDescriptor(
+  "/authorization.AuthorizationService/ChangePermissions",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.PermissionParams,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.PermissionParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.authorization.PermissionParams,
+ *   !proto.authorization.Response>}
+ */
+const methodInfo_AuthorizationService_ChangePermissions = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.authorization.Response,
+  /** @param {!proto.authorization.PermissionParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @param {!proto.authorization.PermissionParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.authorization.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.authorization.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.authorization.AuthorizationServiceClient.prototype.changePermissions = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/ChangePermissions",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_ChangePermissions,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.authorization.PermissionParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.authorization.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.authorization.AuthorizationServicePromiseClient.prototype.changePermissions = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/ChangePermissions",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_ChangePermissions
+  );
+};
+
 module.exports = proto.authorization;

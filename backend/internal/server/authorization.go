@@ -139,3 +139,32 @@ func (s *Server) ChangePassword(ctx context.Context, params *authorization.Passw
 
 	return new(authorization.Response), nil
 }
+
+func (s *Server) ChangePermissions(ctx context.Context, params *authorization.PermissionParams) (*authorization.Response, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "users")
+
+	var user authorization.User
+	err := store.GetElementByID(params.Id, &user)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	user.Permission = params.Permission
+
+	err = store.C.Update(bson.M{"id": params.Id}, user)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	token, err := authorization.GenerateJWT(&user)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+	return &authorization.Response{Token: token}, nil
+}

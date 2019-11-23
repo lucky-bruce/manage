@@ -41,6 +41,7 @@ func NewIncome(quote *quotes.Quote) {
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "income")
 
+	logger.InfoFunc(quote.Supplierids)
 	for _, sup := range quote.Supplierids {
 		var total float32
 		var totalWithProfit float32
@@ -61,7 +62,7 @@ func NewIncome(quote *quotes.Quote) {
 		err := store.Insert(newPayoff)
 		if err != nil {
 			logger.ErrorFunc(err)
-			continue
+
 		}
 	}
 }

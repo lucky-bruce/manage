@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StaffTable from "./staff";
+import StaffTable from "./staff/staff";
 import StockTable from "./stock";
 import QuotesTable from "./quotes/quotes";
 import ServicesTable from "./services";

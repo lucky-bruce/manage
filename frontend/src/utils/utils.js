@@ -12,11 +12,10 @@ export function checkAuthorization(profile, path) {
   }
 }
 
-export function limitedAccess(roles, path) {
+export function limitedAccess(roles, path, permission) {
   const profile = GetProfile();
-  if (!profile) {
-    console.log("prof");
 
+  if (!profile) {
     navigate("/login", true, { to: path });
     return;
   }
@@ -24,7 +23,12 @@ export function limitedAccess(roles, path) {
   if (checkAuthorization(profile, path)) {
     if (roles.length > 0) {
       for (var i in roles) {
-        if (profile.role === roles[i] || profile.role === "admin") return true;
+        if (
+          (profile.role === roles[i] &&
+            (permission ? permission(profile) : true)) ||
+          profile.role === "admin"
+        )
+          return true;
       }
       navigate("/not-permitted");
     }

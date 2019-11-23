@@ -9,6 +9,8 @@ service AuthorizationService {
   rpc GetUser (Params) returns (User);
   rpc GetUsers (Params) returns (Response);
   rpc GetStats (Params) returns (Stats);
+
+  rpc ChangePermissions(PermissionParams) returns (Response);
 }
 
 message User {
@@ -29,6 +31,21 @@ message User {
   string Zip = 15;
   string Username = 16;
   string Companyid = 17;
+  
+  Permission permission = 18;
+}
+
+
+message PermissionParams {
+  Permission permission = 1;
+  string id = 2;
+  
+}
+
+message Permission {
+  bool financial = 1;
+  bool quotes = 2;
+  bool stock = 3;
 }
 
 message PasswordChange {
