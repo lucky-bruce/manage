@@ -1,10 +1,10 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"time"
 
-	"github.com/Beaxhem/manage/backend/pkg/authorization"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2"
@@ -25,10 +25,28 @@ func CreateSession() {
 
 }
 
+var firstname *string
+var username *string
+var password *string
+
+func init() {
+	firstname = flag.String("firstname", "Admin", "First name of the account")
+	username = flag.String("username", "admin", "Username of the account")
+	password = flag.String("password", "admin", "Password for the account")
+}
+
 func main() {
 	CreateSession()
 
-	admin := authorization.User{FirstName: "Admin", Role: "admin", Username: "admin"}
+	flag.Parse()
+
+	admin := struct {
+		FirstName string
+		Role      string
+		Username  string
+		Password  string
+		ID        string
+	}{FirstName: *firstname, Role: "admin", Username: *username}
 
 	id, err := uuid.NewRandom()
 	if err != nil {
@@ -37,7 +55,7 @@ func main() {
 	}
 	admin.ID = id.String()
 
-	hpass, err := bcrypt.GenerateFromPassword([]byte("admin"), bcrypt.DefaultCost)
+	hpass, err := bcrypt.GenerateFromPassword([]byte(*password), bcrypt.DefaultCost)
 	if err != nil {
 		log.Println(err)
 		return

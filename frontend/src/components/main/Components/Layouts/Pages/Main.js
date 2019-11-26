@@ -19,19 +19,19 @@ import image3 from "../../../images/c.jpg";
 import { A } from "hookrouter";
 
 class Main extends Component {
-  state = {
-    data: []
-  };
-
   render() {
     const image1 =
       "http://4.bp.blogspot.com/-LVDJIaNyM1A/UoAL7AIswrI/AAAAAAAAAAc/O1IPVytbLwE/s1600/_piscina_04.jpg";
+
     return (
       <div id="apppage">
         <Header />
         <MDBView>
-          <BackgroundSlideshow duration={5} images={[image2, image3, image1]} />
-          <MDBMask className="d-flex justify-content-center align-items-center gradient">
+          <BackgroundSlideshow duration={5} images={[image1, image2, image3]} />
+          <MDBMask
+            pattern={8}
+            className="d-flex justify-content-center align-items-center gradient"
+          >
             <MDBContainer>
               <MDBRow>
                 <MDBCol
@@ -75,9 +75,9 @@ class Main extends Component {
         </MDBView>
 
         <div id="colorlib-main">
-          <About data={this.state.data} />
+          <About />
           <Portfolio />
-          <Sectors data={this.state.data} />
+          <Sectors />
           <Quotes />
           <Contact />
         </div>

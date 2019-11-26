@@ -63,12 +63,10 @@ export default () => {
             <MDBCol md="4" className="mt-xl-5 mb-5">
               <MDBCard>
                 <span>
-                  {" "}
                   <MDBIcon
                     icon="map-marker-alt"
                     size="2x"
                     style={{
-                      width: "62px",
                       textAlign: "center"
                     }}
                     className="contact-us-icons"

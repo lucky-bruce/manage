@@ -102,8 +102,6 @@ export default function SendTo(props) {
         min="0"
         max={userInput.max}
         onChange={e => {
-          console.log(userInput.max);
-
           if (e.target.value <= userInput.max) {
             handleChange("amount", e.target.value);
           }

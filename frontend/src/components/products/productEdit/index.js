@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer,useState } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,10 +7,51 @@ import {
 	productInput
 } from "../../../utils/grpc";
 import { Switch, CheckboxSwitch, Radio, Autocomplete } from "../../ui/index";
-import { editProduct, GetProductByID } from "../../../utils/backend";
+import { editProduct, GetProductByID,getUniqueFields } from "../../../utils/backend";
 import { navigate } from "hookrouter";
 
 export default function EditForm(props) {
+
+	const [sectors, setsectors] = useState([]);
+	const [categories, setcategories] = useState([]);
+	const [subcategories, setsubcategories] = useState([]);
+	
+	const GetSectors = () => {
+    getUniqueFields("sector", "products", (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setsectors(res.toObject().valuesList);
+      }
+    });
+	};
+	
+	const GetCategories = () => {
+    getUniqueFields("category", "products", (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setcategories(res.toObject().valuesList);
+      }
+    });
+  };
+
+  const GetSubCategories = () => {
+    getUniqueFields("subcategory", "products", (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setsubcategories(res.toObject().valuesList);
+      }
+    });
+	};
+
+	useEffect(() => {
+    GetSectors();
+		GetCategories();
+		GetSubCategories()
+  }, []);
+	
 	const [userInput, setUserInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		productInput
@@ -42,7 +83,7 @@ export default function EditForm(props) {
 			}
 
 			if (res) {
-				console.log(res.toObject());
+				
 				navigate("/dashboard", true);
 			}
 		});
@@ -427,23 +468,32 @@ export default function EditForm(props) {
 						</div>
 
 						<div className="mt-3">
+						<Autocomplete
+          id="sector"
+          className="col-md-6 p-0 mb-4"
+          inputClass="bg-primary text-white product"
+          results={sectors}
+          value={userInput.sector}
+          onChange={v => handleChange("sector", v)}
+          placeholder="Select a Sector"
+        />
 							<Autocomplete
-								id="category"
-								className="col-md-6 p-0 mb-4"
-								inputClass="bg-primary text-white product"
-								results={["test"]}
-								value={userInput.category}
-								onChange={v => handleChange("category", v)}
-								placeholder="Select a Category"
-							/>
-							<Autocomplete
-								className="col-md-6 p-0 mb-4"
-								inputClass="bg-primary text-white product"
-								results={["test"]}
-								value={userInput.subcategory}
-								onChange={v => handleChange("subcategory", v)}
-								placeholder="Select a Sub Category"
-							/>
+          id="category"
+          className="col-md-6 p-0 mb-4"
+          inputClass="bg-primary text-white product"
+          results={categories}
+          value={userInput.category}
+          onChange={v => handleChange("category", v)}
+          placeholder="Select a Category"
+        />
+        <Autocomplete
+          className="col-md-6 p-0 mb-4"
+          inputClass="bg-primary text-white product"
+          results={subcategories}
+          value={userInput.subcategory}
+          onChange={v => handleChange("subcategory", v)}
+          placeholder="Select a Sub Category"
+        />
 							<Autocomplete
 								className="col-md-6 p-0 mb-4"
 								inputClass="bg-primary text-white product"

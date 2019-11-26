@@ -9,11 +9,17 @@ service FinancialService {
   rpc ToDestination(Params) returns (Response);
 
   rpc GetExpenses(Params) returns (Expenses);
-  
+
+  rpc Pay(PaymentParams) returns (EmptyResponse);
 }
 
 message Request {
 
+}
+
+message PaymentParams {
+  string id = 1;
+  float amount = 2; 
 }
 
 message EmptyResponse {

@@ -7,6 +7,7 @@ import { Params } from "../../proto/financial/financial_pb";
 import { Query } from "../../proto/products/products_pb";
 import { GetProfile } from "../../utils/utils";
 import ToReceive from "./toreceive";
+import Received from "./received";
 
 export default function Financial() {
   const [tab, setTab] = useState(0);
@@ -52,6 +53,10 @@ export default function Financial() {
     {
       title: "To receive",
       component: <ToReceive incomes={incomes} />
+    },
+    {
+      title: "Received",
+      component: <Received update={() => GetIncomes()} incomes={incomes} />
     },
     {
       title: "Expenses",

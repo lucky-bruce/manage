@@ -476,4 +476,81 @@ proto.financial.FinancialServicePromiseClient.prototype.getExpenses = function(
   );
 };
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.PaymentParams,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodDescriptor_FinancialService_Pay = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/Pay",
+  grpc.web.MethodType.UNARY,
+  proto.financial.PaymentParams,
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.PaymentParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.PaymentParams,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodInfo_FinancialService_Pay = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.PaymentParams} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.PaymentParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.EmptyResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.EmptyResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.pay = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/Pay",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_Pay,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.PaymentParams} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.EmptyResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.pay = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/Pay",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_Pay
+  );
+};
+
 module.exports = proto.financial;

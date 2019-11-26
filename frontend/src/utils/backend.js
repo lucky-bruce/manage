@@ -14,6 +14,10 @@ import {
   Permission
 } from "../proto/authorization/authorization_pb";
 import { Params as LandingParams } from "../proto/landing/landing_pb";
+import {
+  Params as FinancialParams,
+  PaymentParams
+} from "../proto/financial/financial_pb";
 
 const client = GetClients();
 
@@ -44,6 +48,10 @@ export const getDistance = (from, to, callback) => {
   params.setTo(to);
 
   client.quotes.getDistance(params, {}, (err, res) => callback(err, res));
+};
+
+export const getProducts = (params, callback) => {
+  client.products.getProducts(params, {}, callback);
 };
 
 export const GetProductByID = (id, callback) => {
@@ -98,12 +106,16 @@ export const changePermission = (id, permissions, callback) => {
   client.auth.changePermissions(pp, {}, callback);
 };
 
-export const getIncomes = (params = new LandingParams(), callback) => {
+export const getIncomes = (params = new FinancialParams(), callback) => {
   client.finances.getIncome(params, {}, callback);
 };
 
-export const getExpenses = (params = new LandingParams(), callback) => {
+export const getExpenses = (params = new FinancialParams(), callback) => {
   client.finances.getExpenses(params, {}, callback);
+};
+
+export const pay = (params = new PaymentParams(), callback) => {
+  client.finances.pay(params, {}, callback);
 };
 
 export const getUniqueFields = (field, collection, callback) => {

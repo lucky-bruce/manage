@@ -142,3 +142,33 @@ func (s *Server) GetExpenses(ctx context.Context, params *financial.Params) (*fi
 
 	return &financial.Expenses{Expense: exps}, nil
 }
+
+func (s *Server) Pay(ctx context.Context, params *financial.PaymentParams) (*financial.EmptyResponse, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "income")
+
+	var payoff financial.Payoff
+	err := store.GetElement(&payoff, bson.M{"quoteid": params.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.EmptyResponse), err
+	}
+
+	if payoff.Toreceive-params.Amount < 0 {
+
+		return new(financial.EmptyResponse), nil
+	}
+
+	payoff.Toreceive -= params.Amount
+	payoff.Paid += params.Amount
+
+	err = store.C.Update(bson.M{"quoteid": params.Id}, payoff)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.EmptyResponse), err
+	}
+
+	return new(financial.EmptyResponse), nil
+}

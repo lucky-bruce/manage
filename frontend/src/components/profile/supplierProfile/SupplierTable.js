@@ -44,7 +44,6 @@ export default function SupplierTable(props) {
 
   return (
     <div className="mt-4">
-      <h3>Validate quotations</h3>
       <div className="mt-3 table-responsive">
         <table className="table">
           <thead>

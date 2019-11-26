@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./editor.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "mdbreact/dist/css/mdb.css";
+import "./components/main/Components/Layouts/index.css";
 import Dashboard from "./routes/dashboard/Dashboard";
 import * as serviceWorker from "./serviceWorker";
 import NotFoundPage from "./routes/NotFoundPage";
@@ -78,15 +80,7 @@ const routes = {
     </Private>
   ),
   "/new/quote": () => (
-    <Private
-      permission={u => {
-        if (u.permission) {
-          return u.permission["quotes"] ? true : false;
-        }
-        return false;
-      }}
-      roles={["user"]}
-    >
+    <Private roles={["user"]}>
       <QuoteForm />
     </Private>
   ),

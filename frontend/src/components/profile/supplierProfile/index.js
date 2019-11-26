@@ -7,6 +7,7 @@ import $ from "jquery";
 import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import Stats from "../profileStats";
 import { Tabs } from "../../ui";
+import ShortageTable from "./ShortageTable";
 
 export default function SupplierProfile() {
   const userData = GetProfile();
@@ -87,7 +88,8 @@ export default function SupplierProfile() {
                   copyToClipboard(
                     `${window.location.origin}/new/staff?id=${
                       userData
-                        ? userData.role === "supplier"
+                        ? userData.role === "supplier" ||
+                          userData.role === "admin"
                           ? userData.id
                           : userData.companyid
                         : ""
@@ -104,7 +106,12 @@ export default function SupplierProfile() {
         </div>
       </div>
       <div className="mt-4">
-        <Tabs data={[{ title: "Quotes", component: <SupplierTable /> }]} />
+        <Tabs
+          data={[
+            { title: "Quotes", component: <SupplierTable /> },
+            { title: "Shortages", component: <ShortageTable /> }
+          ]}
+        />
       </div>
     </div>
   );
