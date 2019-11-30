@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Bank } from "../../../proto/financial/financial_pb";
 import Context from "../../context/context";
+import { GetProfile, GetUserId } from "../../../utils/utils";
 
 export default function Modal(props) {
   const context = useContext(Context);
@@ -26,6 +27,7 @@ export default function Modal(props) {
 
     bank.setName(name);
     bank.setColor(RandomColor());
+    bank.setUserid(GetUserId());
     client.newBank(bank, {}, (err, res) => {
       if (err) {
         console.log(err);

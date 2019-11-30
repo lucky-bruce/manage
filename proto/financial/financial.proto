@@ -11,6 +11,7 @@ service FinancialService {
   rpc GetExpenses(Params) returns (Expenses);
 
   rpc Pay(PaymentParams) returns (EmptyResponse);
+
 }
 
 message Request {
@@ -22,9 +23,6 @@ message PaymentParams {
   float amount = 2; 
 }
 
-message EmptyResponse {
-
-}
 
 message Expenses {
   repeated Expense expense = 1;
@@ -39,8 +37,9 @@ message Expense {
 message Params {
   string name = 1;
   float amount = 2;
-  string to = 3;
-  products.Query query = 4;
+  string description = 3;
+  string to = 4;
+  products.Query query = 5;
 }
 
 message Payoff {
@@ -68,4 +67,9 @@ message Bank {
   string name = 1;
   float money = 2;
   string color = 3;
+  string userid = 4;
+}
+
+message EmptyResponse {
+
 }

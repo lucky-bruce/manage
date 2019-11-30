@@ -24,8 +24,11 @@ export function limitedAccess(roles, path, permission) {
     if (roles.length > 0) {
       for (var i in roles) {
         if (
-          (profile.role === roles[i] &&
-            (permission ? permission(profile) : true)) ||
+          (profile.role === roles[i] && profile === "staff"
+            ? permission
+              ? permission(profile)
+              : true
+            : true) ||
           profile.role === "admin"
         )
           return true;
@@ -108,4 +111,18 @@ export const isEmpty = obj => {
   }
 
   return true;
+};
+
+export const GetUserId = () => {
+  let p = GetProfile();
+  switch (p.role) {
+    case "supplier":
+      return p.id;
+    case "staff":
+      return p.companyid;
+    case "user":
+      return p.id;
+    default:
+      return "";
+  }
 };

@@ -37,12 +37,12 @@ func (s *Server) GetIncome(ctx context.Context, params *financial.Params) (*fina
 }
 
 func NewIncome(quote *quotes.Quote) {
+
 	dataStore := db.NewDataStore()
 
 	defer dataStore.Close()
 	store := db.GetStore(dataStore, "income")
 
-	logger.InfoFunc(quote.Supplierids)
 	for _, sup := range quote.Supplierids {
 		var total float32
 		var totalWithProfit float32
@@ -111,14 +111,38 @@ func (s *Server) GetBanks(ctx context.Context, req *financial.Request) (*financi
 }
 
 func (s *Server) ToDestination(ctx context.Context, params *financial.Params) (*financial.Response, error) {
-	ex := financial.Expense{Timestamp: time.Now().Unix(), Name: params.Name, Amount: params.Amount}
+
+	go func(name string, amount float32) {
+		dataStore := db.NewDataStore()
+
+		defer dataStore.Close()
+		store := db.GetStore(dataStore, "expenses")
+
+		err := store.Insert(financial.Expense{Timestamp: time.Now().Unix(), Name: name, Amount: amount})
+		if err != nil {
+			logger.ErrorFunc(err)
+
+		}
+	}(params.To, params.Amount)
+
 	dataStore := db.NewDataStore()
 
 	defer dataStore.Close()
-	store := db.GetStore(dataStore, "expenses")
+	store := db.GetStore(dataStore, "banks")
 
-	err := store.Insert(ex)
+	var bank financial.Bank
+
+	err := store.GetElement(&bank, bson.M{"name": params.To})
 	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.Response), err
+	}
+
+	bank.Money += params.Amount
+
+	err = store.C.Update(bson.M{"name": bank.Name}, bank)
+	if err != nil {
+		logger.ErrorFunc(err)
 		return new(financial.Response), err
 	}
 

@@ -16,7 +16,8 @@ import {
 import { Params as LandingParams } from "../proto/landing/landing_pb";
 import {
   Params as FinancialParams,
-  PaymentParams
+  PaymentParams,
+  NewParams
 } from "../proto/financial/financial_pb";
 
 const client = GetClients();
