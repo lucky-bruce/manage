@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
 
 import Context from "../../context/context";
 import {
@@ -12,10 +12,12 @@ import { TopBar } from "../../ui/index";
 import Upload from "../../upload/Upload";
 import Product from "./product";
 import Service from "./service";
+import { useQueryParams } from "hookrouter";
 
 export default function ProductForm() {
   const context = useContext(Context);
 
+  const [queryParams, setQueryParams] = useQueryParams();
   const [tab, settab] = useState(0);
 
   const [userInput, setUserInput] = useReducer(
@@ -61,6 +63,15 @@ export default function ProductForm() {
     <Product handleChange={handleChange} userInput={userInput} />,
     <Service handleChange={handleChange} userInput={userInput} />
   ];
+
+  useEffect(() => {
+    const { tab } = queryParams;
+    if (tab === "service") {
+      settab(1);
+    } else {
+      settab(0);
+    }
+  }, []);
 
   return (
     <div>

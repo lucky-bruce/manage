@@ -15,6 +15,7 @@ import {
   Sector,
   News
 } from "../proto/landing/landing_pb";
+import { Expense } from "../proto/financial/financial_pb";
 
 const user = GetProfile();
 
@@ -75,6 +76,15 @@ export const quoteInput = {
   suppliersLoc: [],
   subtotal: 0,
   total: 0
+};
+export const expenseInput = {
+  name: "",
+  amount: 0,
+  timestamp: 0,
+  repeated: false,
+  period: 0,
+  id: "",
+  step: 0
 };
 
 export const teamInput = {
@@ -174,7 +184,6 @@ export const GetGRPCQuote = obj => {
   for (let product of obj.productsList) {
     var qp = new QuoteProduct();
     var p = GetGRPCProduct(product.product);
-    console.log(p);
 
     qp.setProduct(p);
     qp.setQty(product.qty);
@@ -219,6 +228,17 @@ export const GetGRPCQuote = obj => {
   }
 
   return quote;
+};
+
+export const GetGRPCExpense = obj => {
+  let s = new Expense();
+  s.setId(obj.id);
+  s.setName(obj.name);
+  s.setAmount(obj.amount);
+  s.setRepeated(obj.repeated);
+  s.setPeriod(new Date(obj.period).getTime() / 1000);
+  s.setStep(obj.step);
+  return s;
 };
 
 export const GetGRPCTeam = obj => {
@@ -376,4 +396,14 @@ export const GetTeamFromGRPC = (handleChange, obj) => {
   handleChange("image", obj.image);
   handleChange("description", obj.description);
   handleChange("timestamp", obj.timestamp);
+};
+
+export const GetExpenseFromGRPC = (handleChange, obj) => {
+  handleChange("period", obj.period);
+  handleChange("name", obj.name);
+  handleChange("id", obj.id);
+  handleChange("repeated", obj.repeated);
+  handleChange("amount", obj.amount);
+  handleChange("timestamp", obj.timestamp);
+  handleChange("step", obj.step);
 };

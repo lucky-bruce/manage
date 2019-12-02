@@ -11,6 +11,8 @@ service AuthorizationService {
   rpc GetStats (Params) returns (Stats);
 
   rpc ChangePermissions(PermissionParams) returns (Response);
+
+  rpc LinkSalary(Params) returns (Response);
 }
 
 message User {
@@ -31,8 +33,8 @@ message User {
   string Zip = 15;
   string Username = 16;
   string Companyid = 17;
-  
   Permission permission = 18;
+  string salaryid = 19;
 }
 
 
@@ -67,7 +69,8 @@ message Response {
 
 message Params {
   string id = 1;
-  products.Query query = 2;
+  string salaryid = 2;
+  products.Query query = 3;
 }
 
 message Stats {

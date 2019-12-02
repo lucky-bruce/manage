@@ -5,6 +5,7 @@ import { GetProfile } from "../../../../utils/utils";
 import Context from "../../../context/context";
 import PermissionSelect from "./PermissionSelect";
 import { changePermission } from "../../../../utils/backend";
+import SalaryMenu from "./SalaryMenu";
 export default function StaffTable() {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -88,6 +89,7 @@ export default function StaffTable() {
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Permissions</th>
+            <th scope="col">Salary</th>
           </tr>
         </thead>
         <tbody>
@@ -103,6 +105,13 @@ export default function StaffTable() {
                   onChange={(name, value) => onChange(user.id, name, value)}
                   id={user.id}
                   permissions={user.permission || {}}
+                />
+              </td>
+              <td>
+                <SalaryMenu
+                  id={user.id}
+                  name={`${user.firstname} ${user.lastname}`}
+                  salaryid={user.salaryid}
                 />
               </td>
             </tr>

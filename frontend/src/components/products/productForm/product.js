@@ -40,6 +40,7 @@ export default function ProductForm({ handleChange, userInput }) {
   useEffect(() => {
     GetSectors();
     GetCategories();
+    GetSubCategories();
   }, []);
 
   return (

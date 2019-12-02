@@ -17,7 +17,7 @@ import { Params as LandingParams } from "../proto/landing/landing_pb";
 import {
   Params as FinancialParams,
   PaymentParams,
-  NewParams
+  Expense
 } from "../proto/financial/financial_pb";
 
 const client = GetClients();
@@ -107,8 +107,23 @@ export const changePermission = (id, permissions, callback) => {
   client.auth.changePermissions(pp, {}, callback);
 };
 
+export const newExpense = (e = new Expense(), callback) => {
+  client.finances.newExpense(e, {}, callback);
+};
+
+export const deleteExpense = (p = new FinancialParams(), callback) => {
+  client.finances.deleteExpense(p, {}, callback);
+};
+export const linkSalary = (params = new AuthorizationParams(), callback) => {
+  client.auth.linkSalary(params, {}, callback);
+};
+
 export const getIncomes = (params = new FinancialParams(), callback) => {
   client.finances.getIncome(params, {}, callback);
+};
+
+export const getExpense = (params = new FinancialParams(), callback) => {
+  client.finances.getExpense(params, {}, callback);
 };
 
 export const getExpenses = (params = new FinancialParams(), callback) => {

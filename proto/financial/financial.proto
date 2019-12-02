@@ -8,14 +8,28 @@ service FinancialService {
   rpc GetBanks(Request) returns (Response);
   rpc ToDestination(Params) returns (Response);
 
+  rpc NewExpense(Expense) returns (Expense);
   rpc GetExpenses(Params) returns (Expenses);
+  rpc GetExpense(Params) returns (Expense);
+  rpc DeleteExpense(Params) returns (EmptyResponse);
+  rpc ToggleReiteration(Params) returns (EmptyResponse);
+
+  rpc NewSalary(Salary) returns (Salary);
 
   rpc Pay(PaymentParams) returns (EmptyResponse);
-
 }
 
 message Request {
 
+}
+
+message Salary {
+  int64 timestamp = 1;
+  string name = 2;
+  float amount = 3;
+  bool repeated = 4;
+  int64 period = 5;
+  string id = 6;
 }
 
 message PaymentParams {
@@ -32,6 +46,10 @@ message Expense {
   int64 timestamp = 1;
   string name = 2;
   float amount = 3;
+  bool repeated = 4;
+  int64 period = 5;
+  string id = 6;
+  int32 step = 7;
 }
 
 message Params {
@@ -40,6 +58,7 @@ message Params {
   string description = 3;
   string to = 4;
   products.Query query = 5;
+  string id = 6;
 }
 
 message Payoff {

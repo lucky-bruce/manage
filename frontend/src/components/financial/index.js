@@ -10,7 +10,7 @@ import ToReceive from "./toreceive";
 import Received from "./received";
 
 export default function Financial() {
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(4);
 
   const [incomes, setIncomes] = useState([]);
 

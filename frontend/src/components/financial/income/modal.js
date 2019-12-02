@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Bank } from "../../../proto/financial/financial_pb";
 import Context from "../../context/context";
-import { GetProfile, GetUserId } from "../../../utils/utils";
+import { GetUserId } from "../../../utils/utils";
 
 export default function Modal(props) {
   const context = useContext(Context);

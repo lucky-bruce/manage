@@ -14,6 +14,7 @@ import (
 	"github.com/Beaxhem/manage/backend/pkg/services"
 
 	"github.com/Beaxhem/manage/backend/internal/server"
+	"github.com/jasonlvhit/gocron"
 	"google.golang.org/grpc"
 )
 
@@ -35,6 +36,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	gocron.Every(1).Hour().Do(server.RepeatedExpenses)
 
 	srv := grpc.NewServer(withServerUnaryInterceptor())
 	quotes.RegisterQuoteServiceServer(srv, &server.Server{})

@@ -63,7 +63,7 @@ export default function Stock() {
 		<div className="table-responsive p-4">
 			{user.role === "supplier" ? (
 				<button className="m-3 btn-success btn">
-					<A className="text-white" href="/new/product">
+					<A className="text-white" href="/new/goods">
 						New Product
 					</A>
 				</button>

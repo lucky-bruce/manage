@@ -84,7 +84,7 @@ const routes = {
       <QuoteForm />
     </Private>
   ),
-  "/new/product": () => (
+  "/new/goods": () => (
     <Private
       permission={u => {
         if (u.permission) {

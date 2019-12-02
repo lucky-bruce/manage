@@ -168,3 +168,28 @@ func (s *Server) ChangePermissions(ctx context.Context, params *authorization.Pe
 	}
 	return &authorization.Response{Token: token}, nil
 }
+
+func (s *Server) LinkSalary(ctx context.Context, params *authorization.Params) (*authorization.Response, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "users")
+
+	var user authorization.User
+	logger.InfoFunc(params.Salaryid)
+	err := store.GetElement(&user, bson.M{"id": params.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	user.Salaryid = params.Salaryid
+
+	err = store.C.Update(bson.M{"id": params.Id}, user)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(authorization.Response), err
+	}
+
+	return new(authorization.Response), nil
+}

@@ -56,7 +56,7 @@ export default function StockTable() {
 
   return (
     <div>
-      <A className="text-white" href="/new/product">
+      <A className="text-white" href="/new/goods">
         <button className="m-3 btn-success btn">New Product</button>
       </A>
 

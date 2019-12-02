@@ -8,6 +8,7 @@ require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/golang/protobuf v1.3.2
 	github.com/google/uuid v1.1.1
+	github.com/jasonlvhit/gocron v0.0.0-20191125235832-30e323a962ed
 	github.com/kr/pretty v0.1.0
 	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20191027152451-9434209cb086

@@ -9,6 +9,7 @@ import (
 	"github.com/Beaxhem/manage/backend/pkg/financial"
 	"github.com/Beaxhem/manage/backend/pkg/logger"
 	"github.com/Beaxhem/manage/backend/pkg/quotes"
+	"github.com/google/uuid"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -118,7 +119,8 @@ func (s *Server) ToDestination(ctx context.Context, params *financial.Params) (*
 		defer dataStore.Close()
 		store := db.GetStore(dataStore, "expenses")
 
-		err := store.Insert(financial.Expense{Timestamp: time.Now().Unix(), Name: name, Amount: amount})
+		id, _ := uuid.NewRandom()
+		err := store.Insert(financial.Expense{Id: id.String(), Timestamp: time.Now().Unix(), Name: name, Amount: amount})
 		if err != nil {
 			logger.ErrorFunc(err)
 
@@ -149,6 +151,63 @@ func (s *Server) ToDestination(ctx context.Context, params *financial.Params) (*
 	return new(financial.Response), nil
 
 }
+func NewExpense(ex *financial.Expense) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	err := store.Insert(ex)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return
+	}
+}
+
+func (s *Server) NewExpense(ctx context.Context, expense *financial.Expense) (*financial.Expense, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	if expense.Id != "" {
+		err := store.C.Update(bson.M{"id": expense.Id}, expense)
+		if err != nil {
+			logger.ErrorFunc(err)
+			return new(financial.Expense), err
+		}
+
+		return new(financial.Expense), nil
+	}
+	id, _ := uuid.NewRandom()
+	expense.Id = id.String()
+	expense.Timestamp = time.Now().Unix()
+
+	err := store.Insert(expense)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.Expense), err
+	}
+
+	return expense, nil
+}
+
+func (s *Server) GetExpense(ctx context.Context, params *financial.Params) (*financial.Expense, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	var exp financial.Expense
+
+	err := store.GetElement(&exp, bson.M{"id": params.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.Expense), err
+	}
+
+	return &exp, nil
+}
 
 func (s *Server) GetExpenses(ctx context.Context, params *financial.Params) (*financial.Expenses, error) {
 	dataStore := db.NewDataStore()
@@ -157,8 +216,14 @@ func (s *Server) GetExpenses(ctx context.Context, params *financial.Params) (*fi
 	store := db.GetStore(dataStore, "expenses")
 
 	var exps []*financial.Expense
+	var q interface{}
+	var sortFields []string
+	if params.GetQuery() != nil {
+		q, _ = utils.GetQuery(params.GetQuery().Querystring)
+		sortFields = params.GetQuery().SortFields
+	}
 
-	err := store.GetAll(&exps, nil, nil)
+	err := store.GetAll(&exps, sortFields, q)
 	if err != nil {
 		logger.ErrorFunc(err)
 		return new(financial.Expenses), err
@@ -195,4 +260,136 @@ func (s *Server) Pay(ctx context.Context, params *financial.PaymentParams) (*fin
 	}
 
 	return new(financial.EmptyResponse), nil
+}
+
+func (s *Server) DeleteExpense(ctx context.Context, params *financial.Params) (*financial.EmptyResponse, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	err := store.DeleteElementByID(params.Id)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.EmptyResponse), err
+	}
+
+	return new(financial.EmptyResponse), nil
+}
+
+func (s *Server) ToggleReiteration(ctx context.Context, params *financial.Params) (*financial.EmptyResponse, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "expenses")
+
+	var ex financial.Expense
+	err := store.GetElementByID(params.Id, &ex)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.EmptyResponse), err
+	}
+
+	ex.Repeated = true
+
+	err = store.C.Update(bson.M{"id": ex.Id}, ex)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.EmptyResponse), err
+	}
+
+	return new(financial.EmptyResponse), nil
+}
+
+func RepeatedExpenses() {
+
+	if time.Now().Hour() != 0 {
+		return
+	}
+
+	go func() {
+		dataStore := db.NewDataStore()
+
+		defer dataStore.Close()
+		store := db.GetStore(dataStore, "salaries")
+
+		var sls []*financial.Salary
+		err := store.GetAll(&sls, nil, nil)
+		if err != nil {
+			logger.ErrorFunc(err)
+			return
+		}
+
+		for _, r := range sls {
+			if r.Period < time.Now().Unix() {
+				r.Period = int64(time.Duration(r.Period) + 31*24*time.Hour)
+				err := store.C.Update(bson.M{"name": r.Name}, r)
+				if err != nil {
+					logger.ErrorFunc(err)
+					return
+				}
+
+				id, _ := uuid.NewRandom()
+
+				NewExpense(&financial.Expense{Name: r.Name, Amount: r.Amount, Timestamp: time.Now().Unix(), Id: id.String()})
+			}
+		}
+	}()
+
+	go func() {
+		dataStore := db.NewDataStore()
+
+		defer dataStore.Close()
+		expensesStore := db.GetStore(dataStore, "expenses")
+
+		var exps []*financial.Expense
+		err := expensesStore.GetAll(&exps, nil, bson.M{"type": "repeated"})
+		if err != nil {
+			logger.ErrorFunc(err)
+			return
+		}
+
+		for _, r := range exps {
+			if r.Period < time.Now().Unix() {
+				r.Period = int64(time.Duration(r.Period) + time.Duration(r.Step)*24*time.Hour)
+				err := expensesStore.C.Update(bson.M{"name": r.Name}, r)
+				if err != nil {
+					logger.ErrorFunc(err)
+					return
+				}
+				id, _ := uuid.NewRandom()
+
+				NewExpense(&financial.Expense{Name: r.Name, Amount: r.Amount, Timestamp: time.Now().Unix(), Id: id.String()})
+			}
+		}
+	}()
+
+}
+
+func (s *Server) NewSalary(ctx context.Context, salary *financial.Salary) (*financial.Salary, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "salaries")
+
+	if salary.Id != "" {
+		err := store.C.Update(bson.M{"id": salary.Id}, salary)
+		if err != nil {
+			logger.ErrorFunc(err)
+			return new(financial.Salary), err
+		}
+
+		return new(financial.Salary), nil
+	}
+	id, _ := uuid.NewRandom()
+	salary.Id = id.String()
+	salary.Timestamp = time.Now().Unix()
+
+	err := store.Insert(salary)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(financial.Salary), err
+	}
+
+	return salary, nil
 }

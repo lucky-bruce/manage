@@ -85,7 +85,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
         companyid: jspb.Message.getFieldWithDefault(msg, 17, ""),
         permission:
           (f = msg.getPermission()) &&
-          proto.authorization.Permission.toObject(includeInstance, f)
+          proto.authorization.Permission.toObject(includeInstance, f),
+        salaryid: jspb.Message.getFieldWithDefault(msg, 19, "")
       };
 
     if (includeInstance) {
@@ -196,6 +197,10 @@ proto.authorization.User.deserializeBinaryFromReader = function(msg, reader) {
         );
         msg.setPermission(value);
         break;
+      case 19:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setSalaryid(value);
+        break;
       default:
         reader.skipField();
         break;
@@ -298,6 +303,10 @@ proto.authorization.User.serializeBinaryToWriter = function(message, writer) {
       f,
       proto.authorization.Permission.serializeBinaryToWriter
     );
+  }
+  f = message.getSalaryid();
+  if (f.length > 0) {
+    writer.writeString(19, f);
   }
 };
 
@@ -549,6 +558,19 @@ proto.authorization.User.prototype.clearPermission = function() {
  */
 proto.authorization.User.prototype.hasPermission = function() {
   return jspb.Message.getField(this, 18) != null;
+};
+
+/**
+ * optional string salaryid = 19;
+ * @return {string}
+ */
+proto.authorization.User.prototype.getSalaryid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 19, ""));
+};
+
+/** @param {string} value */
+proto.authorization.User.prototype.setSalaryid = function(value) {
+  jspb.Message.setProto3StringField(this, 19, value);
 };
 
 /**
@@ -1562,6 +1584,7 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
     var f,
       obj = {
         id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+        salaryid: jspb.Message.getFieldWithDefault(msg, 2, ""),
         query:
           (f = msg.getQuery()) &&
           products_products_pb.Query.toObject(includeInstance, f)
@@ -1604,6 +1627,10 @@ proto.authorization.Params.deserializeBinaryFromReader = function(msg, reader) {
         msg.setId(value);
         break;
       case 2:
+        var value = /** @type {string} */ (reader.readString());
+        msg.setSalaryid(value);
+        break;
+      case 3:
         var value = new products_products_pb.Query();
         reader.readMessage(
           value,
@@ -1642,10 +1669,14 @@ proto.authorization.Params.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(1, f);
   }
+  f = message.getSalaryid();
+  if (f.length > 0) {
+    writer.writeString(2, f);
+  }
   f = message.getQuery();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
       products_products_pb.Query.serializeBinaryToWriter
     );
@@ -1666,20 +1697,33 @@ proto.authorization.Params.prototype.setId = function(value) {
 };
 
 /**
- * optional products.Query query = 2;
+ * optional string salaryid = 2;
+ * @return {string}
+ */
+proto.authorization.Params.prototype.getSalaryid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+/** @param {string} value */
+proto.authorization.Params.prototype.setSalaryid = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+/**
+ * optional products.Query query = 3;
  * @return {?proto.products.Query}
  */
 proto.authorization.Params.prototype.getQuery = function() {
   return /** @type{?proto.products.Query} */ (jspb.Message.getWrapperField(
     this,
     products_products_pb.Query,
-    2
+    3
   ));
 };
 
 /** @param {?proto.products.Query|undefined} value */
 proto.authorization.Params.prototype.setQuery = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
+  jspb.Message.setWrapperField(this, 3, value);
 };
 
 proto.authorization.Params.prototype.clearQuery = function() {
@@ -1691,7 +1735,7 @@ proto.authorization.Params.prototype.clearQuery = function() {
  * @return {!boolean}
  */
 proto.authorization.Params.prototype.hasQuery = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 /**

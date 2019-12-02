@@ -57,6 +57,85 @@ func (m *Request) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Request proto.InternalMessageInfo
 
+type Salary struct {
+	Timestamp            int64    `protobuf:"varint,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Amount               float32  `protobuf:"fixed32,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Repeated             bool     `protobuf:"varint,4,opt,name=repeated,proto3" json:"repeated,omitempty"`
+	Period               int64    `protobuf:"varint,5,opt,name=period,proto3" json:"period,omitempty"`
+	Id                   string   `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Salary) Reset()         { *m = Salary{} }
+func (m *Salary) String() string { return proto.CompactTextString(m) }
+func (*Salary) ProtoMessage()    {}
+func (*Salary) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a8d8ee334e6c4413, []int{1}
+}
+
+func (m *Salary) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Salary.Unmarshal(m, b)
+}
+func (m *Salary) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Salary.Marshal(b, m, deterministic)
+}
+func (m *Salary) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Salary.Merge(m, src)
+}
+func (m *Salary) XXX_Size() int {
+	return xxx_messageInfo_Salary.Size(m)
+}
+func (m *Salary) XXX_DiscardUnknown() {
+	xxx_messageInfo_Salary.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Salary proto.InternalMessageInfo
+
+func (m *Salary) GetTimestamp() int64 {
+	if m != nil {
+		return m.Timestamp
+	}
+	return 0
+}
+
+func (m *Salary) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Salary) GetAmount() float32 {
+	if m != nil {
+		return m.Amount
+	}
+	return 0
+}
+
+func (m *Salary) GetRepeated() bool {
+	if m != nil {
+		return m.Repeated
+	}
+	return false
+}
+
+func (m *Salary) GetPeriod() int64 {
+	if m != nil {
+		return m.Period
+	}
+	return 0
+}
+
+func (m *Salary) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type PaymentParams struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Amount               float32  `protobuf:"fixed32,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -69,7 +148,7 @@ func (m *PaymentParams) Reset()         { *m = PaymentParams{} }
 func (m *PaymentParams) String() string { return proto.CompactTextString(m) }
 func (*PaymentParams) ProtoMessage()    {}
 func (*PaymentParams) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{1}
+	return fileDescriptor_a8d8ee334e6c4413, []int{2}
 }
 
 func (m *PaymentParams) XXX_Unmarshal(b []byte) error {
@@ -115,7 +194,7 @@ func (m *Expenses) Reset()         { *m = Expenses{} }
 func (m *Expenses) String() string { return proto.CompactTextString(m) }
 func (*Expenses) ProtoMessage()    {}
 func (*Expenses) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{2}
+	return fileDescriptor_a8d8ee334e6c4413, []int{3}
 }
 
 func (m *Expenses) XXX_Unmarshal(b []byte) error {
@@ -147,6 +226,10 @@ type Expense struct {
 	Timestamp            int64    `protobuf:"varint,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Amount               float32  `protobuf:"fixed32,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Repeated             bool     `protobuf:"varint,4,opt,name=repeated,proto3" json:"repeated,omitempty"`
+	Period               int64    `protobuf:"varint,5,opt,name=period,proto3" json:"period,omitempty"`
+	Id                   string   `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
+	Step                 int32    `protobuf:"varint,7,opt,name=step,proto3" json:"step,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -156,7 +239,7 @@ func (m *Expense) Reset()         { *m = Expense{} }
 func (m *Expense) String() string { return proto.CompactTextString(m) }
 func (*Expense) ProtoMessage()    {}
 func (*Expense) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{3}
+	return fileDescriptor_a8d8ee334e6c4413, []int{4}
 }
 
 func (m *Expense) XXX_Unmarshal(b []byte) error {
@@ -198,12 +281,41 @@ func (m *Expense) GetAmount() float32 {
 	return 0
 }
 
+func (m *Expense) GetRepeated() bool {
+	if m != nil {
+		return m.Repeated
+	}
+	return false
+}
+
+func (m *Expense) GetPeriod() int64 {
+	if m != nil {
+		return m.Period
+	}
+	return 0
+}
+
+func (m *Expense) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Expense) GetStep() int32 {
+	if m != nil {
+		return m.Step
+	}
+	return 0
+}
+
 type Params struct {
 	Name                 string          `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Amount               float32         `protobuf:"fixed32,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	Description          string          `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	To                   string          `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
 	Query                *products.Query `protobuf:"bytes,5,opt,name=query,proto3" json:"query,omitempty"`
+	Id                   string          `protobuf:"bytes,6,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
@@ -213,7 +325,7 @@ func (m *Params) Reset()         { *m = Params{} }
 func (m *Params) String() string { return proto.CompactTextString(m) }
 func (*Params) ProtoMessage()    {}
 func (*Params) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{4}
+	return fileDescriptor_a8d8ee334e6c4413, []int{5}
 }
 
 func (m *Params) XXX_Unmarshal(b []byte) error {
@@ -269,6 +381,13 @@ func (m *Params) GetQuery() *products.Query {
 	return nil
 }
 
+func (m *Params) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type Payoff struct {
 	Supplierid           string          `protobuf:"bytes,1,opt,name=supplierid,proto3" json:"supplierid,omitempty"`
 	Timestamp            int64           `protobuf:"varint,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
@@ -286,7 +405,7 @@ func (m *Payoff) Reset()         { *m = Payoff{} }
 func (m *Payoff) String() string { return proto.CompactTextString(m) }
 func (*Payoff) ProtoMessage()    {}
 func (*Payoff) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{5}
+	return fileDescriptor_a8d8ee334e6c4413, []int{6}
 }
 
 func (m *Payoff) XXX_Unmarshal(b []byte) error {
@@ -368,7 +487,7 @@ func (m *SectorProfit) Reset()         { *m = SectorProfit{} }
 func (m *SectorProfit) String() string { return proto.CompactTextString(m) }
 func (*SectorProfit) ProtoMessage()    {}
 func (*SectorProfit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{6}
+	return fileDescriptor_a8d8ee334e6c4413, []int{7}
 }
 
 func (m *SectorProfit) XXX_Unmarshal(b []byte) error {
@@ -415,7 +534,7 @@ func (m *Response) Reset()         { *m = Response{} }
 func (m *Response) String() string { return proto.CompactTextString(m) }
 func (*Response) ProtoMessage()    {}
 func (*Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{7}
+	return fileDescriptor_a8d8ee334e6c4413, []int{8}
 }
 
 func (m *Response) XXX_Unmarshal(b []byte) error {
@@ -464,7 +583,7 @@ func (m *Bank) Reset()         { *m = Bank{} }
 func (m *Bank) String() string { return proto.CompactTextString(m) }
 func (*Bank) ProtoMessage()    {}
 func (*Bank) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{8}
+	return fileDescriptor_a8d8ee334e6c4413, []int{9}
 }
 
 func (m *Bank) XXX_Unmarshal(b []byte) error {
@@ -523,7 +642,7 @@ func (m *EmptyResponse) Reset()         { *m = EmptyResponse{} }
 func (m *EmptyResponse) String() string { return proto.CompactTextString(m) }
 func (*EmptyResponse) ProtoMessage()    {}
 func (*EmptyResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a8d8ee334e6c4413, []int{9}
+	return fileDescriptor_a8d8ee334e6c4413, []int{10}
 }
 
 func (m *EmptyResponse) XXX_Unmarshal(b []byte) error {
@@ -546,6 +665,7 @@ var xxx_messageInfo_EmptyResponse proto.InternalMessageInfo
 
 func init() {
 	proto.RegisterType((*Request)(nil), "financial.Request")
+	proto.RegisterType((*Salary)(nil), "financial.Salary")
 	proto.RegisterType((*PaymentParams)(nil), "financial.PaymentParams")
 	proto.RegisterType((*Expenses)(nil), "financial.Expenses")
 	proto.RegisterType((*Expense)(nil), "financial.Expense")
@@ -560,43 +680,51 @@ func init() {
 func init() { proto.RegisterFile("financial/financial.proto", fileDescriptor_a8d8ee334e6c4413) }
 
 var fileDescriptor_a8d8ee334e6c4413 = []byte{
-	// 570 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0xdf, 0x8b, 0xd3, 0x40,
-	0x10, 0x26, 0xe9, 0x5d, 0x73, 0x99, 0x5a, 0xab, 0xab, 0x78, 0xb1, 0x88, 0x94, 0x80, 0x50, 0x41,
-	0x7a, 0xd8, 0x2a, 0xa7, 0x3e, 0x8a, 0x67, 0xf1, 0x45, 0xea, 0xd6, 0x47, 0x11, 0xf6, 0x92, 0x29,
-	0x2c, 0xd7, 0xec, 0xa6, 0xd9, 0xcd, 0x69, 0xfe, 0x08, 0xff, 0x44, 0x1f, 0xfd, 0x3f, 0x64, 0x37,
-	0x3f, 0x9a, 0x1c, 0x15, 0xf5, 0x6d, 0xe6, 0xdb, 0x6f, 0x33, 0xdf, 0x7c, 0x33, 0x59, 0x78, 0xb8,
-	0xe1, 0x82, 0x89, 0x88, 0xb3, 0xed, 0x59, 0x13, 0xcd, 0xd2, 0x4c, 0x6a, 0x49, 0xfc, 0x06, 0x18,
-	0x9f, 0xa6, 0x99, 0x8c, 0xf3, 0x48, 0xab, 0xb3, 0x3a, 0x28, 0x39, 0xa1, 0x0f, 0x1e, 0xc5, 0x5d,
-	0x8e, 0x4a, 0x87, 0xe7, 0x30, 0x5c, 0xb1, 0x22, 0x41, 0xa1, 0x57, 0x2c, 0x63, 0x89, 0x22, 0xb7,
-	0xc1, 0xe5, 0x71, 0xe0, 0x4c, 0x9c, 0xa9, 0x4f, 0x5d, 0x1e, 0x93, 0x07, 0xd0, 0x67, 0x89, 0xcc,
-	0x85, 0x0e, 0xdc, 0x89, 0x33, 0x75, 0x69, 0x95, 0x85, 0xaf, 0xe0, 0xe4, 0xe2, 0x7b, 0x8a, 0x42,
-	0xa1, 0x22, 0xcf, 0xc0, 0xc3, 0x32, 0x0e, 0x9c, 0x49, 0x6f, 0x3a, 0x98, 0x93, 0xd9, 0x5e, 0x56,
-	0xc5, 0xa2, 0x35, 0x25, 0x5c, 0x83, 0x57, 0x61, 0xe4, 0x11, 0xf8, 0x9a, 0x27, 0xa8, 0x34, 0x4b,
-	0x52, 0x5b, 0xb3, 0x47, 0xf7, 0x00, 0x21, 0x70, 0x24, 0x58, 0x82, 0xb6, 0xb0, 0x4f, 0x6d, 0xdc,
-	0x92, 0xd3, 0xeb, 0xc8, 0xf9, 0xe1, 0x40, 0xbf, 0xea, 0xa0, 0xbe, 0xe6, 0x1c, 0xbc, 0xd6, 0xe9,
-	0x82, 0x4c, 0x60, 0x10, 0xa3, 0x8a, 0x32, 0x9e, 0x6a, 0x2e, 0x85, 0xfd, 0xa6, 0x4f, 0xdb, 0x90,
-	0xf1, 0x43, 0xcb, 0xe0, 0xa8, 0xf4, 0x43, 0x4b, 0xf2, 0x04, 0x8e, 0x77, 0x39, 0x66, 0x45, 0x70,
-	0x3c, 0x71, 0xa6, 0x83, 0xf9, 0x68, 0xd6, 0x78, 0xfb, 0xc9, 0xc0, 0xb4, 0x3c, 0x0d, 0x7f, 0x59,
-	0x3d, 0x85, 0xdc, 0x6c, 0xc8, 0x63, 0x00, 0x95, 0xa7, 0xe9, 0x96, 0x63, 0xd6, 0x38, 0xdb, 0x42,
-	0xba, 0x26, 0xb8, 0x37, 0x4d, 0x30, 0xa7, 0x32, 0xc3, 0x08, 0xf9, 0x35, 0x56, 0x3d, 0xef, 0x01,
-	0xd3, 0x6b, 0xca, 0x78, 0x6c, 0xf5, 0xb9, 0xd4, 0xc6, 0x24, 0x00, 0x6f, 0x97, 0x4b, 0x8d, 0x3c,
-	0xb6, 0x1a, 0x7d, 0x5a, 0xa7, 0xe4, 0x39, 0x78, 0x0a, 0x23, 0x2d, 0x33, 0x15, 0xf4, 0xed, 0x9c,
-	0x4e, 0x5b, 0x73, 0x5a, 0xdb, 0x93, 0x55, 0x26, 0x37, 0x5c, 0xd3, 0x9a, 0x67, 0xc4, 0xa7, 0x16,
-	0xda, 0xa2, 0x52, 0x81, 0x67, 0xcb, 0xb4, 0x90, 0xf0, 0x0d, 0xdc, 0x6a, 0x5f, 0xfc, 0x1f, 0xf3,
-	0xc3, 0x2f, 0x70, 0x42, 0x51, 0xa5, 0xd2, 0x6c, 0xc2, 0x53, 0xe8, 0x73, 0x11, 0xc9, 0xa4, 0xde,
-	0xa0, 0xbb, 0x2d, 0x65, 0xa5, 0x8f, 0xb4, 0x22, 0x98, 0x09, 0x5c, 0x32, 0x71, 0xa5, 0x02, 0xd7,
-	0x32, 0x47, 0x2d, 0xe6, 0x5b, 0x26, 0xae, 0x68, 0x79, 0x1a, 0x7e, 0x85, 0x23, 0x93, 0x1e, 0x54,
-	0x74, 0x1f, 0x8e, 0x13, 0x29, 0xb0, 0xa8, 0x04, 0x95, 0x89, 0x41, 0x23, 0xb9, 0x95, 0x59, 0xb5,
-	0x06, 0x65, 0x62, 0xd4, 0xe7, 0xca, 0x8e, 0xae, 0x5c, 0x82, 0x2a, 0x0b, 0x47, 0x30, 0xbc, 0x48,
-	0x52, 0x5d, 0xd4, 0x2d, 0xcc, 0x7f, 0xba, 0x70, 0xe7, 0x7d, 0x2d, 0x65, 0x8d, 0xd9, 0x35, 0x8f,
-	0x90, 0x2c, 0xc0, 0x5f, 0xa2, 0xfe, 0x50, 0x2a, 0xef, 0x36, 0x65, 0x96, 0x75, 0x7c, 0xaf, 0x05,
-	0x35, 0x66, 0xbc, 0x00, 0xef, 0x23, 0x7e, 0xb3, 0xea, 0x6f, 0x76, 0x37, 0x0e, 0xda, 0xbf, 0x56,
-	0xbb, 0x3e, 0x59, 0xc0, 0xc9, 0x12, 0xb5, 0x21, 0x29, 0x42, 0x3a, 0x9f, 0xb5, 0xbf, 0xfa, 0xe1,
-	0x52, 0xe7, 0x30, 0xfc, 0x2c, 0xdf, 0xa1, 0xd2, 0x5c, 0x30, 0xbb, 0xef, 0xff, 0xaa, 0xf1, 0x25,
-	0x0c, 0x96, 0xa8, 0x9b, 0x27, 0xe0, 0x2f, 0xd7, 0x1a, 0xde, 0x6b, 0xe8, 0xad, 0x58, 0x41, 0x82,
-	0xee, 0x78, 0xf7, 0xef, 0xcf, 0x9f, 0xfb, 0xbb, 0xec, 0xdb, 0xc7, 0x6b, 0xf1, 0x3b, 0x00, 0x00,
-	0xff, 0xff, 0x77, 0x45, 0x9d, 0x39, 0xfd, 0x04, 0x00, 0x00,
+	// 698 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x55, 0xcd, 0x6e, 0x13, 0x3d,
+	0x14, 0xd5, 0x4c, 0x7e, 0xe7, 0xe6, 0xcb, 0x57, 0x6a, 0x10, 0x1d, 0x22, 0x84, 0xa2, 0x91, 0x90,
+	0x82, 0x84, 0x5a, 0xb5, 0x01, 0x15, 0x10, 0x0b, 0x84, 0x5a, 0x2a, 0x36, 0x55, 0x70, 0xbb, 0x44,
+	0x48, 0xee, 0xe4, 0xa6, 0xb2, 0x9a, 0x19, 0xbb, 0xb6, 0xd3, 0x92, 0x17, 0x61, 0xc7, 0x13, 0xf0,
+	0x5c, 0x3c, 0x05, 0x1b, 0x64, 0xcf, 0x4f, 0x26, 0x6d, 0xc2, 0xcf, 0x8e, 0x9d, 0xef, 0xf1, 0xb9,
+	0x73, 0x8f, 0xcf, 0xbd, 0x63, 0xc3, 0x83, 0x09, 0x4f, 0x59, 0x1a, 0x73, 0x36, 0xdd, 0x29, 0x57,
+	0xdb, 0x52, 0x09, 0x23, 0x48, 0x50, 0x02, 0xbd, 0x2d, 0xa9, 0xc4, 0x78, 0x16, 0x1b, 0xbd, 0x53,
+	0x2c, 0x32, 0x4e, 0x14, 0x40, 0x8b, 0xe2, 0xe5, 0x0c, 0xb5, 0x89, 0xbe, 0x78, 0xd0, 0x3c, 0x61,
+	0x53, 0xa6, 0xe6, 0xe4, 0x21, 0x04, 0x86, 0x27, 0xa8, 0x0d, 0x4b, 0x64, 0xe8, 0xf5, 0xbd, 0x41,
+	0x8d, 0x2e, 0x00, 0x42, 0xa0, 0x9e, 0xb2, 0x04, 0x43, 0xbf, 0xef, 0x0d, 0x02, 0xea, 0xd6, 0xe4,
+	0x3e, 0x34, 0x59, 0x22, 0x66, 0xa9, 0x09, 0x6b, 0x7d, 0x6f, 0xe0, 0xd3, 0x3c, 0x22, 0x3d, 0x68,
+	0x2b, 0x94, 0xc8, 0x0c, 0x8e, 0xc3, 0x7a, 0xdf, 0x1b, 0xb4, 0x69, 0x19, 0xdb, 0x1c, 0x89, 0x8a,
+	0x8b, 0x71, 0xd8, 0x70, 0x25, 0xf2, 0x88, 0xfc, 0x0f, 0x3e, 0x1f, 0x87, 0x4d, 0xf7, 0x75, 0x9f,
+	0x8f, 0xa3, 0x7d, 0xe8, 0x8e, 0xd8, 0x3c, 0xc1, 0xd4, 0x8c, 0x98, 0x62, 0x89, 0xce, 0x09, 0x5e,
+	0x41, 0xa8, 0x14, 0xf7, 0xab, 0xc5, 0xa3, 0x17, 0xd0, 0x3e, 0xfc, 0x2c, 0x31, 0xd5, 0xa8, 0xc9,
+	0x53, 0x68, 0x61, 0xb6, 0x0e, 0xbd, 0x7e, 0x6d, 0xd0, 0xd9, 0x23, 0xdb, 0x0b, 0xbf, 0x72, 0x16,
+	0x2d, 0x28, 0xd1, 0x37, 0x0f, 0x5a, 0x39, 0xf8, 0x6f, 0x99, 0x61, 0xeb, 0x69, 0x83, 0x32, 0x6c,
+	0xf5, 0xbd, 0x41, 0x83, 0xba, 0x75, 0xf4, 0xd5, 0x83, 0x66, 0x6e, 0x4d, 0x21, 0xc7, 0x5b, 0x29,
+	0x67, 0xc9, 0x1e, 0xd2, 0x87, 0xce, 0x18, 0x75, 0xac, 0xb8, 0x34, 0x5c, 0xa4, 0x4e, 0x6b, 0x40,
+	0xab, 0x90, 0x2d, 0x6e, 0x84, 0x93, 0x1a, 0x50, 0xdf, 0x08, 0xf2, 0x18, 0x1a, 0x97, 0x33, 0x54,
+	0x73, 0xa7, 0xb1, 0xb3, 0xb7, 0xb1, 0x5d, 0x4e, 0xd3, 0x07, 0x0b, 0xd3, 0x6c, 0xf7, 0x56, 0x03,
+	0xbf, 0x3b, 0x7d, 0x73, 0x31, 0x99, 0x90, 0x47, 0x00, 0x7a, 0x26, 0xe5, 0x94, 0xa3, 0x2a, 0x5b,
+	0x58, 0x41, 0x96, 0xcd, 0xf6, 0x6f, 0x9a, 0x6d, 0x77, 0x85, 0xc2, 0x18, 0xf9, 0x15, 0xe6, 0xde,
+	0x2e, 0x00, 0x7b, 0x76, 0xc9, 0x78, 0x66, 0xad, 0x4f, 0xdd, 0x9a, 0x84, 0xd0, 0xba, 0x9c, 0x09,
+	0x83, 0x3c, 0xf3, 0x35, 0xa0, 0x45, 0x48, 0x76, 0xa1, 0xa5, 0x31, 0x36, 0x42, 0xe9, 0xb0, 0xe9,
+	0x06, 0x62, 0xab, 0x32, 0x10, 0x27, 0x6e, 0x67, 0xa4, 0xc4, 0x84, 0x1b, 0x5a, 0xf0, 0xac, 0x78,
+	0xe9, 0xa0, 0x29, 0x6a, 0xed, 0x3a, 0xe0, 0xd3, 0x0a, 0x12, 0xbd, 0x82, 0xff, 0xaa, 0x89, 0x7f,
+	0xd3, 0x8c, 0xe8, 0x23, 0xb4, 0x29, 0x6a, 0x29, 0xec, 0xc4, 0x3d, 0x81, 0x26, 0x4f, 0x63, 0x91,
+	0x14, 0xa3, 0xba, 0x59, 0x51, 0x96, 0xf9, 0x48, 0x73, 0x82, 0xed, 0xc8, 0x19, 0x4b, 0x2f, 0x74,
+	0xe8, 0x3b, 0xe6, 0x46, 0x85, 0xf9, 0x96, 0xa5, 0x17, 0x34, 0xdb, 0x8d, 0x3e, 0x41, 0xdd, 0x86,
+	0x2b, 0x15, 0xdd, 0x83, 0x46, 0x22, 0x52, 0x9c, 0xe7, 0x82, 0xb2, 0xc0, 0xa2, 0xb1, 0x98, 0x0a,
+	0x95, 0x8f, 0x45, 0x16, 0x58, 0xf5, 0x33, 0xed, 0x5a, 0x97, 0x0d, 0x45, 0x1e, 0x45, 0x1b, 0xd0,
+	0x3d, 0x4c, 0xa4, 0x99, 0x17, 0x47, 0xd8, 0xfb, 0x51, 0x87, 0x3b, 0xef, 0x0a, 0x29, 0x27, 0xa8,
+	0xae, 0x78, 0x8c, 0x64, 0x08, 0xc1, 0x11, 0x9a, 0xf7, 0x99, 0xf2, 0xe5, 0x43, 0xd9, 0xe1, 0xed,
+	0xdd, 0xad, 0x40, 0xa5, 0x19, 0xcf, 0xa0, 0x75, 0x8c, 0xd7, 0x4e, 0xfd, 0xcd, 0xd3, 0xf5, 0xc2,
+	0xea, 0x3f, 0x5c, 0xad, 0x4f, 0x86, 0xd0, 0x3e, 0x42, 0x63, 0x49, 0x9a, 0x90, 0xa5, 0xcf, 0xba,
+	0xcb, 0x6e, 0x75, 0xa9, 0x7d, 0xe8, 0x9e, 0x8a, 0x03, 0xd4, 0x86, 0xa7, 0xcc, 0xcd, 0xff, 0x9f,
+	0x6b, 0x84, 0x63, 0xbc, 0x2e, 0x2e, 0x8c, 0x15, 0x37, 0x4b, 0x6f, 0x05, 0x46, 0x9e, 0x43, 0xe7,
+	0x08, 0x4d, 0x79, 0x43, 0xfd, 0xa6, 0x58, 0xc9, 0x1b, 0x02, 0x2c, 0xd2, 0x56, 0x65, 0xad, 0xaa,
+	0xf5, 0x1a, 0xba, 0x07, 0x38, 0x45, 0x83, 0xbf, 0xc8, 0x5b, 0xef, 0xe6, 0x1b, 0xd8, 0x3c, 0x15,
+	0xe7, 0xe7, 0x53, 0xa4, 0xc8, 0x0d, 0xaa, 0xb5, 0xe6, 0xac, 0xff, 0xc2, 0x2e, 0x04, 0xc7, 0x78,
+	0x9d, 0x3f, 0x2f, 0xd5, 0xcc, 0x0c, 0xea, 0xdd, 0x86, 0xc8, 0x4b, 0xa8, 0x8d, 0xd8, 0x9c, 0x84,
+	0xcb, 0xc3, 0xbf, 0x78, 0x06, 0xd6, 0x57, 0x3b, 0x6b, 0xba, 0xc7, 0x6d, 0xf8, 0x33, 0x00, 0x00,
+	0xff, 0xff, 0xcb, 0x98, 0xfb, 0x32, 0x1d, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -615,7 +743,12 @@ type FinancialServiceClient interface {
 	NewBank(ctx context.Context, in *Bank, opts ...grpc.CallOption) (*EmptyResponse, error)
 	GetBanks(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	ToDestination(ctx context.Context, in *Params, opts ...grpc.CallOption) (*Response, error)
+	NewExpense(ctx context.Context, in *Expense, opts ...grpc.CallOption) (*Expense, error)
 	GetExpenses(ctx context.Context, in *Params, opts ...grpc.CallOption) (*Expenses, error)
+	GetExpense(ctx context.Context, in *Params, opts ...grpc.CallOption) (*Expense, error)
+	DeleteExpense(ctx context.Context, in *Params, opts ...grpc.CallOption) (*EmptyResponse, error)
+	ToggleReiteration(ctx context.Context, in *Params, opts ...grpc.CallOption) (*EmptyResponse, error)
+	NewSalary(ctx context.Context, in *Salary, opts ...grpc.CallOption) (*Salary, error)
 	Pay(ctx context.Context, in *PaymentParams, opts ...grpc.CallOption) (*EmptyResponse, error)
 }
 
@@ -663,9 +796,54 @@ func (c *financialServiceClient) ToDestination(ctx context.Context, in *Params, 
 	return out, nil
 }
 
+func (c *financialServiceClient) NewExpense(ctx context.Context, in *Expense, opts ...grpc.CallOption) (*Expense, error) {
+	out := new(Expense)
+	err := c.cc.Invoke(ctx, "/financial.FinancialService/NewExpense", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *financialServiceClient) GetExpenses(ctx context.Context, in *Params, opts ...grpc.CallOption) (*Expenses, error) {
 	out := new(Expenses)
 	err := c.cc.Invoke(ctx, "/financial.FinancialService/GetExpenses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *financialServiceClient) GetExpense(ctx context.Context, in *Params, opts ...grpc.CallOption) (*Expense, error) {
+	out := new(Expense)
+	err := c.cc.Invoke(ctx, "/financial.FinancialService/GetExpense", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *financialServiceClient) DeleteExpense(ctx context.Context, in *Params, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, "/financial.FinancialService/DeleteExpense", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *financialServiceClient) ToggleReiteration(ctx context.Context, in *Params, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := c.cc.Invoke(ctx, "/financial.FinancialService/ToggleReiteration", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *financialServiceClient) NewSalary(ctx context.Context, in *Salary, opts ...grpc.CallOption) (*Salary, error) {
+	out := new(Salary)
+	err := c.cc.Invoke(ctx, "/financial.FinancialService/NewSalary", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -687,7 +865,12 @@ type FinancialServiceServer interface {
 	NewBank(context.Context, *Bank) (*EmptyResponse, error)
 	GetBanks(context.Context, *Request) (*Response, error)
 	ToDestination(context.Context, *Params) (*Response, error)
+	NewExpense(context.Context, *Expense) (*Expense, error)
 	GetExpenses(context.Context, *Params) (*Expenses, error)
+	GetExpense(context.Context, *Params) (*Expense, error)
+	DeleteExpense(context.Context, *Params) (*EmptyResponse, error)
+	ToggleReiteration(context.Context, *Params) (*EmptyResponse, error)
+	NewSalary(context.Context, *Salary) (*Salary, error)
 	Pay(context.Context, *PaymentParams) (*EmptyResponse, error)
 }
 
@@ -707,8 +890,23 @@ func (*UnimplementedFinancialServiceServer) GetBanks(ctx context.Context, req *R
 func (*UnimplementedFinancialServiceServer) ToDestination(ctx context.Context, req *Params) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ToDestination not implemented")
 }
+func (*UnimplementedFinancialServiceServer) NewExpense(ctx context.Context, req *Expense) (*Expense, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewExpense not implemented")
+}
 func (*UnimplementedFinancialServiceServer) GetExpenses(ctx context.Context, req *Params) (*Expenses, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExpenses not implemented")
+}
+func (*UnimplementedFinancialServiceServer) GetExpense(ctx context.Context, req *Params) (*Expense, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExpense not implemented")
+}
+func (*UnimplementedFinancialServiceServer) DeleteExpense(ctx context.Context, req *Params) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExpense not implemented")
+}
+func (*UnimplementedFinancialServiceServer) ToggleReiteration(ctx context.Context, req *Params) (*EmptyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ToggleReiteration not implemented")
+}
+func (*UnimplementedFinancialServiceServer) NewSalary(ctx context.Context, req *Salary) (*Salary, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewSalary not implemented")
 }
 func (*UnimplementedFinancialServiceServer) Pay(ctx context.Context, req *PaymentParams) (*EmptyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
@@ -790,6 +988,24 @@ func _FinancialService_ToDestination_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FinancialService_NewExpense_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Expense)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FinancialServiceServer).NewExpense(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/financial.FinancialService/NewExpense",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FinancialServiceServer).NewExpense(ctx, req.(*Expense))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FinancialService_GetExpenses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Params)
 	if err := dec(in); err != nil {
@@ -804,6 +1020,78 @@ func _FinancialService_GetExpenses_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FinancialServiceServer).GetExpenses(ctx, req.(*Params))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FinancialService_GetExpense_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Params)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FinancialServiceServer).GetExpense(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/financial.FinancialService/GetExpense",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FinancialServiceServer).GetExpense(ctx, req.(*Params))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FinancialService_DeleteExpense_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Params)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FinancialServiceServer).DeleteExpense(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/financial.FinancialService/DeleteExpense",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FinancialServiceServer).DeleteExpense(ctx, req.(*Params))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FinancialService_ToggleReiteration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Params)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FinancialServiceServer).ToggleReiteration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/financial.FinancialService/ToggleReiteration",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FinancialServiceServer).ToggleReiteration(ctx, req.(*Params))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FinancialService_NewSalary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Salary)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FinancialServiceServer).NewSalary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/financial.FinancialService/NewSalary",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FinancialServiceServer).NewSalary(ctx, req.(*Salary))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -847,8 +1135,28 @@ var _FinancialService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FinancialService_ToDestination_Handler,
 		},
 		{
+			MethodName: "NewExpense",
+			Handler:    _FinancialService_NewExpense_Handler,
+		},
+		{
 			MethodName: "GetExpenses",
 			Handler:    _FinancialService_GetExpenses_Handler,
+		},
+		{
+			MethodName: "GetExpense",
+			Handler:    _FinancialService_GetExpense_Handler,
+		},
+		{
+			MethodName: "DeleteExpense",
+			Handler:    _FinancialService_DeleteExpense_Handler,
+		},
+		{
+			MethodName: "ToggleReiteration",
+			Handler:    _FinancialService_ToggleReiteration_Handler,
+		},
+		{
+			MethodName: "NewSalary",
+			Handler:    _FinancialService_NewSalary_Handler,
 		},
 		{
 			MethodName: "Pay",

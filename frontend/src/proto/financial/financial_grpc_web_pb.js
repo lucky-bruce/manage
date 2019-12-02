@@ -402,6 +402,83 @@ proto.financial.FinancialServicePromiseClient.prototype.toDestination = function
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.Expense,
+ *   !proto.financial.Expense>}
+ */
+const methodDescriptor_FinancialService_NewExpense = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/NewExpense",
+  grpc.web.MethodType.UNARY,
+  proto.financial.Expense,
+  proto.financial.Expense,
+  /** @param {!proto.financial.Expense} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Expense.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.Expense,
+ *   !proto.financial.Expense>}
+ */
+const methodInfo_FinancialService_NewExpense = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.Expense,
+  /** @param {!proto.financial.Expense} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Expense.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.Expense} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.Expense)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.Expense>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.newExpense = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/NewExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_NewExpense,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.Expense} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.Expense>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.newExpense = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/NewExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_NewExpense
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.financial.Params,
  *   !proto.financial.Expenses>}
  */
@@ -473,6 +550,314 @@ proto.financial.FinancialServicePromiseClient.prototype.getExpenses = function(
     request,
     metadata || {},
     methodDescriptor_FinancialService_GetExpenses
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.Params,
+ *   !proto.financial.Expense>}
+ */
+const methodDescriptor_FinancialService_GetExpense = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/GetExpense",
+  grpc.web.MethodType.UNARY,
+  proto.financial.Params,
+  proto.financial.Expense,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Expense.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.Params,
+ *   !proto.financial.Expense>}
+ */
+const methodInfo_FinancialService_GetExpense = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.Expense,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Expense.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.Expense)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.Expense>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.getExpense = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/GetExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_GetExpense,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.Expense>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.getExpense = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/GetExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_GetExpense
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.Params,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodDescriptor_FinancialService_DeleteExpense = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/DeleteExpense",
+  grpc.web.MethodType.UNARY,
+  proto.financial.Params,
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.Params,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodInfo_FinancialService_DeleteExpense = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.EmptyResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.EmptyResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.deleteExpense = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/DeleteExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_DeleteExpense,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.EmptyResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.deleteExpense = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/DeleteExpense",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_DeleteExpense
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.Params,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodDescriptor_FinancialService_ToggleReiteration = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/ToggleReiteration",
+  grpc.web.MethodType.UNARY,
+  proto.financial.Params,
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.Params,
+ *   !proto.financial.EmptyResponse>}
+ */
+const methodInfo_FinancialService_ToggleReiteration = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.EmptyResponse,
+  /** @param {!proto.financial.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.EmptyResponse.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.EmptyResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.EmptyResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.toggleReiteration = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/ToggleReiteration",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_ToggleReiteration,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.EmptyResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.toggleReiteration = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/ToggleReiteration",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_ToggleReiteration
+  );
+};
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.financial.Salary,
+ *   !proto.financial.Salary>}
+ */
+const methodDescriptor_FinancialService_NewSalary = new grpc.web.MethodDescriptor(
+  "/financial.FinancialService/NewSalary",
+  grpc.web.MethodType.UNARY,
+  proto.financial.Salary,
+  proto.financial.Salary,
+  /** @param {!proto.financial.Salary} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Salary.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.financial.Salary,
+ *   !proto.financial.Salary>}
+ */
+const methodInfo_FinancialService_NewSalary = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.financial.Salary,
+  /** @param {!proto.financial.Salary} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.financial.Salary.deserializeBinary
+);
+
+/**
+ * @param {!proto.financial.Salary} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.financial.Salary)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.financial.Salary>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.financial.FinancialServiceClient.prototype.newSalary = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/financial.FinancialService/NewSalary",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_NewSalary,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.financial.Salary} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.financial.Salary>}
+ *     A native promise that resolves to the response
+ */
+proto.financial.FinancialServicePromiseClient.prototype.newSalary = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/financial.FinancialService/NewSalary",
+    request,
+    metadata || {},
+    methodDescriptor_FinancialService_NewSalary
   );
 };
 

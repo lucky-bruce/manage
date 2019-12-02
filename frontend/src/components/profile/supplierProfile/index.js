@@ -61,7 +61,7 @@ export default function SupplierProfile() {
         <div className="col-12 col-md-4  mt-3 mt-md-0 d-flex flex-column ">
           <div className="d-flex flex-column mb-4 order-1 order-sm-2">
             <A
-              href="/new/product"
+              href="/new/goods"
               className="text-white"
               style={{ marginBottom: "0.2rem" }}
             >

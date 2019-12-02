@@ -630,4 +630,81 @@ proto.authorization.AuthorizationServicePromiseClient.prototype.changePermission
   );
 };
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.authorization.Params,
+ *   !proto.authorization.Response>}
+ */
+const methodDescriptor_AuthorizationService_LinkSalary = new grpc.web.MethodDescriptor(
+  "/authorization.AuthorizationService/LinkSalary",
+  grpc.web.MethodType.UNARY,
+  proto.authorization.Params,
+  proto.authorization.Response,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.authorization.Params,
+ *   !proto.authorization.Response>}
+ */
+const methodInfo_AuthorizationService_LinkSalary = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.authorization.Response,
+  /** @param {!proto.authorization.Params} request */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.authorization.Response.deserializeBinary
+);
+
+/**
+ * @param {!proto.authorization.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.authorization.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.authorization.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.authorization.AuthorizationServiceClient.prototype.linkSalary = function(
+  request,
+  metadata,
+  callback
+) {
+  return this.client_.rpcCall(
+    this.hostname_ + "/authorization.AuthorizationService/LinkSalary",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_LinkSalary,
+    callback
+  );
+};
+
+/**
+ * @param {!proto.authorization.Params} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.authorization.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.authorization.AuthorizationServicePromiseClient.prototype.linkSalary = function(
+  request,
+  metadata
+) {
+  return this.client_.unaryCall(
+    this.hostname_ + "/authorization.AuthorizationService/LinkSalary",
+    request,
+    metadata || {},
+    methodDescriptor_AuthorizationService_LinkSalary
+  );
+};
+
 module.exports = proto.authorization;
