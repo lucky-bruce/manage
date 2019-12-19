@@ -53,7 +53,8 @@ export function getToken() {
 }
 
 export function isLoggedIn() {
-  if (GetProfile()) {
+  let p = GetProfile();
+  if (p && checkAuthorization(p)) {
     return true;
   } else {
     return false;

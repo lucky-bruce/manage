@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { A } from "hookrouter";
+import { navigate } from "hookrouter";
 import { Params } from "../../../proto/services/services_pb";
 import { Query } from "../../../proto/products/products_pb";
 import Context from "../../context/context";
@@ -41,9 +41,12 @@ export default function Services(props) {
 
   return (
     <div>
-      <A href="/new/goods?tab=service">
-        <Button variant="primary">New service</Button>
-      </A>
+      <Button
+        onClick={() => navigate("/new/goods", false, { tab: "service" })}
+        variant="primary"
+      >
+        New service
+      </Button>
 
       <div className="table-responsive mt-3">
         <table className="table ">

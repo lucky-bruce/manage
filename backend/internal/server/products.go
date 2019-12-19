@@ -19,6 +19,7 @@ import (
 	"github.com/Beaxhem/manage/backend/pkg/logger"
 	"github.com/Beaxhem/manage/backend/pkg/products"
 	"github.com/chai2010/webp"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const chunkSize = 16 * 1024 // 16 KiB
@@ -181,4 +182,35 @@ func NewImageFromString(img, ext, path string) (*os.File, error) {
 	}
 
 	return dst, nil
+}
+
+func (s *Server) NewComment(c context.Context, comment *products.Comment) (*products.EmptyResponse, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "comments")
+
+	err := store.Insert(comment)
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(products.EmptyResponse), err
+	}
+
+	return new(products.EmptyResponse), nil
+}
+
+func (*Server) GetComments(c context.Context, params *products.ProductParams) (*products.Comments, error) {
+	dataStore := db.NewDataStore()
+
+	defer dataStore.Close()
+	store := db.GetStore(dataStore, "comments")
+
+	var comments []*products.Comment
+	err := store.GetAll(&comments, nil, bson.M{"id": params.Id})
+	if err != nil {
+		logger.ErrorFunc(err)
+		return new(products.Comments), err
+	}
+
+	return &products.Comments{Comments: comments}, nil
 }

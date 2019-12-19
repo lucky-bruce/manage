@@ -32,15 +32,18 @@ import StaffForm from "./routes/accounts/StaffRegistration";
 import { GetClients } from "./clients";
 import StatusUpdate from "./routes/quotes/StatusUpdate";
 import Private from "./routes/PrivateRoute";
-import Settings from "./routes/accounts/Settings";
+import ProfileSettings from "./routes/accounts/Settings";
 import Portfolio from "./routes/landing/Dashboard/Editor/Portfolio";
 import OurTeam from "./routes/landing/Dashboard/Editor/OurTeam";
 import Sectors from "./routes/landing/Dashboard/Editor/Sectors";
 import MainDash from "./routes/landing/Dashboard/Editor/Dashboard";
 import News from "./routes/landing/Dashboard/Editor/News";
 import About from "./routes/landing/Dashboard/Editor/About";
+import Settings from "./routes/landing/Settings";
+
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { red, blue } from "@material-ui/core/colors";
+import Staff from "./routes/dashboard/Staff";
 
 require("jquery");
 require("bootstrap");
@@ -150,7 +153,7 @@ const routes = {
     </Private>
   ),
   "/stock": () => (
-    <Private roles={["supplier", "user"]}>
+    <Private roles={["supplier"]}>
       <StockPage />
     </Private>
   ),
@@ -167,11 +170,20 @@ const routes = {
       <QuotesPage />
     </Private>
   ),
+  "/staff": () => (
+    <Private roles={["supplier"]}>
+      <Staff />
+    </Private>
+  ),
   "/logout": () => <LogOut />,
-  "/test": () => <Test />,
   "/login": () => <Login />,
   "/profile/settings": () => (
     <Private roles={["user", "supplier", "staff"]}>
+      <ProfileSettings />
+    </Private>
+  ),
+  "/editor": () => (
+    <Private roles={["admin"]}>
       <Settings />
     </Private>
   ),

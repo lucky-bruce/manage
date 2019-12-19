@@ -6,6 +6,7 @@ import Img from "../../../../components/img/index";
 import { newMix, getMixes } from "../../../../utils/backend";
 import { navigate, usePath } from "hookrouter";
 import { limitedAccess } from "../../../../utils/utils";
+import BackToSettings from "./BackToSettings";
 
 export default () => {
   const [tab, setTab] = useState(0);
@@ -64,9 +65,12 @@ export default () => {
   }, []);
 
   return (
-    <MDBContainer>
+    <MDBContainer className="mt-4">
       <form className="about-form">
-        <p className="h4 text-center mb-4">About</p>
+        <BackToSettings>
+          <p className="h4 text-center mb-4">About</p>
+        </BackToSettings>
+
         <MDBRow>
           <MDBCol md="12" style={{ margin: "auto" }}>
             <div className="custom-control custom-radio custom-control-inline">

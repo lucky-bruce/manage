@@ -48,6 +48,7 @@ message Permission {
   bool financial = 1;
   bool quotes = 2;
   bool stock = 3;
+  bool services = 4;
 }
 
 message PasswordChange {

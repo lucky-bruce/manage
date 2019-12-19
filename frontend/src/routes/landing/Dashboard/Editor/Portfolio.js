@@ -21,8 +21,9 @@ import {
   newPortfolio,
   deletePortfolio
 } from "../../../../utils/backend";
-import { usePath } from "hookrouter";
+import { usePath, A } from "hookrouter";
 import { limitedAccess } from "../../../../utils/utils";
+import BackToSettings from "./BackToSettings";
 
 const { confirm } = Modal;
 
@@ -86,8 +87,11 @@ const Portfolio = () => {
   // const showDeleteConfirm = id => {};
 
   return (
-    <MDBContainer>
-      <p className="h4 text-center mb-4">Portfolio</p>
+    <MDBContainer className="mt-4">
+      <BackToSettings>
+        <p className="h4 text-center mb-4">Portfolio</p>
+      </BackToSettings>
+
       <MDBRow>
         <MDBCol md="6">
           <form onSubmit={submitHandler} encType="multipart/form-data">

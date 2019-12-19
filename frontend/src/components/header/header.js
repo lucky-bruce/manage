@@ -33,11 +33,11 @@ export default () => {
       title: "Quotes",
       access: ["supplier", "staff"]
     },
-    {
-      link: "/sectors",
-      title: "Sectors",
-      access: ["supplier", "staff"]
-    },
+    // {
+    //   link: "/sectors",
+    //   title: "Sectors",
+    //   access: ["supplier", "staff"]
+    // },
     // {
     //   link: "/statts",
     //   title: "Statts",
@@ -47,6 +47,11 @@ export default () => {
       link: "/providers",
       title: "Providers",
       access: ["user"]
+    },
+    {
+      link: "/staff",
+      title: "Staff",
+      access: ["supplier"]
     }
     // {
     //   link: "/logs",

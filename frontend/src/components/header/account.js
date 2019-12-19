@@ -33,7 +33,7 @@ function Account() {
           background: "transparent"
         }}
       >
-        <div style={{ whiteSpace: "nowrap" }}>
+        <div className="font-weight-bold" style={{ whiteSpace: "nowrap" }}>
           {profile.firstName + " " + profile.lastName}{" "}
           <FontAwesomeIcon icon={faUser} />
         </div>

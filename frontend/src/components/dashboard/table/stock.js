@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Context from "../../context/context";
 import { ProductParams, Query } from "../../../proto/products/products_pb";
-import { A } from "hookrouter";
+import { A, navigate } from "hookrouter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { getToken, GetProfile } from "../../../utils/utils";
@@ -56,9 +56,12 @@ export default function StockTable() {
 
   return (
     <div>
-      <A className="text-white" href="/new/goods">
-        <button className="m-3 btn-success btn">New Product</button>
-      </A>
+      <button
+        onClick={() => navigate("/new/goods", false, { tab: "product" })}
+        className="text-white m-3 btn-success btn"
+      >
+        New Product
+      </button>
 
       <div className="table-responsive">
         <table className="table ">

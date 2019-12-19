@@ -14,7 +14,7 @@ import {
 } from "../../../../utils/grpc";
 import { getBasic, newBasic } from "../../../../utils/backend";
 import { navigate, usePath } from "hookrouter";
-
+import BackToSettings from "./BackToSettings";
 import { limitedAccess } from "../../../../utils/utils";
 
 const FormPage = () => {
@@ -34,7 +34,6 @@ const FormPage = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log(res.toObject());
         navigate("/");
       }
     });
@@ -45,8 +44,6 @@ const FormPage = () => {
       if (err) {
         console.log(err);
       } else {
-        console.log(res.toObject());
-
         getBasicFromGRPC(handleChange, res.toObject());
       }
     });
@@ -61,9 +58,12 @@ const FormPage = () => {
   }, []);
 
   return (
-    <MDBContainer>
+    <MDBContainer className="mt-4">
       <form className="basic-form" onSubmit={handleSubmit}>
-        <p className="h4 text-center mb-4">Basic Information</p>
+        <BackToSettings>
+          <p className="h4 text-center mb-4">Basic Information</p>
+        </BackToSettings>
+
         <MDBRow>
           <MDBCol md="12" style={{ margin: "auto" }}>
             <MDBInput

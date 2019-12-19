@@ -17,6 +17,7 @@ import TeamTable from "../../../../components/landing/team/TeamTable";
 import Img from "../../../../components/img/index";
 import { usePath } from "hookrouter";
 import { limitedAccess } from "../../../../utils/utils";
+import BackToSettings from "./BackToSettings";
 
 const { confirm } = Modal;
 
@@ -67,7 +68,6 @@ const OurTeam = () => {
         console.log(err);
       } else {
         setTeams(res.toObject().teamsList);
-        console.log(res.toObject());
       }
     });
   };
@@ -85,8 +85,11 @@ const OurTeam = () => {
   }, []);
 
   return (
-    <MDBContainer>
-      <p className="h4 text-center mb-4">Team</p>
+    <MDBContainer className="mt-4">
+      <BackToSettings>
+        <p className="h4 text-center mb-4">Team</p>
+      </BackToSettings>
+
       <MDBRow>
         <MDBCol md="6">
           <form onSubmit={submitHandler} encType="multipart/form-data">

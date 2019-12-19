@@ -66,6 +66,14 @@ export const editProduct = (prod, callback) => {
   client.products.editProduct(prod, {}, (err, res) => callback(err, res));
 };
 
+export const getComments = (params, callback) => {
+  client.products.getComments(params, {}, callback);
+};
+
+export const newComment = (comment, callback) => {
+  client.products.newComment(comment, {}, callback);
+};
+
 export const getServices = (q, callback) => {
   let params = new ServiceParams();
 

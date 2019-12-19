@@ -17,6 +17,7 @@ import Img from "../../../../components/img/index";
 import { usePath } from "hookrouter";
 import { limitedAccess } from "../../../../utils/utils";
 import NewsTable from "../../../../components/landing/news/NewsTable";
+import BackToSettings from "./BackToSettings";
 
 const { confirm } = Modal;
 
@@ -115,8 +116,11 @@ const News = () => {
   };
 
   return (
-    <MDBContainer className="text-center">
-      <p className="h4 text-center mb-4">News</p>
+    <MDBContainer className="text-center mt-4">
+      <BackToSettings>
+        <p className="h4 text-center mb-4">News</p>
+      </BackToSettings>
+
       <MDBRow>
         <MDBCol md="6">
           <form onSubmit={submitHandler}>

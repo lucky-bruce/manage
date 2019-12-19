@@ -51,7 +51,7 @@ export default function PermissionSelect({
             id="defaultCheck1"
           />
           <label className="form-check-label" for="defaultCheck1">
-            Stock
+            Products
           </label>
         </div>
         <div className="form-check" style={{ marginTop: ".4rem" }}>
@@ -67,6 +67,20 @@ export default function PermissionSelect({
             Quotes
           </label>
         </div>
+        <div className="form-check" style={{ marginTop: ".4rem" }}>
+          <input
+            onChange={e => onChange("services", e.target.checked)}
+            checked={permissions.services}
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="defaultCheck1"
+          />
+          <label className="form-check-label" for="defaultCheck1">
+            Services
+          </label>
+        </div>
+
         <MDBBtn onClick={() => change()} size="sm">
           Save
         </MDBBtn>

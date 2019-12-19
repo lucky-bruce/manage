@@ -9,6 +9,22 @@ service ProductService {
   rpc EditProduct(Product) returns (EmptyResponse);
   rpc DeleteProductByID(ProductParams) returns (EmptyResponse);
   rpc UploadImage(Image) returns (ImageResponse);
+
+  rpc NewComment(Comment) returns (EmptyResponse);
+  rpc GetComments(ProductParams) returns (Comments);
+  
+}
+
+message Comment {
+  string username = 1;
+  int32 rating = 2;
+  string description = 3;
+  int64 timestamp = 4;
+  string id = 5;
+}
+
+message Comments {
+  repeated Comment comments = 1;
 }
 
 message ProductParams {

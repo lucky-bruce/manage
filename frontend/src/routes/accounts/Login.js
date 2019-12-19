@@ -1,12 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { A, navigate, useQueryParams } from "hookrouter";
 import Context from "../../components/context/context";
 import { LoginParams } from "../../proto/authorization/authorization_pb";
+import { isLoggedIn } from "../../utils/utils";
 
 export default function Login() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("initialState");
+  const [password, setPassword] = useState("");
 
   const context = useContext(Context);
   const client = context.auth;
@@ -29,6 +30,12 @@ export default function Login() {
       }
     });
   }
+
+  useEffect(() => {
+    if (isLoggedIn()) {
+      navigate("/profile");
+    }
+  }, []);
 
   return (
     <div style={{ height: "100vh" }} className="d-flex align-items-center ">

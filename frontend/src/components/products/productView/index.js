@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Context from "../../context/context";
 import { ProductParams } from "../../../proto/products/products_pb";
 import ImgCarousel from "./imgCarousel";
-import Chart from "./chart";
+
 import Suppliers from "./table";
+import Reviews from "./reviews/reviews";
 
 export default function View(props) {
   const [product, setProduct] = useState({});
@@ -24,7 +25,6 @@ export default function View(props) {
 
       if (res) {
         setProduct(res.toObject());
-        console.log(res.toObject());
       }
     });
   }
@@ -51,12 +51,9 @@ export default function View(props) {
             <p>{product.sector}</p>
             <ImgCarousel imgs={product.imagesList || []} />
           </div>
-          <div className="col-md-4 p-0">
+          <div className="col-md-4 ">
             <h5>Total in stock: {product.qtyinstock}</h5>
-            <p>
-              <span className="font-weight-bold">Product Net Worth:</span>{" "}
-              <span className="text-primary">R$ 000.000,000</span>
-            </p>
+
             <div className="font-weight-bold">Product description:</div>
             <p>{product.description}</p>
             <div>
@@ -66,6 +63,8 @@ export default function View(props) {
           </div>
           <div className="col-md-4 p-0">{/* <Chart /> */}</div>
         </div>
+        <Reviews id={product.id} />
+
         <Suppliers />
       </div>
     </div>

@@ -6,6 +6,7 @@ import Context from "../../../context/context";
 import PermissionSelect from "./PermissionSelect";
 import { changePermission } from "../../../../utils/backend";
 import SalaryMenu from "./SalaryMenu";
+
 export default function StaffTable() {
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),

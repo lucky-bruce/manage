@@ -818,7 +818,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
       obj = {
         financial: jspb.Message.getFieldWithDefault(msg, 1, false),
         quotes: jspb.Message.getFieldWithDefault(msg, 2, false),
-        stock: jspb.Message.getFieldWithDefault(msg, 3, false)
+        stock: jspb.Message.getFieldWithDefault(msg, 3, false),
+        services: jspb.Message.getFieldWithDefault(msg, 4, false)
       };
 
     if (includeInstance) {
@@ -871,6 +872,10 @@ proto.authorization.Permission.deserializeBinaryFromReader = function(
         var value = /** @type {boolean} */ (reader.readBool());
         msg.setStock(value);
         break;
+      case 4:
+        var value = /** @type {boolean} */ (reader.readBool());
+        msg.setServices(value);
+        break;
       default:
         reader.skipField();
         break;
@@ -912,6 +917,10 @@ proto.authorization.Permission.serializeBinaryToWriter = function(
   f = message.getStock();
   if (f) {
     writer.writeBool(3, f);
+  }
+  f = message.getServices();
+  if (f) {
+    writer.writeBool(4, f);
   }
 };
 
@@ -970,6 +979,25 @@ proto.authorization.Permission.prototype.getStock = function() {
 /** @param {boolean} value */
 proto.authorization.Permission.prototype.setStock = function(value) {
   jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+/**
+ * optional bool services = 4;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.authorization.Permission.prototype.getServices = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(
+    this,
+    4,
+    false
+  ));
+};
+
+/** @param {boolean} value */
+proto.authorization.Permission.prototype.setServices = function(value) {
+  jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 /**

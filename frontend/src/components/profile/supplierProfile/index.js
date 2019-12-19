@@ -33,7 +33,8 @@ export default function SupplierProfile() {
         <div className="col-md-8">
           <h4>
             Welcome, {userData ? userData.firstName : ""} /{" "}
-            {userData.companyname}
+            {userData.companyname}{" "}
+            <span style={{ textTransform: "capitalize" }}>{userData.role}</span>
           </h4>
         </div>
         <div className="col-md-4 d-flex flex-column"></div>
@@ -100,6 +101,23 @@ export default function SupplierProfile() {
                 <Button variant="info">Get new staff link &#43;</Button>
               </span>
             </OverlayTrigger>
+            {userData.role === "admin" ? (
+              <A
+                href="/editor"
+                className="text-white"
+                style={{ marginBottom: "0.2rem" }}
+              >
+                <button
+                  type="button"
+                  className="btn btn-primary "
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Website settings &#9881;
+                </button>
+              </A>
+            ) : (
+              ""
+            )}
           </div>
 
           <Stats user={userData} />

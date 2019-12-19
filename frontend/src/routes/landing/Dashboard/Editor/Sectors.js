@@ -6,6 +6,8 @@ import Img from "../../../../components/img/index";
 import { newSector, getSectors } from "../../../../utils/backend";
 import { usePath } from "hookrouter";
 import { limitedAccess } from "../../../../utils/utils";
+import BackToSettings from "./BackToSettings";
+
 export default () => {
   const [tab, setTab] = useState(0);
 
@@ -56,7 +58,7 @@ export default () => {
         console.log(err);
       } else {
         const sectors = res.toObject().sectorsList;
-        console.log(sectors);
+
         handleChange("sectorsList", sectors);
       }
     });
@@ -70,10 +72,13 @@ export default () => {
   }, []);
 
   return (
-    <MDBContainer>
+    <MDBContainer className="mt-4">
       <form className="about-form">
-        <p className="h4 text-center mb-4">About</p>
-        <MDBRow>
+        <BackToSettings>
+          <p className="h4 text-center mb-4">Sectors</p>
+        </BackToSettings>
+
+        <MDBRow className="mt-3">
           <MDBCol md="12" style={{ margin: "auto" }}>
             {userInput.sectorsList.map((sector, i) => (
               <div className="custom-control custom-radio custom-control-inline">
