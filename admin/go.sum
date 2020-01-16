@@ -1,5 +1,5 @@
-github.com/Beaxhem/manage v1.1.0 h1:EERvp6Z8zhKcBdnON5Il+SZE/0E4a0w3BU1TnHBR9+w=
-github.com/Beaxhem/manage/backend v0.0.0-20191123212045-98ca3df7cbb2 h1:eahlgjvo31bAqLx3ZiDhyKTgWwH2b7JTVkSk52zp8As=
+github.com/captain328/manage v1.1.0 h1:EERvp6Z8zhKcBdnON5Il+SZE/0E4a0w3BU1TnHBR9+w=
+github.com/captain328/manage/backend v0.0.0-20191123212045-98ca3df7cbb2 h1:eahlgjvo31bAqLx3ZiDhyKTgWwH2b7JTVkSk52zp8As=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=

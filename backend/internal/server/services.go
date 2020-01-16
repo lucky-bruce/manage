@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 
-	"github.com/Beaxhem/manage/backend/internal/utils"
-	"github.com/Beaxhem/manage/backend/pkg/db"
-	"github.com/Beaxhem/manage/backend/pkg/logger"
-	"github.com/Beaxhem/manage/backend/pkg/services"
+	"github.com/captain328/manage/backend/internal/utils"
+	"github.com/captain328/manage/backend/pkg/db"
+	"github.com/captain328/manage/backend/pkg/logger"
+	"github.com/captain328/manage/backend/pkg/services"
 )
 
 func (s *Server) GetService(ctx context.Context, params *services.Params) (*services.Service, error) {

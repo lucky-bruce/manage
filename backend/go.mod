@@ -1,4 +1,4 @@
-module github.com/Beaxhem/manage/backend
+module github.com/captain328/manage/backend
 
 go 1.13
 

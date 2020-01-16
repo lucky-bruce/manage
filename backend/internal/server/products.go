@@ -14,10 +14,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Beaxhem/manage/backend/internal/utils"
-	"github.com/Beaxhem/manage/backend/pkg/db"
-	"github.com/Beaxhem/manage/backend/pkg/logger"
-	"github.com/Beaxhem/manage/backend/pkg/products"
+	"github.com/captain328/manage/backend/internal/utils"
+	"github.com/captain328/manage/backend/pkg/db"
+	"github.com/captain328/manage/backend/pkg/logger"
+	"github.com/captain328/manage/backend/pkg/products"
 	"github.com/chai2010/webp"
 	"gopkg.in/mgo.v2/bson"
 )

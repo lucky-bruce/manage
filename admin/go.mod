@@ -1,4 +1,4 @@
-module github.com/Beaxhem/manage/admin
+module github.com/captain328/manage/admin
 
 go 1.13
 

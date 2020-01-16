@@ -5,15 +5,15 @@ import (
 	"log"
 	"net"
 
-	"github.com/Beaxhem/manage/backend/pkg/authorization"
-	"github.com/Beaxhem/manage/backend/pkg/db"
-	"github.com/Beaxhem/manage/backend/pkg/financial"
-	"github.com/Beaxhem/manage/backend/pkg/landing"
-	"github.com/Beaxhem/manage/backend/pkg/products"
-	"github.com/Beaxhem/manage/backend/pkg/quotes"
-	"github.com/Beaxhem/manage/backend/pkg/services"
+	"github.com/captain328/manage/backend/pkg/authorization"
+	"github.com/captain328/manage/backend/pkg/db"
+	"github.com/captain328/manage/backend/pkg/financial"
+	"github.com/captain328/manage/backend/pkg/landing"
+	"github.com/captain328/manage/backend/pkg/products"
+	"github.com/captain328/manage/backend/pkg/quotes"
+	"github.com/captain328/manage/backend/pkg/services"
 
-	"github.com/Beaxhem/manage/backend/internal/server"
+	"github.com/captain328/manage/backend/internal/server"
 	"github.com/jasonlvhit/gocron"
 	"google.golang.org/grpc"
 )

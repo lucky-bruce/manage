@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/Beaxhem/manage/backend/internal/utils"
-	"github.com/Beaxhem/manage/backend/pkg/db"
-	"github.com/Beaxhem/manage/backend/pkg/financial"
-	"github.com/Beaxhem/manage/backend/pkg/logger"
-	"github.com/Beaxhem/manage/backend/pkg/quotes"
+	"github.com/captain328/manage/backend/internal/utils"
+	"github.com/captain328/manage/backend/pkg/db"
+	"github.com/captain328/manage/backend/pkg/financial"
+	"github.com/captain328/manage/backend/pkg/logger"
+	"github.com/captain328/manage/backend/pkg/quotes"
 	"github.com/google/uuid"
 
 	"gopkg.in/mgo.v2/bson"
